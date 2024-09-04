@@ -1,4 +1,4 @@
-package com.example.myfirstproject.View.Login
+package com.example.helplineapp.View.Login
 
 import android.widget.Toast
 import androidx.compose.foundation.Image

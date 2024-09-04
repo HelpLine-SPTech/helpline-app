@@ -1,19 +1,22 @@
 package com.example.helplineapp.ViewModel.Login
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myfirstproject.integracaoViaCep.Interface.LoginService
-import com.example.myfirstproject.integracaoViaCep.config.LoginClient
+import com.example.helplineapp.MyApp.Companion.context
+import com.example.helplineapp.network.Login.LoginService
+import com.example.myfirstproject.integracaoViaCep.config.Login
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel: ViewModel() {
 
-  var userEmail: String by mutableStateOf("")
-  var userPassword: String by mutableStateOf("")
+  var userEmail: String by mutableStateOf("ong@gmail.com")
+  var userPassword: String by mutableStateOf("aditum123")
 
 
   fun loginUser(onLoginSuccess: () -> Unit, onLoginError: (String) -> Unit){
@@ -31,7 +34,19 @@ class LoginViewModel : ViewModel() {
 
   private suspend fun userLogin(email: String, password: String): LoginService.LoginResponse{
     val loginRequest = LoginService.LoginRequest(email, password)
-    return LoginClient.apiService.login(loginRequest)
+    saveToken(loginRequest.toString())
+    Log.d("Login", "Token: ${loginRequest.toString()}")
+    return Login.apiService.login(loginRequest)
+  }
+
+  private fun saveToken(token: String){
+    val sharedPreferences: SharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE)
+    sharedPreferences.edit().putString("auth_token", token).apply()
+  }
+
+  fun getToken(): String?{
+    val sharedPreferences: SharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE)
+    return sharedPreferences.getString("auth_token", null)
   }
 
   fun onEmailChange(it: String) {
