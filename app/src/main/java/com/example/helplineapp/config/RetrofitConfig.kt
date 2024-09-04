@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 // Configuração do Retrofit
-object RetrofitClientLogin{
+object RetrofitClient{
   private const val BASE_URL = "https://helpline-api-dev.azurewebsites.net/"
 
   private fun provideOkHttpClient(context: Context): OkHttpClient {
@@ -43,8 +43,8 @@ object RetrofitClientLogin{
 }
 
 // Configuração do serviço
-object LoginClient {
+object Login {
   val apiService: LoginService by lazy {
-    RetrofitClientLogin.retrofit.create(LoginService::class.java)
+    RetrofitClient.retrofit.create(LoginService::class.java)
   }
 }

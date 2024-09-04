@@ -13,7 +13,7 @@ import com.example.myfirstproject.integracaoViaCep.Interface.LoginService
 import com.example.myfirstproject.integracaoViaCep.config.LoginClient
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel: ViewModel() {
 
   var userEmail: String by mutableStateOf("ong@gmail.com")
   var userPassword: String by mutableStateOf("aditum123")
@@ -36,7 +36,19 @@ class LoginViewModel : ViewModel() {
 
   private suspend fun userLogin(email: String, password: String): LoginService.LoginResponse{
     val loginRequest = LoginService.LoginRequest(email, password)
-    return LoginClient.apiService.login(loginRequest)
+    saveToken(loginRequest.toString())
+    Log.d("Login", "Token: ${loginRequest.toString()}")
+    return Login.apiService.login(loginRequest)
+  }
+
+  private fun saveToken(token: String){
+    val sharedPreferences: SharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE)
+    sharedPreferences.edit().putString("auth_token", token).apply()
+  }
+
+  fun getToken(): String?{
+    val sharedPreferences: SharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE)
+    return sharedPreferences.getString("auth_token", null)
   }
 
   // Função para guardar o token
