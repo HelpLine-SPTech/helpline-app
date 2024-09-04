@@ -1,5 +1,6 @@
 package com.example.helplineapp
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -29,12 +30,4 @@ class MainActivity : ComponentActivity() {
       }
     }
   }
-
-  //  @Preview(showBackground = true)
-//  @Composable
-//  fun GreetingPreview() {
-//    HelplineAppTheme {
-//
-//    }
-//  }
 }

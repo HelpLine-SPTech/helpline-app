@@ -8,9 +8,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.helplineapp.MyApp.Companion.context
-import com.example.helplineapp.network.Login.LoginService
-import com.example.myfirstproject.integracaoViaCep.config.Login
+import com.example.helplineapp.GetContext.Companion.context
+import com.example.myfirstproject.integracaoViaCep.Interface.LoginService
+import com.example.myfirstproject.integracaoViaCep.config.LoginClient
 import kotlinx.coroutines.launch
 
 class LoginViewModel: ViewModel() {
@@ -23,11 +23,13 @@ class LoginViewModel: ViewModel() {
     viewModelScope.launch {
       try {
         val response = userLogin(userEmail, userPassword)
-        Log.d("Login", "Token: ${response.token}")
+        Log.d("LoginViewModel", "Token: ${response.token}")
+        saveToken(response.token)
+        Log.d("LoginViewModel", "Token salvo com sucesso!")
         onLoginSuccess()
       } catch (e: Exception) {
-        Log.e("Login", "Erro ao fazer login", e)
-        onLoginError("Usu[ario ou senha incorretos!")
+        Log.e("LoginViewModel", "Erro ao fazer login", e)
+        onLoginError("Usuário ou senha incorretos!")
       }
     }
   }
@@ -48,6 +50,19 @@ class LoginViewModel: ViewModel() {
     val sharedPreferences: SharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE)
     return sharedPreferences.getString("auth_token", null)
   }
+
+  // Função para guardar o token
+  private fun saveToken(token: String) {
+    // Salvar o token em algum lugar, como SharedPreferences ou DataStore
+    val sharedPreferences: SharedPreferences = context.getSharedPreferences("login_token", Context.MODE_PRIVATE)
+    sharedPreferences.edit().putString("auth_token", token).apply()
+  }
+
+  fun getToken(): String?{
+    val sharedPreferences: SharedPreferences = context.getSharedPreferences("login_token", Context.MODE_PRIVATE)
+    return sharedPreferences.getString("auth_token", null)
+  }
+
 
   fun onEmailChange(it: String) {
     userEmail = it
