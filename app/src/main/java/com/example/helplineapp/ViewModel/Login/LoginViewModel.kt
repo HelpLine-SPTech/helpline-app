@@ -15,8 +15,8 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel: ViewModel() {
 
-  var userEmail: String by mutableStateOf("ong@gmail.com")
-  var userPassword: String by mutableStateOf("aditum123")
+  var userEmail: String by mutableStateOf("")
+  var userPassword: String by mutableStateOf("")
 
 
   fun loginUser(onLoginSuccess: () -> Unit, onLoginError: (String) -> Unit){
