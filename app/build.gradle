@@ -77,13 +77,13 @@ dependencies {
   // Dependencia que faz requisições HTTP
   implementation(libs.logging.interceptor)
 
-  // Dependências WebSocket
-  implementation libs.spring.websocket
-  implementation libs.spring.messaging
-  implementation libs.spring.web
-  implementation libs.spring.core
-  implementation libs.spring.context
-  implementation libs.commons.lang3
-  implementation libs.kotlinx.coroutines.core
-  implementation libs.kotlinx.coroutines.android
+  // // Dependências WebSocket
+  // implementation libs.spring.websocket
+  // implementation libs.spring.messaging
+  // implementation libs.spring.web
+  // implementation libs.spring.core
+  // implementation libs.spring.context
+  // implementation libs.commons.lang3
+  // implementation libs.kotlinx.coroutines.core
+  // implementation libs.kotlinx.coroutines.android
 }
