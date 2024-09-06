@@ -2,9 +2,11 @@ package com.example.myfirstproject.integracaoViaCep.config
 
 import android.content.Context
 import android.util.Log
-import com.example.helplineapp.MyApp.Companion.context
-import com.example.helplineapp.network.Login.LoginService
+import com.example.helplineapp.GetContext.Companion.context
+import com.example.myfirstproject.integracaoViaCep.Interface.LoginService
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -12,33 +14,29 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient{
   private const val BASE_URL = "https://helpline-api-dev.azurewebsites.net/"
 
-  private fun provideOkHttpClient(): OkHttpClient{
+  private fun provideOkHttpClient(context: Context): OkHttpClient {
     return OkHttpClient.Builder()
-      .addInterceptor { chain ->
-        val originalRequest = chain.request()
-        val token = getToken()
-        val newRequest = if (token != null){
-          originalRequest.newBuilder()
-            .addHeader("Authorization", "Bearer $token")
-            .build()
-        } else {
-          originalRequest
-        }
-        chain.proceed(newRequest)
-        }
-      .build()
-  }
+      .addInterceptor { chain: Interceptor.Chain ->
+        val requestBuilder: Request.Builder = chain.request().newBuilder()
 
-  private fun getToken(): String? {
-    val sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE)
-    Log.d("Login", "Token: ${sharedPreferences.getString("auth_token", null)}")
-    return sharedPreferences.getString("auth_token", null)
+        // Recupera o token do SharedPreferences
+        val sharedPreferences = context.getSharedPreferences("login_token", Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString("auth_token", null)
+
+        // Se o token não for nulo, adicione-o ao cabeçalho da requisição
+        if (token != null) {
+          requestBuilder.addHeader("Authorization", "Bearer $token")
+        }
+
+        chain.proceed(requestBuilder.build())
+      }
+      .build()
   }
 
   val retrofit: Retrofit by lazy{
     Retrofit.Builder()
       .baseUrl(BASE_URL)
-      .client(provideOkHttpClient())
+      .client(provideOkHttpClient(context))
       .addConverterFactory(GsonConverterFactory.create())
       .build()
   }

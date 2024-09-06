@@ -132,6 +132,7 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
       visualTransformation = PasswordVisualTransformation(),
       colors = TextFieldDefaults.textFieldColors(
         containerColor = Color.White,
+
         focusedIndicatorColor = Color.Transparent,
       ),
       modifier = Modifier
@@ -155,7 +156,6 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
         viewModel.loginUser(
           onLoginSuccess = {
             Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_LONG).show()
-            navController.navigate("mapa")
           },
           onLoginError = { errorMessage ->
             Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
