@@ -3,7 +3,7 @@ package com.example.myfirstproject.integracaoViaCep.config
 import android.content.Context
 import android.util.Log
 import com.example.helplineapp.GetContext.Companion.context
-import com.example.myfirstproject.integracaoViaCep.Interface.LoginService
+import com.example.helplineapp.network.Login.LoginService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
