@@ -41,12 +41,12 @@ class LoginViewModel: ViewModel() {
     return Login.apiService.login(loginRequest)
   }
 
- // Função para guardar o token
+
+  // Função para guardar o token
   private fun saveToken(token: String) {
-    // Salvar o token utilizando SharedPreferences
+    // Salvar o token em algum lugar, como SharedPreferences ou DataStore
     val sharedPreferences: SharedPreferences = context.getSharedPreferences("login_token", Context.MODE_PRIVATE)
     sharedPreferences.edit().putString("auth_token", token).apply()
-   Log.d("Token no SharedPreferences", "${sharedPreferences.getString("login_token", null)}")
   }
 
   fun getToken(): String?{
