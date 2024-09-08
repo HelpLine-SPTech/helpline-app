@@ -73,7 +73,8 @@ fun ForumScreen(navController: NavController) {
             modifier = Modifier
                 .align(Alignment.BottomCenter) // Alinha o footer na parte inferior do Box
                 .fillMaxWidth()
-                .height(60.dp) // Altura do footer
+                .height(60.dp),
+            navController// Altura do footer
         )
     }
 }

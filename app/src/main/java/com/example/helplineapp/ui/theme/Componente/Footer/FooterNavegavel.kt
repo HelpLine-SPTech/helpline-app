@@ -21,10 +21,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.helplineapp.R
 
 @Composable
-fun BottomNavBar(modifier: Modifier) {
+fun BottomNavBar(modifier: Modifier, navController: NavController) {
+
 
     Row(
         modifier = modifier
@@ -42,7 +44,7 @@ fun BottomNavBar(modifier: Modifier) {
             NavigationBarItem(
                 icon = {
                     Icon(imageVector = Icons.Default.Home,
-                        contentDescription = "h",
+                        contentDescription = "Home Button",
                         tint = Color.White,
                         modifier = Modifier.size(32.dp))
                 },
@@ -53,7 +55,7 @@ fun BottomNavBar(modifier: Modifier) {
             NavigationBarItem(
                 icon = {
                     Icon(imageVector = Icons.Default.Search,
-                        contentDescription = "h",
+                        contentDescription = "Search Button",
                         tint = Color.White,
                         modifier = Modifier.size(32.dp))
                 },
@@ -63,18 +65,18 @@ fun BottomNavBar(modifier: Modifier) {
             NavigationBarItem(
                 icon = {
                     Icon(imageVector = Icons.Default.Notifications,
-                        contentDescription = "h",
+                        contentDescription = "Notification Button",
                         tint = Color.White,
                         modifier = Modifier.size(32.dp))
                 },
                 selected = false,
-                onClick = { /* Ação para Notifications */ }
+                onClick = { navController.navigate("notificationScreen") }
             )
 
             NavigationBarItem(
                 icon = {
                     Icon(imageVector = Icons.AutoMirrored.Filled.Chat,
-                        contentDescription = "h",
+                        contentDescription = "Chat button",
                         tint = Color.White,
                         modifier = Modifier.size(32.dp))
                 },
@@ -84,7 +86,7 @@ fun BottomNavBar(modifier: Modifier) {
             NavigationBarItem(
                 icon = {
                     Icon(imageVector = Icons.Default.Work,
-                        contentDescription = "h",
+                        contentDescription = "Job button",
                         tint = Color.White,
                         modifier = Modifier.size(32.dp))
                 },
@@ -96,12 +98,12 @@ fun BottomNavBar(modifier: Modifier) {
 
 }
 
-@Preview
-@Composable
-fun PreviewBottomNavBar() {
-    BottomNavBar(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(60.dp) // Altura do footer
-    )
-}
+//@Preview
+//@Composable
+//fun PreviewBottomNavBar() {
+//    BottomNavBar(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .height(60.dp)// Altura do footer
+//    )
+//}
