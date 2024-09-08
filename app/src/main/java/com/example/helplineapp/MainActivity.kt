@@ -8,15 +8,13 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.helplineapp.GetContext.Companion.context
 import com.example.helplineapp.View.Forum.ForumScreen
 import com.example.helplineapp.View.Login.LoginScreen
 import com.example.helplineapp.ui.theme.HelplineAppTheme
-import com.example.helplineapp.View.Login.LoginScreen
+import com.example.helplineapp.View.Notification.NotificationScreen
 import com.example.helplineapp.View.SplashScreen.SplashScreen
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +32,7 @@ class MainActivity : ComponentActivity() {
       HelplineAppTheme {
         val navController = rememberNavController()
         // startDestination -> Tela que o aplicativo vai começar
-        NavHost(navController = navController, startDestination = "splashScreen") {
+        NavHost(navController = navController, startDestination = "notificationScreen") {
 
           // Criando a rota para a tela de login
           composable(route = "loginPage") {
@@ -49,6 +47,10 @@ class MainActivity : ComponentActivity() {
           // Rota para tela de splash screen
           composable(route = "splashScreen") {
             SplashScreen(navController)
+          }
+
+          composable(route = "notificationScreen") {
+            NotificationScreen(navController)
           }
         }
       }
