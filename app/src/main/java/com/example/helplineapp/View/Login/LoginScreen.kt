@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -156,7 +157,6 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
         viewModel.loginUser(
           onLoginSuccess = {
             Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_LONG).show()
-
           },
           onLoginError = { errorMessage ->
             Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
