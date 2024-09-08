@@ -1,6 +1,7 @@
 package com.example.helplineapp.View.Login
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -98,6 +99,8 @@ fun LoginScreen(navController: NavController) {
 fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
   val context = LocalContext.current
 
+  BackHandler {  }
+
   Column(
     modifier = Modifier.fillMaxWidth()
   ) {
@@ -160,7 +163,9 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
         viewModel.loginUser(
           onLoginSuccess = {
             Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_LONG).show()
-            navController.navigate("forumScreen")
+            navController.navigate("forumScreen"){
+              popUpTo("loginPage") { inclusive = true }
+            }
           },
           onLoginError = { errorMessage ->
             Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()

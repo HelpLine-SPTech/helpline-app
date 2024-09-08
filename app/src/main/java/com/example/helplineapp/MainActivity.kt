@@ -17,6 +17,7 @@ import com.example.helplineapp.View.Forum.ForumScreen
 import com.example.helplineapp.View.Login.LoginScreen
 import com.example.helplineapp.ui.theme.HelplineAppTheme
 import com.example.helplineapp.View.Login.LoginScreen
+import com.example.helplineapp.View.SplashScreen.SplashScreen
 
 class MainActivity : ComponentActivity() {
   @SuppressLint("WrongConstant")
@@ -33,15 +34,21 @@ class MainActivity : ComponentActivity() {
       HelplineAppTheme {
         val navController = rememberNavController()
         // startDestination -> Tela que o aplicativo vai começar
-        NavHost(navController = navController, startDestination = "loginPage") {
+        NavHost(navController = navController, startDestination = "splashScreen") {
 
           // Criando a rota para a tela de login
           composable(route = "loginPage") {
             LoginScreen(navController)
           }
 
+          // Rota para tela do fórum
           composable(route = "forumScreen") {
             ForumScreen(navController)
+          }
+
+          // Rota para tela de splash screen
+          composable(route = "splashScreen") {
+            SplashScreen(navController)
           }
         }
       }
