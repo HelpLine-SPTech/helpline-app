@@ -19,18 +19,15 @@ class MainActivity : ComponentActivity() {
     enableEdgeToEdge()
     setContent {
       HelplineAppTheme {
+        val navController = rememberNavController()
+        // startDestination -> Tela que o aplicativo vai começar
+        NavHost(navController = navController, startDestination = "loginPage") {
 
-        LoginScreen(navController = NavController(context))
-//        val navController = rememberNavController()
-//
-//        // startDestination -> Tela que o aplicativo vai começar
-//        NavHost(navController = navController, startDestination = "loginPage") {
-//
-//          // Criando a rota para a tela de login
-//          composable(route = "loginPage") {
-//            LoginScreen(navController)
-//          }
-//        }
+          // Criando a rota para a tela de login
+          composable(route = "loginPage") {
+            LoginScreen(navController)
+          }
+        }
       }
     }
   }
