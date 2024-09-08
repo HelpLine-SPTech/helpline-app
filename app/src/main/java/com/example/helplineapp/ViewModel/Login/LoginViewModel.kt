@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.helplineapp.GetContext.Companion.context
 import com.example.helplineapp.network.Login.LoginService
-import com.example.myfirstproject.integracaoViaCep.config.Login
+import com.example.helplineapp.config.Login
 import kotlinx.coroutines.launch
 
 class LoginViewModel: ViewModel() {
@@ -40,6 +40,7 @@ class LoginViewModel: ViewModel() {
     Log.d("Login", "Token: ${loginRequest.toString()}")
     return Login.apiService.login(loginRequest)
   }
+
 
   // Função para guardar o token
   private fun saveToken(token: String) {

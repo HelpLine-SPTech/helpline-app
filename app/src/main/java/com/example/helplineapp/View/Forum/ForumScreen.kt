@@ -2,7 +2,6 @@ package com.example.helplineapp.View.Forum
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -20,11 +19,10 @@ import com.example.helplineapp.ui.theme.Componente.Header.TopBar
 import com.example.helplineapp.ui.theme.Componente.Footer.BottomNavBar
 
 @Composable
-fun PostCard(navController: NavController) {
+fun ForumScreen(navController: NavController) {
     // Header
     Column(
         modifier = Modifier.fillMaxSize()
-            .padding(start = 15.dp), // Margem à esquerda
     ) {
         TopBar()
 
