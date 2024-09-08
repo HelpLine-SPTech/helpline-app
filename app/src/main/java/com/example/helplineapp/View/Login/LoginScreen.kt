@@ -156,6 +156,7 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
         viewModel.loginUser(
           onLoginSuccess = {
             Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_LONG).show()
+
           },
           onLoginError = { errorMessage ->
             Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
