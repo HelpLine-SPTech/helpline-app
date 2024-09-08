@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
       HelplineAppTheme {
         val navController = rememberNavController()
         // startDestination -> Tela que o aplicativo vai começar
-        NavHost(navController = navController, startDestination = "forumScreen") {
+        NavHost(navController = navController, startDestination = "loginPage") {
 
           // Criando a rota para a tela de login
           composable(route = "loginPage") {

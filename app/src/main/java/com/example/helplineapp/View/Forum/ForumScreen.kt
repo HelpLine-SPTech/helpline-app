@@ -1,9 +1,12 @@
 package com.example.helplineapp.View.Forum
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,92 +18,62 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.helplineapp.R
 import com.example.helplineapp.ui.theme.Componente.Header.TopBar
 import com.example.helplineapp.ui.theme.Componente.Footer.BottomNavBar
+import com.example.helplineapp.ui.theme.Componente.Forum.Post
 
 @Composable
 fun ForumScreen(navController: NavController) {
-    // Header
-    Column(
+    // Usando um Box para sobrepor o conteúdo e o footer
+    Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        TopBar()
-
-        // Container principal do post
+        // Conteúdo principal que rola
         Column(
             modifier = Modifier
-               .padding(10.dp) // Padding geral
-                .background(Color(0xFFF2F6EF)) // Cor de fundo
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(16.dp))
-                .weight(1f), // Permite que o conteúdo ocupe o espaço restante
-            horizontalAlignment = Alignment.Start,
+                .fillMaxSize()
+                .padding(bottom = 60.dp) // Espaçamento para evitar sobreposição com o footer
+                .verticalScroll(rememberScrollState()) // Permite que o conteúdo role
         ) {
-            // Linha para a foto e nome do usuário
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 15.dp)
-                    .padding(start = 10.dp),
-                verticalAlignment = Alignment.CenterVertically // Alinha verticalmente
-            ) {
-                Image(
-                    painter = painterResource(id = com.example.helplineapp.R.mipmap.fotomaria),
-                    contentDescription = "Foto Maria",
-                    modifier = Modifier.size(50.dp)
-                )
-                // Nome do usuário
-                Text(
-                    text = "Maria Eduarda",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(start = 8.dp) // Espaço entre a imagem e o texto
-                )
-            }
+            TopBar()
 
-            // Texto da mensagem
-            Text(
-                text = "Oi pessoal, estou com algumas cestas básicas e gostaria de saber se alguma ONG poderia entrar em contato comigo para eu possa fazer a doação.",
-                fontSize = 14.sp,
-                modifier = Modifier
-                    .padding(bottom = 5.dp) // Espaçamento inferior
-                    .padding(start = 30.dp),
+            // Card do post
+            
+            Post(nome = "Maria Eduarda", texto = "Oi pessoal, estou com algumas cestas básicas e gostaria de saber se alguma ONG poderia entrar em contato comigo para que eu possa fazer a doação.",
+                profilePic = R.mipmap.fotomaria,
+                postImage = true
+            )
+            
+            // Adicione mais posts aqui conforme necessário
+            // Post 2
+            Post(
+                "Julia Almeida",
+                "Gostaria de saber se alguma ONG poderia entrar em contato comigo para eu possa fazer a doação.",
+                    R.mipmap.img_julia_almeida,
+                    false
             )
 
-            // Imagem
-            Image(
-                painter = painterResource(id = com.example.helplineapp.R.mipmap.imgdoacao),
-                contentDescription = "Cestas básicas",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .size(180.dp)
-                    .width(100.dp)
-                    .padding(start = 30.dp),
+            // Post3
+            Post(
+                "Julio Cesar",
+                "Estou tão feliz por ter sido voluntária e ter contribuído com a ONG que me vinculei! " +
+                    "Foi uma experiência incrível e gratificante, saber que pude ajudar de alguma" +
+                    " forma faz tudo valer a pena. Mal posso esperar para continuar colaborando" +
+                    " e fazendo a diferença na comunidade.\n" +
+                    "#BemDaMadrugada.",
+                R.mipmap.img_julia_almeida,
+                false
             )
-
-            // Área de interações (curtir, comentar)
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 10.dp)
-                    .padding(start = 10.dp),
-                    horizontalArrangement = Arrangement.Start // Alinha à esquerda
-            ) {
-                Image(
-                    painter = painterResource(id = com.example.helplineapp.R.mipmap.iconelike),
-                    contentDescription = "Icone Like",
-                    modifier = Modifier.size(20.dp)
-                )
-
-                Image(
-                    painter = painterResource(id = com.example.helplineapp.R.mipmap.iconecomentario),
-                    contentDescription = "Icone Comentario",
-                    modifier = Modifier.size(20.dp)
-                )
-            }
         }
 
-        // Footer fixo
-        BottomNavBar()
+
+            // Footer fixo na parte inferior
+        BottomNavBar(
+            modifier = Modifier
+                .align(Alignment.BottomCenter) // Alinha o footer na parte inferior do Box
+                .fillMaxWidth()
+                .height(60.dp) // Altura do footer
+        )
     }
 }
