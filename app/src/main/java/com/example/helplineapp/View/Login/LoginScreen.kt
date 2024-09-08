@@ -110,6 +110,8 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
       value = viewModel.userEmail,
       onValueChange = {viewModel.onEmailChange(it)},
       colors = TextFieldDefaults.textFieldColors(
+        focusedTextColor = Color.Black,
+        unfocusedTextColor = Color.Black,
         containerColor = Color.White,
         focusedIndicatorColor = Color.Transparent,
       ),
@@ -132,8 +134,9 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
       onValueChange = { viewModel.onPasswordChange(it) },
       visualTransformation = PasswordVisualTransformation(),
       colors = TextFieldDefaults.textFieldColors(
+        focusedTextColor = Color.Black,
+        unfocusedTextColor = Color.Black,
         containerColor = Color.White,
-
         focusedIndicatorColor = Color.Transparent,
       ),
       modifier = Modifier
