@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -109,6 +110,8 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
       value = viewModel.userEmail,
       onValueChange = {viewModel.onEmailChange(it)},
       colors = TextFieldDefaults.textFieldColors(
+        focusedTextColor = Color.Black,
+        unfocusedTextColor = Color.Black,
         containerColor = Color.White,
         focusedIndicatorColor = Color.Transparent,
       ),
@@ -131,8 +134,9 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
       onValueChange = { viewModel.onPasswordChange(it) },
       visualTransformation = PasswordVisualTransformation(),
       colors = TextFieldDefaults.textFieldColors(
+        focusedTextColor = Color.Black,
+        unfocusedTextColor = Color.Black,
         containerColor = Color.White,
-
         focusedIndicatorColor = Color.Transparent,
       ),
       modifier = Modifier

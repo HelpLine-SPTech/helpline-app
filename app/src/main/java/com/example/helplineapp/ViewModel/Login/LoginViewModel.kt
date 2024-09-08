@@ -9,8 +9,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.helplineapp.GetContext.Companion.context
-import com.example.myfirstproject.integracaoViaCep.Interface.LoginService
-import com.example.myfirstproject.integracaoViaCep.config.LoginClient
+import com.example.helplineapp.network.Login.LoginService
+import com.example.helplineapp.config.Login
 import kotlinx.coroutines.launch
 
 class LoginViewModel: ViewModel() {
@@ -41,21 +41,12 @@ class LoginViewModel: ViewModel() {
     return Login.apiService.login(loginRequest)
   }
 
-  private fun saveToken(token: String){
-    val sharedPreferences: SharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE)
-    sharedPreferences.edit().putString("auth_token", token).apply()
-  }
-
-  fun getToken(): String?{
-    val sharedPreferences: SharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE)
-    return sharedPreferences.getString("auth_token", null)
-  }
-
-  // Função para guardar o token
+ // Função para guardar o token
   private fun saveToken(token: String) {
-    // Salvar o token em algum lugar, como SharedPreferences ou DataStore
+    // Salvar o token utilizando SharedPreferences
     val sharedPreferences: SharedPreferences = context.getSharedPreferences("login_token", Context.MODE_PRIVATE)
     sharedPreferences.edit().putString("auth_token", token).apply()
+   Log.d("Token no SharedPreferences", "${sharedPreferences.getString("login_token", null)}")
   }
 
   fun getToken(): String?{
