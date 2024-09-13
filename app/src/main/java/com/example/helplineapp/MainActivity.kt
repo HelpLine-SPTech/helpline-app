@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.helplineapp.View.Forum.ForumScreen
 import com.example.helplineapp.View.Login.LoginScreen
+import com.example.helplineapp.View.NavDrawer
 import com.example.helplineapp.ui.theme.HelplineAppTheme
 import com.example.helplineapp.View.Notification.NotificationScreen
 import com.example.helplineapp.View.SplashScreen.SplashScreen
@@ -31,8 +32,9 @@ class MainActivity : ComponentActivity() {
     setContent {
       HelplineAppTheme {
         val navController = rememberNavController()
+
         // startDestination -> Tela que o aplicativo vai começar
-        NavHost(navController = navController, startDestination = "notificationScreen") {
+        NavHost(navController = navController, startDestination = "splashScreen") {
 
           // Criando a rota para a tela de login
           composable(route = "loginPage") {

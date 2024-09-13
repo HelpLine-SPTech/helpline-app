@@ -21,6 +21,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,7 +32,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -80,7 +83,7 @@ fun LoginScreen(navController: NavController) {
 
       Spacer(modifier = Modifier.height(28.dp))
 
-      LoginForm(navController, viewModel)
+      LoginForm(navController)
 
       Spacer(modifier = Modifier.height(10.dp))
 
@@ -96,10 +99,12 @@ fun LoginScreen(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
+fun LoginForm(navController: NavController) {
   val context = LocalContext.current
+  var email by remember { mutableStateOf("") }
+  var password by remember { mutableStateOf("") }
 
-  BackHandler {  }
+  BackHandler {}
 
   Column(
     modifier = Modifier.fillMaxWidth()
@@ -110,8 +115,8 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
     )
 
     TextField(
-      value = viewModel.userEmail,
-      onValueChange = {viewModel.onEmailChange(it)},
+      value = email,
+      onValueChange = { email = it },
       colors = TextFieldDefaults.textFieldColors(
         focusedTextColor = Color.Black,
         unfocusedTextColor = Color.Black,
@@ -133,8 +138,8 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
     )
 
     TextField(
-      value = viewModel.userPassword,
-      onValueChange = { viewModel.onPasswordChange(it) },
+      value = password,
+      onValueChange = { password = it },
       visualTransformation = PasswordVisualTransformation(),
       colors = TextFieldDefaults.textFieldColors(
         focusedTextColor = Color.Black,
@@ -160,17 +165,14 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
 
     Button(
       onClick = {
-        viewModel.loginUser(
-          onLoginSuccess = {
-            Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_LONG).show()
-            navController.navigate("forumScreen"){
-              popUpTo("loginPage") { inclusive = true }
-            }
-          },
-          onLoginError = { errorMessage ->
-            Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+        if (email == "admin@teste.com" && password == "admin123") {
+          Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_LONG).show()
+          navController.navigate("forumScreen") {
+            popUpTo("loginPage") { inclusive = true }
           }
-        )
+        } else {
+          Toast.makeText(context, "Email ou senha incorretos", Toast.LENGTH_LONG).show()
+        }
       },
       modifier = Modifier
         .fillMaxWidth()
