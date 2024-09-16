@@ -19,62 +19,63 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.helplineapp.R
+import com.example.helplineapp.View.NavDrawer
 import com.example.helplineapp.ui.theme.Componente.Header.TopBar
 import com.example.helplineapp.ui.theme.Componente.Footer.BottomNavBar
 import com.example.helplineapp.ui.theme.Componente.Forum.Post
 
 @Composable
 fun ForumScreen(navController: NavController) {
-    // Usando um Box para sobrepor o conteúdo e o footer
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        // Conteúdo principal que rola
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 60.dp) // Espaçamento para evitar sobreposição com o footer
-                .verticalScroll(rememberScrollState()) // Permite que o conteúdo role
+    NavDrawer {
+        // Usando um Box para sobrepor o conteúdo e o footer
+        Box(
+            modifier = Modifier.fillMaxSize()
         ) {
-            TopBar()
+            // Conteúdo principal que rola
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 60.dp, top = 120.dp) // Espaçamento para evitar sobreposição com o footer
+                    .verticalScroll(rememberScrollState()) // Permite que o conteúdo role
+            ) {
+                // O TopBar já está sendo chamado dentro do NavDrawer
+                // Conteúdo da tela
+                Post(
+                    nome = "Maria Eduarda",
+                    texto = "Oi pessoal, estou com algumas cestas básicas e gostaria de saber se alguma ONG poderia entrar em contato comigo para que eu possa fazer a doação.",
+                    profilePic = R.drawable.profile_maria_eduarda,
+                    postImage = true
+                )
 
-            // Card do post
-            
-            Post(nome = "Maria Eduarda", texto = "Oi pessoal, estou com algumas cestas básicas e gostaria de saber se alguma ONG poderia entrar em contato comigo para que eu possa fazer a doação.",
-                profilePic = R.mipmap.fotomaria,
-                postImage = true
-            )
-            
-            // Adicione mais posts aqui conforme necessário
-            // Post 2
-            Post(
-                "Julia Almeida",
-                "Gostaria de saber se alguma ONG poderia entrar em contato comigo para eu possa fazer a doação.",
+                // Post 2
+                Post(
+                    "Julia Almeida",
+                    "Gostaria de saber se alguma ONG poderia entrar em contato comigo para eu possa fazer a doação.",
                     R.mipmap.img_julia_almeida,
                     false
-            )
+                )
 
-            // Post3
-            Post(
-                "Julio Cesar",
-                "Estou tão feliz por ter sido voluntária e ter contribuído com a ONG que me vinculei! " +
-                    "Foi uma experiência incrível e gratificante, saber que pude ajudar de alguma" +
-                    " forma faz tudo valer a pena. Mal posso esperar para continuar colaborando" +
-                    " e fazendo a diferença na comunidade.\n" +
-                    "#BemDaMadrugada.",
-                R.mipmap.img_julia_almeida,
-                false
-            )
-        }
-
+                // Post 3
+                Post(
+                    "Adriano Leite Ribeiro",
+                    "Estou tão feliz por ter sido voluntária e ter contribuído com a ONG que me vinculei! " +
+                        "Foi uma experiência incrível e gratificante, saber que pude ajudar de alguma" +
+                        " forma faz tudo valer a pena. Mal posso esperar para continuar colaborando" +
+                        " e fazendo a diferença na comunidade.\n" +
+                        "#BemDaMadrugada.",
+                    R.mipmap.profile_adriano,
+                    false
+                )
+            }
 
             // Footer fixo na parte inferior
-        BottomNavBar(
-            modifier = Modifier
-                .align(Alignment.BottomCenter) // Alinha o footer na parte inferior do Box
-                .fillMaxWidth()
-                .height(60.dp),
-            navController// Altura do footer
-        )
+            BottomNavBar(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter) // Alinha o footer na parte inferior do Box
+                    .fillMaxWidth()
+                    .height(60.dp),
+                navController
+            )
+        }
     }
 }

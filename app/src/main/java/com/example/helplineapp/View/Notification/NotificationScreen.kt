@@ -1,30 +1,21 @@
 package com.example.helplineapp.View.Notification
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ThumbUp
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.helplineapp.R
+import com.example.helplineapp.ui.theme.Componente.Notification.Header.HeaderNotification
 import com.example.helplineapp.ui.theme.Componente.Notification.NotificationItem
 
 
@@ -38,7 +29,7 @@ fun NotificationScreen(navController: NavController) {
       .clip(RoundedCornerShape(25.dp))
       .verticalScroll(rememberScrollState())
   ) {
-    Header(navController)
+    HeaderNotification(navController)
     Spacer(modifier = Modifier.height(23.dp))
     Text(
       text = "Hoje",
@@ -63,7 +54,7 @@ fun NotificationScreen(navController: NavController) {
       fontWeight = FontWeight.SemiBold
     )
     NotificationItem(
-      image = R.mipmap.fotomaria,
+      image = R.drawable.profile_maria_eduarda,
       name = "Maria Eduarda",
       action = "curtiu sua publicação"
     )
@@ -79,51 +70,14 @@ fun NotificationScreen(navController: NavController) {
       fontWeight = FontWeight.SemiBold
     )
     NotificationItem(
-      image = R.mipmap.profile_noemi,
+      image = R.mipmap.profile_noemi_santos,
       name = "Maria Eduarda",
       action = "curtiu sua publicação"
     )
     NotificationItem(
-      image = R.mipmap.profile_noemi,
+      image = R.mipmap.profile_noemi_santos,
       name = "Maria Eduarda",
       action = "curtiu sua publicação"
-    )
-  }
-}
-
-@Composable
-fun Header(navController: NavController) {
-  Row(
-    modifier = Modifier.fillMaxWidth(),
-    horizontalArrangement = Arrangement.SpaceBetween,
-    verticalAlignment = Alignment.CenterVertically
-  ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-      Button(
-        onClick = {
-          navController.navigate("forumScreen")
-        },
-        modifier = Modifier.padding(end = 8.dp)
-          .size(80.dp)
-          .width(90.dp),
-
-        colors = ButtonDefaults.buttonColors(containerColor = Color.White)
-          .copy(contentColor = Color.Black)
-      ) {
-        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-      }
-      Spacer(modifier = Modifier.width(35.dp))
-      Text(
-        text = "Notificações",
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Bold
-      )
-      Spacer(modifier = Modifier.width(17.dp))
-    }
-    Image(
-      painter = painterResource(id = R.mipmap.img_julia_almeida),
-      contentDescription = "Profile Icon",
-      modifier = Modifier.size(56.dp)
     )
   }
 }

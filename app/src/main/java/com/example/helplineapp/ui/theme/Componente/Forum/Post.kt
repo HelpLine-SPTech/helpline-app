@@ -54,10 +54,10 @@ fun Post( nome: String, texto: String, profilePic: Int, postImage: Boolean){
       ) {
         Image(
           painter = painterResource(id = profilePic),
-          contentDescription = "Foto Maria",
+          contentDescription = "profilePic",
           modifier = Modifier
             .size(50.dp)
-            .clip(RoundedCornerShape(25.dp)), // Arredondando a imagem
+            .clip(RoundedCornerShape(20.dp)), // Arredondando a imagem
         )
         // Nome do usuário
         Text(

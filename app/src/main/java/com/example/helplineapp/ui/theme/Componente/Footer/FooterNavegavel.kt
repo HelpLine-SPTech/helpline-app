@@ -26,8 +26,6 @@ import com.example.helplineapp.R
 
 @Composable
 fun BottomNavBar(modifier: Modifier, navController: NavController) {
-
-
     Row(
         modifier = modifier
             .background(Color(0xFF285430)), // Cor de fundo do footer
@@ -40,6 +38,7 @@ fun BottomNavBar(modifier: Modifier, navController: NavController) {
                 .clip(RoundedCornerShape(16.dp)), // Aplica o formato arredondado primeiro
             containerColor = Color(0xFF285430)
         ) {
+
             // Ícones de navegação
             NavigationBarItem(
                 icon = {
@@ -95,7 +94,6 @@ fun BottomNavBar(modifier: Modifier, navController: NavController) {
             )
         }
     }
-
 }
 
 //@Preview

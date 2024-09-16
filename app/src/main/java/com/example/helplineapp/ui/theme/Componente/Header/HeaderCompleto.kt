@@ -1,12 +1,26 @@
 package com.example.helplineapp.ui.theme.Componente.Header
 
+import android.util.Log
+import android.widget.Button
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,7 +32,7 @@ import com.example.helplineapp.R
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun TopBar() {
+fun TopBar(onMenuClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -28,7 +42,7 @@ fun TopBar() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         // Ícone de menu (esquerda)
-        MenuIcon()
+        MenuIcon(onClick = onMenuClick)
 
         // Espaço flexível para garantir que a logo fique no centro
         Spacer(modifier = Modifier.weight(1.4f)) // Espaço flexível para empurrar a logo para o centro
@@ -41,12 +55,14 @@ fun TopBar() {
 }
 
 @Composable
-fun MenuIcon() {
+fun MenuIcon(onClick: () -> Unit) {
     Icon(
         painter = painterResource(id = R.mipmap.menulist),
         contentDescription = "Menu",
-        modifier = Modifier.size(30.dp),
-        tint = Color.Black
+        modifier = Modifier
+            .size(30.dp)
+            .clickable(onClick = onClick), // Clique para abrir o NavigationDrawer
+        tint = Color.Black,
     )
 }
 
@@ -74,8 +90,9 @@ fun ProfileImage() {
     )
 }
 
-@Preview
-@Composable
-fun PreviewTopBar() {
-    TopBar()
-}
+//
+//@Preview
+//@Composable
+//fun PreviewTopBar() {
+//    TopBar()
+//}
