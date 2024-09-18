@@ -202,6 +202,8 @@ fun ProfileScreen(navController: NavController) {
             CampaignListItem("Tutor Voluntário para Reforço Escolar")
             CampaignListItem("Assistente de Eventos Voluntário")
             CampaignListItem("Voluntário para Cuidados de Animais Abandonados")
+            
+            Spacer(modifier = Modifier.padding(40.dp))
         }
 
         // Adicionando o BottomNavBar no Box para garantir que ele fique na parte inferior
