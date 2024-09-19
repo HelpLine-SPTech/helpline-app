@@ -1,8 +1,5 @@
 package com.example.helplineapp.View.PerfilOng
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -421,8 +418,6 @@ fun VolunteerProfileContent(navController: NavController) {
                 OngItem("Nós do Bem", R.drawable.profile_image)
             }
 
-            // Outras seções conforme necessário
-
             Spacer(modifier = Modifier.padding(40.dp))
         }
 
@@ -480,5 +475,5 @@ fun CampaignListItem(title: String) {
 @Composable
 fun PreviewProfileScreen() {
     val navController = rememberNavController()
-    ProfileScreen(profileType = ProfileType.Ong, navController = navController)
+    ProfileScreen(profileType = ProfileType.Volunteer, navController = navController)
 }
