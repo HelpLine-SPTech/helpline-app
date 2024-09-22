@@ -1,5 +1,6 @@
 package com.example.helplineapp.View.Login
 
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
@@ -14,10 +15,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -48,12 +47,6 @@ import com.example.helplineapp.ViewModel.Login.LoginState
 
 @Composable
 fun LoginScreen(navController: NavController, viewModel: LoginViewModel) {
-  val context = LocalContext.current
-
-
-  val email by remember { mutableStateOf("") }
-  val password by remember { mutableStateOf("") }
-
 
   Box(
     modifier = Modifier
@@ -192,10 +185,16 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
     }
 
     when (loginState) {
-      is LoginState.Loading -> Text("Carregando")
-      is LoginState.Success -> Text("Login Success: ${(loginState as LoginState.Success).token}")
-      is LoginState.Error -> Text("Error: ${(loginState as LoginState.Error).message}")
+      is LoginState.Success ->{
+        Log.d("LoginState", "Token: ${(loginState as LoginState.Success).token}")
+        Toast.makeText(context, "Login bem-sucedido", Toast.LENGTH_SHORT).show()
+        navController.navigate("forumScreen")
+      }
+      is LoginState.Error -> {
+        Toast.makeText(context, "Usuário ou senha inválidos", Toast.LENGTH_SHORT).show()
+        Log.d("LoginState", "Error: ${(loginState as LoginState.Error).message}")
+      }
+      LoginState.Loading -> Text("") // O suco da gambiarra
     }
-
   }
 }
