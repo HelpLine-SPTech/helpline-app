@@ -1,6 +1,5 @@
 package com.example.helplineapp.network.Login
 
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -15,6 +14,6 @@ interface LoginService {
   @POST("auth/login") // Verbo HTTP que será usado
 
   // Função que faz a requisição para a API
-  suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
+  suspend fun login(@Body request: LoginRequest): LoginResponse
 
 }
