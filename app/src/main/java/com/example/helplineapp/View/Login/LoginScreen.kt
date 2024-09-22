@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -42,7 +43,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.helplineapp.R
 import com.example.helplineapp.ViewModel.Login.LoginViewModel
-import com.example.helplineapp.ViewModel.Login.LoginState
+
 
 
 @Composable
@@ -106,8 +107,6 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
   var email by remember { mutableStateOf("") }
   var password by remember { mutableStateOf("") }
 
-  val loginState by viewModel.loginState.collectAsState()
-
   BackHandler {}
 
   Column(
@@ -167,9 +166,15 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
 
     Spacer(modifier = Modifier.height(48.dp))
 
+
     Button(
       onClick = {
-        viewModel.loginUser(email, password)
+        viewModel.login(email, password, onLoginSuccess = {
+          navController.navigate("forumScreen")
+          Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_LONG).show()
+        }, onLoginError = {
+          Toast.makeText(context, "Usuário ou senha incorretos!", Toast.LENGTH_SHORT).show()
+        })
       },
       modifier = Modifier
         .fillMaxWidth()
@@ -182,19 +187,6 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
         color = Color.White,
         fontWeight = FontWeight.Bold
       )
-    }
-
-    when (loginState) {
-      is LoginState.Success ->{
-        Log.d("LoginState", "Token: ${(loginState as LoginState.Success).token}")
-        Toast.makeText(context, "Login bem-sucedido", Toast.LENGTH_SHORT).show()
-        navController.navigate("forumScreen")
-      }
-      is LoginState.Error -> {
-        Toast.makeText(context, "Usuário ou senha inválidos", Toast.LENGTH_SHORT).show()
-        Log.d("LoginState", "Error: ${(loginState as LoginState.Error).message}")
-      }
-      LoginState.Loading -> Text("") // O suco da gambiarra
     }
   }
 }
