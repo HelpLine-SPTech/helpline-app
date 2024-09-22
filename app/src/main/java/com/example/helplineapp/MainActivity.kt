@@ -13,16 +13,24 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.helplineapp.View.Forum.ForumScreen
 import com.example.helplineapp.View.Login.LoginScreen
-import com.example.helplineapp.View.NavDrawer
-import com.example.helplineapp.ui.theme.HelplineAppTheme
+import com.example.helplineapp.ui.app.HelplineAppTheme
 import com.example.helplineapp.View.Notification.NotificationScreen
 import com.example.helplineapp.View.SplashScreen.SplashScreen
+import com.example.helplineapp.ViewModel.Login.LoginViewModel
+import com.example.helplineapp.config.appModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.context.startKoin
 
 class MainActivity : ComponentActivity() {
   @SuppressLint("WrongConstant")
   @RequiresApi(Build.VERSION_CODES.R)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    startKoin{
+      androidContext(this@MainActivity)
+      modules(appModule)
+    }
     enableEdgeToEdge()
     WindowInsetsControllerCompat(window, window.decorView).let { controller ->
       controller.hide(android.view.WindowInsets.Type.systemBars())
@@ -38,7 +46,8 @@ class MainActivity : ComponentActivity() {
 
           // Criando a rota para a tela de login
           composable(route = "loginPage") {
-            LoginScreen(navController)
+            val loginViewModel: LoginViewModel = koinViewModel()
+            LoginScreen(navController, loginViewModel)
           }
 
           // Rota para tela do fórum

@@ -1,4 +1,4 @@
-package com.example.helplineapp.ui.theme.Componente.Notification.Header
+package com.example.helplineapp.ui.app.Componente.Notification.Header
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border

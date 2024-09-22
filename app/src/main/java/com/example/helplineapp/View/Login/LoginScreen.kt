@@ -14,13 +14,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,12 +43,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.helplineapp.R
 import com.example.helplineapp.ViewModel.Login.LoginViewModel
+import com.example.helplineapp.ViewModel.Login.LoginState
 
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(navController: NavController, viewModel: LoginViewModel) {
   val context = LocalContext.current
-  val viewModel: LoginViewModel = LoginViewModel()
+
+
+  val email by remember { mutableStateOf("") }
+  val password by remember { mutableStateOf("") }
+
 
   Box(
     modifier = Modifier
@@ -83,7 +91,7 @@ fun LoginScreen(navController: NavController) {
 
       Spacer(modifier = Modifier.height(28.dp))
 
-      LoginForm(navController)
+      LoginForm(navController, viewModel)
 
       Spacer(modifier = Modifier.height(10.dp))
 
@@ -99,10 +107,13 @@ fun LoginScreen(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginForm(navController: NavController) {
+fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
   val context = LocalContext.current
+
   var email by remember { mutableStateOf("") }
   var password by remember { mutableStateOf("") }
+
+  val loginState by viewModel.loginState.collectAsState()
 
   BackHandler {}
 
@@ -165,14 +176,7 @@ fun LoginForm(navController: NavController) {
 
     Button(
       onClick = {
-        if (email == "admin@teste.com" && password == "admin123") {
-          Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_LONG).show()
-          navController.navigate("forumScreen") {
-            popUpTo("loginPage") { inclusive = true }
-          }
-        } else {
-          Toast.makeText(context, "Email ou senha incorretos", Toast.LENGTH_LONG).show()
-        }
+        viewModel.loginUser(email, password)
       },
       modifier = Modifier
         .fillMaxWidth()
@@ -186,5 +190,12 @@ fun LoginForm(navController: NavController) {
         fontWeight = FontWeight.Bold
       )
     }
+
+    when (loginState) {
+      is LoginState.Loading -> Text("Carregando")
+      is LoginState.Success -> Text("Login Success: ${(loginState as LoginState.Success).token}")
+      is LoginState.Error -> Text("Error: ${(loginState as LoginState.Error).message}")
+    }
+
   }
 }

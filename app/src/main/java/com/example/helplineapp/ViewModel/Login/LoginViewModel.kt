@@ -8,59 +8,40 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.helplineapp.GetContext.Companion.context
+import com.example.helplineapp.network.Login.LoginRequest
 import com.example.helplineapp.network.Login.LoginService
-import com.example.helplineapp.config.Login
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class LoginViewModel: ViewModel() {
+sealed class LoginState{
+  data object Loading : LoginState()
+  data class Success(val token: String) : LoginState()
+  data class Error(val message: String) : LoginState()
+}
 
-  var userEmail: String by mutableStateOf("")
-  var userPassword: String by mutableStateOf("")
+class LoginViewModel (private val loginService: LoginService) : ViewModel() {
+
+  // Usar StateFlow para que o estado possa ser observado
+  private val _loginState = MutableStateFlow<LoginState>(LoginState.Loading)
+  val loginState: StateFlow<LoginState> = _loginState
 
 
-  fun loginUser(onLoginSuccess: () -> Unit, onLoginError: (String) -> Unit){
-    viewModelScope.launch {
+  fun loginUser(email: String, password: String) {
+    viewModelScope.launch{
+      _loginState.value = LoginState.Loading
       try {
-        val response = userLogin(userEmail, userPassword)
-        Log.d("LoginViewModel", "Token: ${response.token}")
-        saveToken(response.token)
-        Log.d("LoginViewModel", "Token salvo com sucesso!")
-        onLoginSuccess()
-      } catch (e: Exception) {
-        Log.e("LoginViewModel", "Erro ao fazer login", e)
-        onLoginError("Usuário ou senha incorretos!")
+        val response = loginService.login(LoginRequest(email, password))
+        if (response.isSuccessful){
+          response.body()?.let{
+            _loginState.value = LoginState.Success(it.token)
+          } ?: run{
+            _loginState.value = LoginState.Error("Erro ao fazer login")
+          }
+        }
+      } catch (e: Exception){
+        _loginState.value = LoginState.Error(e.localizedMessage ?: "Erro ao fazer login")
       }
     }
   }
-
-  private suspend fun userLogin(email: String, password: String): LoginService.LoginResponse{
-    val loginRequest = LoginService.LoginRequest(email, password)
-    saveToken(loginRequest.toString())
-    Log.d("Login", "Token: ${loginRequest.toString()}")
-    return Login.apiService.login(loginRequest)
-  }
-
-
-  // Função para guardar o token
-  private fun saveToken(token: String) {
-    // Salvar o token em algum lugar, como SharedPreferences ou DataStore
-    val sharedPreferences: SharedPreferences = context.getSharedPreferences("login_token", Context.MODE_PRIVATE)
-    sharedPreferences.edit().putString("auth_token", token).apply()
-  }
-
-  fun getToken(): String?{
-    val sharedPreferences: SharedPreferences = context.getSharedPreferences("login_token", Context.MODE_PRIVATE)
-    return sharedPreferences.getString("auth_token", null)
-  }
-
-
-  fun onEmailChange(it: String) {
-    userEmail = it
-  }
-
-  fun onPasswordChange(it: String) {
-    userPassword = it
-  }
-
 }

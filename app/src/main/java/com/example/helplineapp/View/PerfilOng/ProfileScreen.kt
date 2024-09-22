@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.helplineapp.R
-import com.example.helplineapp.ui.theme.Componente.Footer.BottomNavBar
+import com.example.helplineapp.ui.app.Componente.Footer.BottomNavBar
 
 sealed class ProfileType {
     object Ong : ProfileType()

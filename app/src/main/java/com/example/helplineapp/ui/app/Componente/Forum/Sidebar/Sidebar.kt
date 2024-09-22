@@ -17,11 +17,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.automirrored.filled.Logout
-import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.filled.Work
-import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.HorizontalDivider
@@ -37,14 +34,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.helplineapp.GetContext.Companion.context
 import com.example.helplineapp.R
-import com.example.helplineapp.ui.theme.Componente.Header.TopBar
+import com.example.helplineapp.ui.app.Componente.Header.TopBar
 import kotlinx.coroutines.launch
 
 @Composable
@@ -135,6 +132,7 @@ fun SidebarContent() {
 
 @Composable
 fun DrawerItem(icon: ImageVector, label: String, isLogout: Boolean = false) {
+  val context = LocalContext.current
   val navController = NavController(context = context)
 
   Row(

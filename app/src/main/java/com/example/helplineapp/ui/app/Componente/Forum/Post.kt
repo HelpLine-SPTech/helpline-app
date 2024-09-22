@@ -1,4 +1,4 @@
-package com.example.helplineapp.ui.theme.Componente.Forum
+package com.example.helplineapp.ui.app.Componente.Forum
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Comment
-import androidx.compose.material.icons.filled.Comment
 import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -30,7 +29,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.helplineapp.R
 
 @Composable
 fun Post( nome: String, texto: String, profilePic: Int, postImage: Boolean){

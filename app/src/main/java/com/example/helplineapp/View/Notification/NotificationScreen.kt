@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.helplineapp.R
-import com.example.helplineapp.ui.theme.Componente.Notification.Header.HeaderNotification
-import com.example.helplineapp.ui.theme.Componente.Notification.NotificationItem
+import com.example.helplineapp.ui.app.Componente.Notification.Header.HeaderNotification
+import com.example.helplineapp.ui.app.Componente.Notification.NotificationItem
 
 
 @Composable
