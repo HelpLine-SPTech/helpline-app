@@ -17,7 +17,7 @@ class LoginViewModel (private val loginService: LoginService) : ViewModel() {
   var errorMessage: String? = null
     private set
 
-  fun login(email: String, password: String, onLoginSuccess: () -> Unit,
+  fun loginUser(email: String, password: String, onLoginSuccess: () -> Unit,
             onLoginError: () -> Unit ) {
     viewModelScope.launch {
       try {

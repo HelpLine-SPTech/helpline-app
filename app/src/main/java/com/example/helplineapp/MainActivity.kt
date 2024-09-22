@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.helplineapp.View.Cadastro.CadastroScreen
 import com.example.helplineapp.View.Forum.ForumScreen
 import com.example.helplineapp.View.Login.LoginScreen
 import com.example.helplineapp.ui.app.HelplineAppTheme
@@ -62,6 +63,10 @@ class MainActivity : ComponentActivity() {
 
           composable(route = "notificationScreen") {
             NotificationScreen(navController)
+          }
+
+          composable(route = "registryScreen"){
+            CadastroScreen(navController)
           }
         }
       }
