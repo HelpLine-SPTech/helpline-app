@@ -18,10 +18,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.helplineapp.R // Certifique-se de usar o R do seu pacote
 
 @Composable
-fun CadastroScreen() {
+fun CadastroScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var confirmEmail by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
@@ -138,10 +139,10 @@ fun CadastroScreen() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun CadastroScreenPreview() {
-    CadastroScreen()
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun CadastroScreenPreview() {
+//    CadastroScreen()
+//}
 
 //Teste

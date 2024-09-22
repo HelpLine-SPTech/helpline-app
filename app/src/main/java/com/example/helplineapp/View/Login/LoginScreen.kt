@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -93,8 +94,10 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel) {
         text = "Não possui conta? Cadastre-se",
         fontSize = 12.sp,
         textAlign = TextAlign.Center,
-        color = Color.Black
-      )
+        color = Color.Black,
+        modifier = Modifier.clickable { navController.navigate("registryScreen") },
+        style = MaterialTheme.typography.bodyMedium
+        )
     }
   }
 }
@@ -166,10 +169,9 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
 
     Spacer(modifier = Modifier.height(48.dp))
 
-
     Button(
       onClick = {
-        viewModel.login(email, password, onLoginSuccess = {
+        viewModel.loginUser(email, password, onLoginSuccess = {
           navController.navigate("forumScreen")
           Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_LONG).show()
         }, onLoginError = {
