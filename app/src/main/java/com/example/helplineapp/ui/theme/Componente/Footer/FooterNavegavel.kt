@@ -25,7 +25,8 @@ import androidx.navigation.NavController
 import com.example.helplineapp.R
 
 @Composable
-fun BottomNavBar(modifier: Modifier, navController: NavController) {
+fun BottomNavBar(modifier: Modifier) {
+    //navController: NavController
     Row(
         modifier = modifier
             .background(Color(0xFF285430)), // Cor de fundo do footer
@@ -69,7 +70,7 @@ fun BottomNavBar(modifier: Modifier, navController: NavController) {
                         modifier = Modifier.size(32.dp))
                 },
                 selected = false,
-                onClick = { navController.navigate("notificationScreen") }
+                onClick = { /*navController.navigate("notificationScreen")*/ }
             )
 
             NavigationBarItem(
