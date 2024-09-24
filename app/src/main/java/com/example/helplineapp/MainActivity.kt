@@ -37,17 +37,17 @@ class MainActivity : ComponentActivity() {
       modules(appModule)
     }
     enableEdgeToEdge()
-    WindowInsetsControllerCompat(window, window.decorView).let { controller ->
-      controller.hide(android.view.WindowInsets.Type.systemBars())
-      controller.systemBarsBehavior =
-        WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-    }
+//    WindowInsetsControllerCompat(window, window.decorView).let { controller ->
+//      controller.hide(android.view.WindowInsets.Type.systemBars())
+//      controller.systemBarsBehavior =
+//        WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+//    }
     setContent {
       HelplineAppTheme {
         val navController = rememberNavController()
 
         // startDestination -> Tela que o aplicativo vai começar
-        NavHost(navController = navController, startDestination = "forumScreen") {
+        NavHost(navController = navController, startDestination = "splashScreen") {
 
           // Criando a rota para a tela de login
           composable(route = "loginPage") {
