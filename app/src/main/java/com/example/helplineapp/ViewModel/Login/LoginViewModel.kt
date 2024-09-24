@@ -1,66 +1,40 @@
 package com.example.helplineapp.ViewModel.Login
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.helplineapp.GetContext.Companion.context
+import com.example.helplineapp.network.Login.LoginRequest
 import com.example.helplineapp.network.Login.LoginService
-import com.example.helplineapp.config.Login
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
-class LoginViewModel: ViewModel() {
+class LoginViewModel (private val loginService: LoginService) : ViewModel() {
 
-  var userEmail: String by mutableStateOf("")
-  var userPassword: String by mutableStateOf("")
+  var loginToken: String? = null
+    private set
 
+  var errorMessage: String? = null
+    private set
 
-  fun loginUser(onLoginSuccess: () -> Unit, onLoginError: (String) -> Unit){
+  fun loginUser(email: String, password: String, onLoginSuccess: () -> Unit,
+            onLoginError: () -> Unit ) {
     viewModelScope.launch {
       try {
-        val response = userLogin(userEmail, userPassword)
-        Log.d("LoginViewModel", "Token: ${response.token}")
-        saveToken(response.token)
-        Log.d("LoginViewModel", "Token salvo com sucesso!")
-        onLoginSuccess()
-      } catch (e: Exception) {
-        Log.e("LoginViewModel", "Erro ao fazer login", e)
-        onLoginError("Usuário ou senha incorretos!")
+        val response = loginService.login(LoginRequest(email, password))
+        if (response != null) {
+          loginToken = response.token
+          errorMessage = null // Clear any previous error
+          onLoginSuccess()
+        } else {
+          onLoginError()
+          errorMessage = "Invalid username or password"
+        }
+
+      } catch (e: HttpException){
+        onLoginError()
+        errorMessage = "Invalid username or password"
       }
     }
   }
-
-  private suspend fun userLogin(email: String, password: String): LoginService.LoginResponse{
-    val loginRequest = LoginService.LoginRequest(email, password)
-    saveToken(loginRequest.toString())
-    Log.d("Login", "Token: ${loginRequest.toString()}")
-    return Login.apiService.login(loginRequest)
-  }
-
-
-  // Função para guardar o token
-  private fun saveToken(token: String) {
-    // Salvar o token em algum lugar, como SharedPreferences ou DataStore
-    val sharedPreferences: SharedPreferences = context.getSharedPreferences("login_token", Context.MODE_PRIVATE)
-    sharedPreferences.edit().putString("auth_token", token).apply()
-  }
-
-  fun getToken(): String?{
-    val sharedPreferences: SharedPreferences = context.getSharedPreferences("login_token", Context.MODE_PRIVATE)
-    return sharedPreferences.getString("auth_token", null)
-  }
-
-
-  fun onEmailChange(it: String) {
-    userEmail = it
-  }
-
-  fun onPasswordChange(it: String) {
-    userPassword = it
-  }
-
 }
