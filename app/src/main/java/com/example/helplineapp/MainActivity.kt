@@ -32,10 +32,10 @@ class MainActivity : ComponentActivity() {
   @RequiresApi(Build.VERSION_CODES.R)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    startKoin{
-      androidContext(this@MainActivity)
-      modules(appModule)
-    }
+//    startKoin{
+//      androidContext(this@MainActivity)
+//      modules(appModule)
+//    }
     enableEdgeToEdge()
 //    WindowInsetsControllerCompat(window, window.decorView).let { controller ->
 //      controller.hide(android.view.WindowInsets.Type.systemBars())

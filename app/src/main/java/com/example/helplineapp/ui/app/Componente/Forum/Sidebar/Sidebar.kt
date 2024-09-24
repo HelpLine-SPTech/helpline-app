@@ -48,7 +48,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun NavDrawer(
   drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
-  navController: NavController,
+//  navController: NavController,
   content: @Composable () -> Unit,
 ) {
 
@@ -65,7 +65,7 @@ fun NavDrawer(
             .background(Color.White),
           verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-          SidebarContent(navController)
+          SidebarContent()
         }
       }
     },
@@ -79,7 +79,7 @@ fun NavDrawer(
 }
 
 @Composable
-fun SidebarContent(navController: NavController) {
+fun SidebarContent() {
   Column(
     modifier = Modifier
       .fillMaxSize()
@@ -110,7 +110,7 @@ fun SidebarContent(navController: NavController) {
           text = "Ver perfil",
           color = Color.Gray,
           fontSize = 14.sp,
-          modifier = Modifier.clickable { navController.navigate("profileScreenVolunteer") },
+//          modifier = Modifier.clickable { navController.navigate("profileScreenVolunteer") },
         )
       }
     }
