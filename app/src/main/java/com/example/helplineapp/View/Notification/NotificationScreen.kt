@@ -1,4 +1,4 @@
-package com.example.helplineapp.view.Notification
+package com.example.helplineapp.View.Notification
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

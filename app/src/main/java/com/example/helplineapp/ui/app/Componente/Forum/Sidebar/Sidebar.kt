@@ -1,4 +1,4 @@
-package com.example.helplineapp.view
+package com.example.helplineapp.View
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

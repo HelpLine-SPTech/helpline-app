@@ -1,4 +1,4 @@
-package com.example.helplineapp.view.vaga
+package com.example.helplineapp.View.vaga
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -35,11 +35,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.helplineapp.R
-import com.example.helplineapp.view.NavDrawer
-import com.example.helplineapp.ui.theme.Componente.Footer.BottomNavBar
+import com.example.helplineapp.ui.app.Componente.Footer.BottomNavBar
+import com.example.helplineapp.View.NavDrawer
 
 @Composable
 fun VagaScreen (){

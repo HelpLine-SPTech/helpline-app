@@ -1,4 +1,4 @@
-package com.example.helplineapp.view.Cadastro
+package com.example.helplineapp.View.Cadastro
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

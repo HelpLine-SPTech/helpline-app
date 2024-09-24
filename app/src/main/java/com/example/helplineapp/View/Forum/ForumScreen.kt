@@ -10,9 +10,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.helplineapp.R
 import com.example.helplineapp.View.NavDrawer
-import com.example.helplineapp.ui.theme.Componente.Header.TopBar
-import com.example.helplineapp.ui.theme.Componente.Footer.BottomNavBar
-import com.example.helplineapp.ui.theme.Componente.Forum.Post
+import com.example.helplineapp.ui.app.Componente.Footer.BottomNavBar
+import com.example.helplineapp.ui.app.Componente.Forum.Post
+
 
 @Composable
 fun ForumScreen(navController: NavController) {
@@ -64,7 +64,6 @@ fun ForumScreen(navController: NavController) {
                     .align(Alignment.BottomCenter) // Alinha o footer na parte inferior do Box
                     .fillMaxWidth()
                     .height(60.dp),
-                navController
             )
         }
     }

@@ -1,4 +1,4 @@
-package com.example.helplineapp.view.SplashScreen
+package com.example.helplineapp.View.SplashScreen
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
