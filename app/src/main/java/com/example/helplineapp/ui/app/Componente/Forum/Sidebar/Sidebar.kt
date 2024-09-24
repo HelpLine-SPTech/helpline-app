@@ -44,10 +44,12 @@ import com.example.helplineapp.R
 import com.example.helplineapp.ui.app.Componente.Header.TopBar
 import kotlinx.coroutines.launch
 
+
 @Composable
 fun NavDrawer(
   drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
-  content: @Composable () -> Unit
+  navController: NavController,
+  content: @Composable () -> Unit,
 ) {
 
   val scope = rememberCoroutineScope()
@@ -63,7 +65,7 @@ fun NavDrawer(
             .background(Color.White),
           verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-          SidebarContent()
+          SidebarContent(navController)
         }
       }
     },
@@ -77,7 +79,7 @@ fun NavDrawer(
 }
 
 @Composable
-fun SidebarContent() {
+fun SidebarContent(navController: NavController) {
   Column(
     modifier = Modifier
       .fillMaxSize()
@@ -107,7 +109,8 @@ fun SidebarContent() {
         Text(
           text = "Ver perfil",
           color = Color.Gray,
-          fontSize = 14.sp
+          fontSize = 14.sp,
+          modifier = Modifier.clickable { navController.navigate("profileScreenVolunteer") },
         )
       }
     }

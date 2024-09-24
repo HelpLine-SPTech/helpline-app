@@ -16,6 +16,10 @@ import com.example.helplineapp.View.Forum.ForumScreen
 import com.example.helplineapp.View.Login.LoginScreen
 import com.example.helplineapp.ui.app.HelplineAppTheme
 import com.example.helplineapp.View.Notification.NotificationScreen
+import com.example.helplineapp.View.PerfilOng.OngProfileContent
+import com.example.helplineapp.View.PerfilOng.ProfileScreen
+import com.example.helplineapp.View.PerfilOng.ProfileType
+import com.example.helplineapp.View.PerfilOng.VolunteerProfileContent
 import com.example.helplineapp.View.SplashScreen.SplashScreen
 import com.example.helplineapp.ViewModel.Login.LoginViewModel
 import com.example.helplineapp.config.appModule
@@ -43,7 +47,7 @@ class MainActivity : ComponentActivity() {
         val navController = rememberNavController()
 
         // startDestination -> Tela que o aplicativo vai começar
-        NavHost(navController = navController, startDestination = "splashScreen") {
+        NavHost(navController = navController, startDestination = "forumScreen") {
 
           // Criando a rota para a tela de login
           composable(route = "loginPage") {
@@ -67,6 +71,14 @@ class MainActivity : ComponentActivity() {
 
           composable(route = "registryScreen"){
             CadastroScreen(navController)
+          }
+
+          composable(route = "profileScreenVolunteer"){
+            VolunteerProfileContent(navController)
+          }
+
+          composable(route = "profileScreenOng"){
+            OngProfileContent(navController)
           }
         }
       }

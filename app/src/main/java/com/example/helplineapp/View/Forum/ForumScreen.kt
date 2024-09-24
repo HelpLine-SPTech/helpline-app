@@ -15,7 +15,7 @@ import com.example.helplineapp.ui.app.Componente.Forum.Post
 
 @Composable
 fun ForumScreen(navController: NavController) {
-    NavDrawer {
+    NavDrawer(navController = navController){
         // Usando um Box para sobrepor o conteúdo e o footer
         Box(
             modifier = Modifier.fillMaxSize()
