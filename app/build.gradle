@@ -103,4 +103,11 @@ dependencies {
 
   implementation "androidx.compose.runtime:runtime-livedata:1.5.0"
   implementation "androidx.compose.runtime:runtime-saveable:1.5.0"
+
+  // Google Fonts para Poppins
+  implementation "androidx.compose.ui:ui-text-google-fonts:1.0.0"
+  implementation "androidx.compose.ui:ui-text:1.2.0" // ou a versão que você está usando
+  implementation "com.google.android.gms:play-services-auth:19.0.0" // Isso pode variar
+
 }
+
