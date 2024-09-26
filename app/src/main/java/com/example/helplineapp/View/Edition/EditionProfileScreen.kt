@@ -189,11 +189,12 @@ fun CompetenciesField(competencias: SnapshotStateList<TextFieldValue>, onAddComp
     }
 
     for (index in competencias.indices) {
-        val competencia = competencias[index]
-
+        val competencia = competencias[index] // Obter a competência atual
         TextField(
             value = competencia,
-            onValueChange = { /* Atualizar a lógica para modificar a competência específica */ },
+            onValueChange = { newValue ->
+                competencias[index] = newValue // Atualiza a competência específica
+            },
             shape = RoundedCornerShape(16.dp),
             placeholder = { Text(text = "Nova competência") },
             trailingIcon = {
@@ -203,9 +204,9 @@ fun CompetenciesField(competencias: SnapshotStateList<TextFieldValue>, onAddComp
                     }
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.trash), // Substitua com seu recurso de imagem
+                        painter = painterResource(id = R.drawable.trash),
                         contentDescription = "Excluir Competência",
-                        modifier = Modifier.size(24.dp) // Ajuste o tamanho conforme necessário
+                        modifier = Modifier.size(24.dp)
                     )
                 }
             },
@@ -230,6 +231,7 @@ fun CompetenciesField(competencias: SnapshotStateList<TextFieldValue>, onAddComp
         }
     }
 }
+
 
 
 @Composable
