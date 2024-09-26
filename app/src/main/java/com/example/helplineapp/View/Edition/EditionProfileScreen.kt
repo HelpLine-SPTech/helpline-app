@@ -204,7 +204,7 @@ fun CompetenciesField(competencias: SnapshotStateList<TextFieldValue>, onAddComp
                     }
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.trash),
+                        painter = painterResource(id = R.drawable.excluir),
                         contentDescription = "Excluir Competência",
                         modifier = Modifier.size(24.dp)
                     )
