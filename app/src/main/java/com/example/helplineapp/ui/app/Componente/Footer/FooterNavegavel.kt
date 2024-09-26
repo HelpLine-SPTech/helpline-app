@@ -74,7 +74,7 @@ fun BottomNavBar(modifier: Modifier, navController: NavController) {
                         modifier = Modifier.size(32.dp))
                 },
                 selected = false,
-                onClick = { /* Ação para Messages */ }
+                onClick = { navController.navigate("chat-list") }
             )
             NavigationBarItem(
                 icon = {
