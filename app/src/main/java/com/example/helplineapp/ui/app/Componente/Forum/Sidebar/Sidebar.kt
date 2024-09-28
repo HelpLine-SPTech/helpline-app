@@ -48,7 +48,6 @@ import kotlinx.coroutines.launch
 @Composable
 fun NavDrawer(
   drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
-  navController: NavController,
   content: @Composable () -> Unit,
 ) {
 
@@ -65,7 +64,7 @@ fun NavDrawer(
             .background(Color.White),
           verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-          SidebarContent(navController)
+          /*SidebarContent()navController*/
         }
       }
     },

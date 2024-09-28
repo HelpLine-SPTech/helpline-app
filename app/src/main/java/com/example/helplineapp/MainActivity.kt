@@ -21,6 +21,7 @@ import com.example.helplineapp.View.PerfilOng.ProfileScreen
 import com.example.helplineapp.View.PerfilOng.ProfileType
 import com.example.helplineapp.View.PerfilOng.VolunteerProfileContent
 import com.example.helplineapp.View.SplashScreen.SplashScreen
+import com.example.helplineapp.View.vaga.VagaScreen
 import com.example.helplineapp.ViewModel.Login.LoginViewModel
 import com.example.helplineapp.config.appModule
 import org.koin.android.ext.koin.androidContext
@@ -28,11 +29,11 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.core.context.startKoin
 
 class MainActivity : ComponentActivity() {
-  @SuppressLint("WrongConstant")
+  @SuppressLint("WrongConstant", "ComposableDestinationInComposeScope")
   @RequiresApi(Build.VERSION_CODES.R)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    startKoin{
+    startKoin {
       androidContext(this@MainActivity)
       modules(appModule)
     }
@@ -69,16 +70,20 @@ class MainActivity : ComponentActivity() {
             NotificationScreen(navController)
           }
 
-          composable(route = "registryScreen"){
+          composable(route = "registryScreen") {
             CadastroScreen(navController)
           }
 
-          composable(route = "profileScreenVolunteer"){
+          composable(route = "profileScreenVolunteer") {
             VolunteerProfileContent(navController)
           }
 
-          composable(route = "profileScreenOng"){
+          composable(route = "profileScreenOng") {
             OngProfileContent(navController)
+
+            composable(route = "vagaScreen") {
+              VagaScreen(navController)
+            }
           }
         }
       }
