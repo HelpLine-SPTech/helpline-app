@@ -22,15 +22,9 @@ class LoginViewModel (private val loginService: LoginService) : ViewModel() {
     viewModelScope.launch {
       try {
         val response = loginService.login(LoginRequest(email, password))
-        if (response != null) {
-          loginToken = response.token
-          errorMessage = null // Clear any previous error
-          onLoginSuccess()
-        } else {
-          onLoginError()
-          errorMessage = "Invalid username or password"
-        }
-
+        loginToken = response.token
+        errorMessage = null // Clear any previous error
+        onLoginSuccess()
       } catch (e: HttpException){
         onLoginError()
         errorMessage = "Invalid username or password"

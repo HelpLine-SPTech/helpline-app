@@ -16,7 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.helplineapp.R
@@ -25,16 +27,16 @@ import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(navController: NavController) {
 
-  BackHandler {}
-
-  //Controla o tempo de exibição da splash screen (2 segundos neste caso)
-  LaunchedEffect(key1 = true) {
-    delay(2000)
-    navController.navigate("loginPage") {
-      // Remove a splash screen da pilha para que o usuário não possa voltar a ela
-      popUpTo("splashScreen") { inclusive = true }
-    }
-  }
+//  BackHandler {}
+//
+//  //Controla o tempo de exibição da splash screen (2 segundos neste caso)
+//  LaunchedEffect(key1 = true) {
+//    delay(2000)
+//    navController.navigate("loginPage") {
+//      // Remove a splash screen da pilha para que o usuário não possa voltar a ela
+//      popUpTo("splashScreen") { inclusive = true }
+//    }
+//  }
 
   // Layout da Splash Screen
   Box(
@@ -66,4 +68,10 @@ fun SplashScreen(navController: NavController) {
       )
     }
   }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SplashScreenPreview(modifier: Modifier = Modifier){
+  SplashScreen(navController = NavController(context = LocalContext.current))
 }
