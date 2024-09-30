@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Helpline</string>
+
+    <!-- Primeira vaga: Amigos de Belém -->
+    <string name="nome_vaga_um">Amigos de Belém</string>
+    <string name="inscrevase">Inscreva-se</string>
+    <string name="vaga">Vaga:</string>
+    <string name="voluntario_pet">Voluntário para Cuidados de Animais Abandonados</string>
+    <string name="endereco">Endereço:</string>
+    <string name="endereco_um">Abrigo de Animais XYZ, Estrada dos Bichinhos, 876</string>
+    <string name="descricao_vaga">Descrição da vaga:</string>
+    <string name="descricao_um">• Auxiliar na alimentação, higiene e exercícios dos animais residentes no abrigo</string>
+    <string name="qtd_vaga">Quantidade de vagas:</string>
+    <string name="qtd_dois">2</string>
+    <string name="horario">Horário:</string>
+    <string name="horario_um">10h00 às 14h00</string>
+    <string name="dia_semana">Dias da semana:</string>
+    <string name="dia_semana_um">Terça-feira e Quinta-feira</string>
+
+    <!-- Segunda vaga: Bem da Madrugada -->
+    <string name="nome_vaga_dois">Bem da Madrugada</string>
+    <string name="voluntario_cozinha">Voluntário Cozinheiro</string>
+    <string name="endereco_dois">Abrigo de Alimentos XYZ, Rua das Receitas, 123</string>
+    <string name="descricao_dois">Preparar refeições saudáveis e balanceadas para os residentes e funcionários do abrigo.</string>
+    <string name="qtd_um">1</string>
+    <string name="horario_dois">09h00 às 14h00</string>
+    <string name="dia_semana_dois">Segunda-feira, Quarta-feira e Sexta-feira</string>
 </resources>

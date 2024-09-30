@@ -21,6 +21,7 @@ import com.example.helplineapp.View.PerfilOng.ProfileScreen
 import com.example.helplineapp.View.PerfilOng.ProfileType
 import com.example.helplineapp.View.PerfilOng.VolunteerProfileContent
 import com.example.helplineapp.View.SplashScreen.SplashScreen
+import com.example.helplineapp.View.vaga.VagaScreen
 import com.example.helplineapp.ViewModel.Login.LoginViewModel
 import com.example.helplineapp.config.appModule
 import org.koin.android.ext.koin.androidContext
@@ -28,26 +29,21 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.core.context.startKoin
 
 class MainActivity : ComponentActivity() {
-  @SuppressLint("WrongConstant")
+  @SuppressLint("WrongConstant", "ComposableDestinationInComposeScope")
   @RequiresApi(Build.VERSION_CODES.R)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-//    startKoin{
-//      androidContext(this@MainActivity)
-//      modules(appModule)
-//    }
-    enableEdgeToEdge()
-    WindowInsetsControllerCompat(window, window.decorView).let { controller ->
-      controller.hide(android.view.WindowInsets.Type.systemBars())
-      controller.systemBarsBehavior =
-        WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    startKoin {
+      androidContext(this@MainActivity)
+      modules(appModule)
     }
+    enableEdgeToEdge()
     setContent {
       HelplineAppTheme {
         val navController = rememberNavController()
 
         // startDestination -> Tela que o aplicativo vai começar
-        NavHost(navController = navController, startDestination = "forumScreen") {
+        NavHost(navController = navController, startDestination = "splashScreen") {
 
           // Criando a rota para a tela de login
           composable(route = "loginPage") {
@@ -69,16 +65,20 @@ class MainActivity : ComponentActivity() {
             NotificationScreen(navController)
           }
 
-          composable(route = "registryScreen"){
+          composable(route = "registryScreen") {
             CadastroScreen(navController)
           }
 
-          composable(route = "profileScreenVolunteer"){
+          composable(route = "profileScreenVolunteer") {
             VolunteerProfileContent(navController)
           }
 
-          composable(route = "profileScreenOng"){
+          composable(route = "profileScreenOng") {
             OngProfileContent(navController)
+
+            composable(route = "vagaScreen") {
+              VagaScreen(navController)
+            }
           }
         }
       }

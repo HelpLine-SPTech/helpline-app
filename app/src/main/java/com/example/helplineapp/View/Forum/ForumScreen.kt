@@ -13,9 +13,10 @@ import com.example.helplineapp.View.NavDrawer
 import com.example.helplineapp.ui.app.Componente.Footer.BottomNavBar
 import com.example.helplineapp.ui.app.Componente.Forum.Post
 
+
 @Composable
 fun ForumScreen(navController: NavController) {
-    NavDrawer(navController = navController){
+    NavDrawer {
         // Usando um Box para sobrepor o conteúdo e o footer
         Box(
             modifier = Modifier.fillMaxSize()
@@ -63,7 +64,6 @@ fun ForumScreen(navController: NavController) {
                     .align(Alignment.BottomCenter) // Alinha o footer na parte inferior do Box
                     .fillMaxWidth()
                     .height(60.dp),
-                navController
             )
         }
     }
