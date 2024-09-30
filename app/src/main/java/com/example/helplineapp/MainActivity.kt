@@ -15,6 +15,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.helplineapp.GetContext.Companion.context
+import com.example.helplineapp.View.Cadastro.CadastroScreen
+import com.example.helplineapp.View.Chat1.ConversasScreen
 import com.example.helplineapp.View.Forum.ForumScreen
 import com.example.helplineapp.View.Login.LoginScreen
 import com.example.helplineapp.ui.theme.HelplineAppTheme
@@ -40,7 +42,8 @@ class MainActivity : ComponentActivity() {
 
           // Criando a rota para a tela de login
           composable(route = "loginPage") {
-            LoginScreen(navController)
+            val loginViewModel: LoginViewModel = koinViewModel()
+            LoginScreen(navController, loginViewModel)
           }
 
           // Rota para tela do fórum
@@ -55,6 +58,10 @@ class MainActivity : ComponentActivity() {
 
           composable(route = "signinStep1") {
             CadastroScreen(CadastroViewModel(), navController)
+          }
+
+          composable(route = "chat-list") {
+            ConversasScreen()
           }
         }
       }
