@@ -25,4 +25,8 @@
     <string name="qtd_um">1</string>
     <string name="horario_dois">09h00 às 14h00</string>
     <string name="dia_semana_dois">Segunda-feira, Quarta-feira e Sexta-feira</string>
+
+    <!-- Post -->
+    <string name="texto_publicacao">Escreva sua publicação...</string>
+    <string name="publicar">Publicar</string>
 </resources>
