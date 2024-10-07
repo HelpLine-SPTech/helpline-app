@@ -19,8 +19,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun BottomNavBar(modifier: Modifier) {
-    //navController: NavController
+fun BottomNavBar(modifier: Modifier = Modifier,
+                 navController: NavController) {
+    //
     Row(
         modifier = modifier
             .background(Color(0xFF285430)), // Cor de fundo do footer
