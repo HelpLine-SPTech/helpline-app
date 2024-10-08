@@ -1,7 +1,7 @@
 package com.example.helplineapp
 
-import CadastroScreen
-import CadastroViewModel
+//import CadastroScreen
+//import CadastroViewModel
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
@@ -42,8 +42,8 @@ class MainActivity : ComponentActivity() {
 
           // Criando a rota para a tela de login
           composable(route = "loginPage") {
-            val loginViewModel: LoginViewModel = koinViewModel()
-            LoginScreen(navController, loginViewModel)
+         //   val loginViewModel: LoginViewModel = koinViewModel()
+          //  LoginScreen(navController, loginViewModel)
           }
 
           // Rota para tela do fórum
@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
           }
 
           composable(route = "signinStep1") {
-            CadastroScreen(CadastroViewModel(), navController)
+     //       CadastroScreen(CadastroViewModel(), navController)
           }
 
           composable(route = "chat-list") {
