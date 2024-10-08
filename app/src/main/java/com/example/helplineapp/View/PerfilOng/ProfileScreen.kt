@@ -221,7 +221,7 @@ fun OngProfileContent(navController: NavController) {
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
                 .height(60.dp),
-            navController = navController,
+            navController = navController
         )
     }
 }
@@ -426,7 +426,7 @@ fun VolunteerProfileContent(navController: NavController) {
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
                 .height(60.dp),
-            navController = navController,
+            navController = navController
         )
     }
 }
