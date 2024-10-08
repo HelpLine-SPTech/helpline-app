@@ -12,7 +12,6 @@
           </Target>
         </DropdownSelection>
         <DialogSelection />
-        <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="PreviewEditionProfile">
         <option name="selectionMode" value="DROPDOWN" />
