@@ -80,4 +80,9 @@
     <string name="perfil_atualizado">Perfil atualizado com sucesso!</string>
     <string name="erro_atualizar_perfil">Erro ao atualizar perfil. Tente novamente.</string>
 
+    <!-- Chat2 -->
+    <string name="mensagem_1">Boa Noite!</string>
+    <string name="mensagem_2">Não, pode falar.</string>
+    <string name="mensagem_3">Boa noite Noemi, tudo bem?</string>
+    <string name="mensagem_4">Está ocupada?</string>
 </resources>
