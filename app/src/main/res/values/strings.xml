@@ -26,6 +26,25 @@
     <string name="horario_dois">09h00 às 14h00</string>
     <string name="dia_semana_dois">Segunda-feira, Quarta-feira e Sexta-feira</string>
 
+    <!-- Primeira Campanha: Doe Amor, Doe Apoio -->
+    <string name="campanha_um">Doe Amor, Doe Apoio</string>
+    <string name="doe_aqui">Doe Aqui!</string>
+    <string name="objetivo_um">Objetivo:</string>
+    <string name="text_objetivo_um">Arrecadar fundos para apoiar instituições que coletam e distribuem
+        leite materno para bebês em necessidade. O foco é sensibilizar e mobilizar a comunidade
+        para contribuir financeiramente.</string>
+    <string name="subtitulo_um">🚼✨ Junte-se a nós na campanha Doe Amor, Doe Apoio e ajude a garantir
+        que mais bebês tenham acesso ao leite materno!</string>
+
+    <!-- Segunda Camapanha: Ajude a Proteger Nossas Florestas -->
+    <string name="campanha_dois">Ajude a Proteger Nossas Florestas</string>
+    <string name="text_objetivo_dois">Angariar fundos para apoiar ONGs dedicadas à preservação de
+        florestas nativas e à proteção de espécies ameaçadas. A meta é conscientizar a sociedade
+        sobre a importância da conservação ambiental e mobilizar recursos para projetos de
+        reflorestamento e combate ao desmatamento ilegal.</string>
+    <string name="subtitulo_dois">🌳💚 Junte-se à nossa campanha e ajude a garantir que as futuras
+        gerações possam desfrutar de um planeta verde e saudável!</string>
+
     <!-- Post -->
     <string name="texto_publicacao">Escreva sua publicação...</string>
     <string name="publicar">Publicar</string>
@@ -85,4 +104,5 @@
     <string name="mensagem_2">Não, pode falar.</string>
     <string name="mensagem_3">Boa noite Noemi, tudo bem?</string>
     <string name="mensagem_4">Está ocupada?</string>
+
 </resources>

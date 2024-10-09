@@ -354,6 +354,7 @@ fun VagaScreen (navController: NavController){
             )
         }
      }
+
     }
 @Preview(showBackground = true)
 @Composable
