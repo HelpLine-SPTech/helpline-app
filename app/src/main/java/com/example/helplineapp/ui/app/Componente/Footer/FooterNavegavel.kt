@@ -19,10 +19,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun BottomNavBar(modifier: Modifier) {
-    //navController: NavController
+fun BottomNavBar(
+    modifier: Modifier = Modifier,
+    navController: NavController) {
+
     Row(
-        modifier = modifier
+        modifier = Modifier
             .background(Color(0xFF285430)), // Cor de fundo do footer
         horizontalArrangement = Arrangement.SpaceAround, // Espaço entre os ícones
         verticalAlignment = Alignment.CenterVertically // Alinha os ícones verticalmente

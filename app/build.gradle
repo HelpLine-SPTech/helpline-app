@@ -70,6 +70,8 @@ dependencies {
 
   // Dependencia Material Icons
   implementation("androidx.compose.material:material-icons-extended:1.7.2")
+  implementation "androidx.compose.material3:material3:1.0.1" // Verifique se é a versão mais recente
+
 
   // Dependencias Splash Screen
   implementation "androidx.compose.ui:ui:1.7.2"
