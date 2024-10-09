@@ -47,8 +47,8 @@ class MainActivity : ComponentActivity() {
 
           // Criando a rota para a tela de login
           composable(route = "loginPage") {
-            val loginViewModel: LoginViewModel = koinViewModel()
-            LoginScreen(navController, loginViewModel)
+         //   val loginViewModel: LoginViewModel = koinViewModel()
+          //  LoginScreen(navController, loginViewModel)
           }
 
           // Rota para tela do fórum
@@ -62,7 +62,9 @@ class MainActivity : ComponentActivity() {
           }
 
           composable(route = "signinStep1") {
-            CadastroScreen(navController)
+
+     //       CadastroScreen(CadastroViewModel(), navController)
+
           }
 
           composable(route = "chat-list") {
