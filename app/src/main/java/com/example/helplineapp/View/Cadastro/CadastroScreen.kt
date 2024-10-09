@@ -19,6 +19,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.helplineapp.R // Certifique-se de usar o R do seu pacote
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+
+val poppinsFamily = FontFamily(
+    Font(R.font.poppins_regular, FontWeight.Normal),
+    Font(R.font.poppins_bold, FontWeight.Bold),
+    Font(R.font.poppins_medium, FontWeight.Medium),
+    Font(R.font.poppins_semibold, FontWeight.SemiBold),
+    Font(R.font.poppins_extrabold, FontWeight.ExtraBold)
+)
 
 @Composable
 fun CadastroScreen(navController: NavController) {
@@ -56,7 +66,7 @@ fun CadastroScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(44.dp))
 
             Text(
-                text = "Informações de login",
+                text = "Informações de login", fontFamily = poppinsFamily,
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 style = TextStyle(
@@ -131,7 +141,7 @@ fun CadastroScreen(navController: NavController) {
                     colors = ButtonDefaults.buttonColors(containerColor = Color(28, 54, 30)),
                     shape = RoundedCornerShape(15.dp)
                 ) {
-                    Text("Próximo", color = Color.White)
+                    Text("Próximo", color = Color.White, fontFamily = poppinsFamily)
                 }
             }
         }

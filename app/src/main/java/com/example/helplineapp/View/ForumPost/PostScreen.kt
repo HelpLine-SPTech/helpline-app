@@ -48,6 +48,17 @@ import androidx.navigation.compose.rememberNavController
 import com.example.helplineapp.R
 import com.example.helplineapp.View.NavDrawer
 import com.example.helplineapp.ui.app.Componente.Footer.BottomNavBar
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+
+val poppinsFamily = FontFamily(
+    Font(R.font.poppins_regular, FontWeight.Normal),
+    Font(R.font.poppins_bold, FontWeight.Bold),
+    Font(R.font.poppins_medium, FontWeight.Medium),
+    Font(R.font.poppins_semibold, FontWeight.SemiBold),
+    Font(R.font.poppins_extrabold, FontWeight.ExtraBold)
+)
 
 @Composable
 fun PostScreen(navController: NavController) {
@@ -105,12 +116,13 @@ fun PostScreen(navController: NavController) {
                                 .weight(1f)
                                 .background(Color(0xFFF2F6EF), shape = CircleShape)
                                 .padding(16.dp),
-                            textStyle = TextStyle(color = Color.Black, fontSize = 18.sp),
+                            textStyle = TextStyle(color = Color.Black, fontFamily = poppinsFamily, fontSize = 18.sp),
                             decorationBox = { innerTextField ->
                                 if (textState.text.isEmpty()) {
                                     Text(
                                         stringResource(id = R.string.texto_publicacao),
                                         color = Color.Gray,
+                                        fontFamily = poppinsFamily,
                                         fontSize = 18.sp
                                     )
                                 }
@@ -158,7 +170,7 @@ fun PostScreen(navController: NavController) {
                                     contentColor = Color.White
                                 )
                             ) {
-                                Text(stringResource(id = R.string.publicar), fontSize = 16.sp)
+                                Text(stringResource(id = R.string.publicar), fontFamily = poppinsFamily, fontSize = 16.sp)
                             }
                         }
                     }

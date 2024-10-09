@@ -1,7 +1,11 @@
 package com.example.helplineapp.View.Notification
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -10,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -17,6 +23,14 @@ import androidx.navigation.NavController
 import com.example.helplineapp.R
 import com.example.helplineapp.ui.app.Componente.Notification.Header.HeaderNotification
 import com.example.helplineapp.ui.app.Componente.Notification.NotificationItem
+
+val poppinsFamily = FontFamily(
+  Font(R.font.poppins_regular, FontWeight.Normal),
+  Font(R.font.poppins_bold, FontWeight.Bold),
+  Font(R.font.poppins_medium, FontWeight.Medium),
+  Font(R.font.poppins_semibold, FontWeight.SemiBold),
+  Font(R.font.poppins_extrabold, FontWeight.ExtraBold)
+)
 
 
 @Composable
@@ -33,6 +47,7 @@ fun NotificationScreen(navController: NavController) {
     Spacer(modifier = Modifier.height(23.dp))
     Text(
       text = "Hoje",
+      fontFamily = poppinsFamily,
       fontSize = 16.sp,
       fontWeight = FontWeight.SemiBold
     )
@@ -50,6 +65,7 @@ fun NotificationScreen(navController: NavController) {
     Spacer(modifier = Modifier.height(14.dp))
     Text(
       text = "Ontem",
+      fontFamily = poppinsFamily,
       fontSize = 16.sp,
       fontWeight = FontWeight.SemiBold
     )
@@ -66,6 +82,7 @@ fun NotificationScreen(navController: NavController) {
     Spacer(modifier = Modifier.height(20.dp))
     Text(
       text = "Semana Passada",
+      fontFamily = poppinsFamily,
       fontSize = 16.sp,
       fontWeight = FontWeight.SemiBold
     )

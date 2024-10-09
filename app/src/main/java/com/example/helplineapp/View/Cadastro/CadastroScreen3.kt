@@ -55,6 +55,7 @@ fun CadastroScreen3(){
 
             Text(
                 text = "Informações de endereço",
+                fontFamily = poppinsFamily,
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 style = androidx.compose.ui.text.TextStyle(
@@ -129,7 +130,7 @@ fun CadastroScreen3(){
                     colors = ButtonDefaults.buttonColors(containerColor = Color(28, 54, 30)),
                     shape = RoundedCornerShape(15.dp)
                 ) {
-                    Text("Confirmar", color = Color.White)
+                    Text("Confirmar", fontFamily = poppinsFamily, color = Color.White)
                 }
             }
         }

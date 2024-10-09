@@ -33,6 +33,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,6 +43,14 @@ import androidx.navigation.compose.rememberNavController
 import com.example.helplineapp.R
 import com.example.helplineapp.View.NavDrawer
 import com.example.helplineapp.ui.app.Componente.Footer.BottomNavBar
+
+val poppinsFamily = FontFamily(
+    Font(R.font.poppins_regular, FontWeight.Normal),
+    Font(R.font.poppins_bold, FontWeight.Bold),
+    Font(R.font.poppins_medium, FontWeight.Medium),
+    Font(R.font.poppins_semibold, FontWeight.SemiBold),
+    Font(R.font.poppins_extrabold, FontWeight.ExtraBold)
+)
 
 @Composable
 fun VagaScreen (navController: NavController){
@@ -108,6 +118,7 @@ fun VagaScreen (navController: NavController){
                         ) {
                             Text(
                                 text = stringResource(id = R.string.nome_vaga_um),
+                                fontFamily = poppinsFamily,
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold
                             )
@@ -123,6 +134,7 @@ fun VagaScreen (navController: NavController){
                             ) {
                                 Text(
                                     text =  stringResource(id = R.string.inscrevase),
+                                    fontFamily = poppinsFamily,
                                     color = Color.White,
                                     style = MaterialTheme.typography.bodySmall,
                                     fontWeight = FontWeight.Bold,
@@ -152,9 +164,11 @@ fun VagaScreen (navController: NavController){
 
                                 Text(text =  stringResource(id = R.string.vaga),
                                     style = MaterialTheme.typography.bodyLarge,
+                                    fontFamily = poppinsFamily,
                                     fontWeight = FontWeight.Bold
                                 )
                                 Text(text = stringResource(id = R.string.voluntario_pet),
+                                    fontFamily = poppinsFamily,
                                         style = MaterialTheme.typography.bodyMedium)
 
                             //Spacer(modifier = Modifier.height(8.dp))
@@ -162,40 +176,54 @@ fun VagaScreen (navController: NavController){
 
                                 Text(text = stringResource(id = R.string.endereco),
                                     style = MaterialTheme.typography.bodyLarge,
-                                    fontWeight = FontWeight.Bold
+                                    fontWeight = FontWeight.Bold,
+                                    fontFamily = poppinsFamily
                                 )
                                 Text(text = stringResource(id = R.string.endereco_um),
-                                    style = MaterialTheme.typography.bodyMedium)
-
-                            //Spacer(modifier = Modifier.height(8.dp))
+                                    style = MaterialTheme.typography.bodyMedium,
+                                            fontFamily = poppinsFamily
+                                )
 
                                 Text(text = stringResource(id = R.string.descricao_vaga),
                                     style = MaterialTheme.typography.bodyLarge,
-                                    fontWeight = FontWeight.Bold
+                                    fontWeight = FontWeight.Bold,
+                                    fontFamily = poppinsFamily
                                 )
                                 Text(text = stringResource(id = R.string.descricao_um),
-                                    style = MaterialTheme.typography.bodyMedium)
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontFamily = poppinsFamily
+                                )
 
                             Row {
                                 Text(text = stringResource(id = R.string.qtd_vaga),
                                     fontWeight = FontWeight.Bold,
+                                    fontFamily = poppinsFamily,
                                     style = MaterialTheme.typography.bodyMedium
                                 )
-                                Text(text = stringResource(id = R.string.qtd_dois),style = MaterialTheme.typography.bodyMedium )
+                                Text(text = stringResource(id = R.string.qtd_dois),
+                                    fontFamily = poppinsFamily,
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
                             }
                             Row {
                                 Text(text = stringResource(id = R.string.horario),
                                     fontWeight = FontWeight.Bold,
+                                    fontFamily = poppinsFamily,
                                     style = MaterialTheme.typography.bodyMedium
                                 )
-                                Text(text = stringResource(id = R.string.horario_um),style = MaterialTheme.typography.bodyMedium )
+                                Text(text = stringResource(id = R.string.horario_um),
+                                    fontFamily = poppinsFamily,
+                                    style = MaterialTheme.typography.bodyMedium )
                             }
                             Row {
                                 Text(text = stringResource(id = R.string.dia_semana),
                                     fontWeight = FontWeight.Bold,
+                                    fontFamily = poppinsFamily,
                                     style = MaterialTheme.typography.bodyMedium
                                 )
-                                Text(text = stringResource(id = R.string.dia_semana_um),style = MaterialTheme.typography.bodyMedium )
+                                Text(text = stringResource(id = R.string.dia_semana_um),
+                                    fontFamily = poppinsFamily,
+                                    style = MaterialTheme.typography.bodyMedium )
                             }
                         }
 
@@ -249,6 +277,7 @@ fun VagaScreen (navController: NavController){
                         ) {
                             Text(
                                 text = stringResource(id = R.string.nome_vaga_dois),
+                                fontFamily = poppinsFamily,
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold
                             )
@@ -264,6 +293,7 @@ fun VagaScreen (navController: NavController){
                             ) {
                                 Text(
                                     text = stringResource(id = R.string.inscrevase),
+                                    fontFamily = poppinsFamily,
                                     color = Color.White,
                                     style = MaterialTheme.typography.bodySmall,
                                     fontWeight = FontWeight.Bold,
@@ -293,50 +323,61 @@ fun VagaScreen (navController: NavController){
 
                             Text(text = stringResource(id = R.string.vaga),
                                 style = MaterialTheme.typography.bodyLarge,
-                                fontWeight = FontWeight.Bold
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = poppinsFamily
                             )
                             Text(text = stringResource(id = R.string.voluntario_cozinha),
+                                fontFamily = poppinsFamily,
                                 style = MaterialTheme.typography.bodyMedium)
-
-                            //Spacer(modifier = Modifier.height(8.dp))
 
 
                             Text(text = stringResource(id = R.string.endereco),
                                 style = MaterialTheme.typography.bodyLarge,
-                                fontWeight = FontWeight.Bold
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = poppinsFamily
                             )
                             Text(text = stringResource(id = R.string.endereco_dois),
+                                fontFamily = poppinsFamily,
                                 style = MaterialTheme.typography.bodyMedium)
-
-                            //Spacer(modifier = Modifier.height(8.dp))
 
                             Text(text = stringResource(id = R.string.descricao_vaga),
                                 style = MaterialTheme.typography.bodyLarge,
-                                fontWeight = FontWeight.Bold
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = poppinsFamily
                             )
                             Text(text = stringResource(id = R.string.descricao_dois),
-                                style = MaterialTheme.typography.bodyMedium)
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontFamily = poppinsFamily)
 
                             Row {
                                 Text(text = stringResource(id = R.string.qtd_vaga),
                                     fontWeight = FontWeight.Bold,
-                                    style = MaterialTheme.typography.bodyMedium
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontFamily = poppinsFamily
                                 )
-                                Text(text = stringResource(id = R.string.qtd_um),style = MaterialTheme.typography.bodyMedium )
+                                Text(text = stringResource(id = R.string.qtd_um),
+                                    fontFamily = poppinsFamily,
+                                    style = MaterialTheme.typography.bodyMedium )
                             }
                             Row {
                                 Text(text = stringResource(id = R.string.horario),
                                     fontWeight = FontWeight.Bold,
+                                    fontFamily = poppinsFamily,
                                     style = MaterialTheme.typography.bodyMedium
                                 )
-                                Text(text = stringResource(id = R.string.horario_dois),style = MaterialTheme.typography.bodyMedium )
+                                Text(text = stringResource(id = R.string.horario_dois),
+                                    fontFamily = poppinsFamily,
+                                    style = MaterialTheme.typography.bodyMedium )
                             }
                             Row {
                                 Text(text = stringResource(id = R.string.dia_semana),
                                     fontWeight = FontWeight.Bold,
+                                    fontFamily = poppinsFamily,
                                     style = MaterialTheme.typography.bodyMedium
                                 )
-                                Text(text = stringResource(id = R.string.dia_semana_dois),style = MaterialTheme.typography.bodyMedium )
+                                Text(text = stringResource(id = R.string.dia_semana_dois),
+                                    fontFamily = poppinsFamily,
+                                    style = MaterialTheme.typography.bodyMedium )
                             }
                         }
 
