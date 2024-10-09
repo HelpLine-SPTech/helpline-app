@@ -2,12 +2,27 @@ package com.example.helplineapp.View.PerfilOng
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,13 +30,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.helplineapp.R
@@ -51,19 +65,21 @@ fun ProfileScreen(profileType: ProfileType, navController: NavController) {
 @Composable
 fun OngProfileContent(navController: NavController) {
     Box(modifier = Modifier.fillMaxSize()) {
+        // Conteúdo rolável
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color(255, 255, 255))
                 .verticalScroll(rememberScrollState())
         ) {
+            // Seta para voltar
             IconButton(
                 onClick = { /* Ação de voltar */ },
                 modifier = Modifier.padding(5.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_back),
-                    contentDescription = stringResource(R.string.voltar),
+                    contentDescription = "Voltar",
                     tint = Color.Black,
                     modifier = Modifier.size(30.dp)
                 )
@@ -76,7 +92,7 @@ fun OngProfileContent(navController: NavController) {
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.capa_profile),
-                    contentDescription = stringResource(R.string.imagem_capa),
+                    contentDescription = "Imagem de Capa",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .height(150.dp)
@@ -95,7 +111,7 @@ fun OngProfileContent(navController: NavController) {
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.profile_image),
-                        contentDescription = stringResource(R.string.foto_perfil),
+                        contentDescription = "Foto de Perfil",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .matchParentSize()
@@ -107,19 +123,19 @@ fun OngProfileContent(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = stringResource(R.string.ong_nome),
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
+                text = "Bem da Madrugada",
                 fontFamily = poppinsFamily,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(start = 16.dp)
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = stringResource(R.string.ong_descricao),
-                fontFamily = poppinsFamily,
+                text = "O grupo Bem da Madrugada é uma ONG com foco na ajuda de necessitados no momento em que encontram-se menos amparados.",
                 fontSize = 16.sp,
+                fontFamily = poppinsFamily,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp)
             )
 
@@ -138,7 +154,7 @@ fun OngProfileContent(navController: NavController) {
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = stringResource(R.string.contato_telefone), fontFamily = poppinsFamily,)
+                    Text(text = "11 91234-5678",fontFamily = poppinsFamily)
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -151,7 +167,7 @@ fun OngProfileContent(navController: NavController) {
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = stringResource(R.string.contato_instagram), fontFamily = poppinsFamily,)
+                    Text(text = "@bem_da_madrugada")
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -164,7 +180,7 @@ fun OngProfileContent(navController: NavController) {
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = stringResource(R.string.contato_endereco), fontFamily = poppinsFamily,)
+                    Text(text = "Rua Vigário Albernaz, 738", fontFamily = poppinsFamily)
                 }
             }
 
@@ -179,20 +195,20 @@ fun OngProfileContent(navController: NavController) {
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(37, 71, 43)),
                 shape = RoundedCornerShape(50)
             ) {
-                Text(text = stringResource(R.string.doacao),
-                    fontFamily = poppinsFamily,
+                Text(text = "Doe aqui!",
                     color = Color.White,
-                    fontWeight = FontWeight.SemiBold
+                    fontFamily = poppinsFamily,
+                    fontWeight = FontWeight.Bold
                 )
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = stringResource(R.string.selos),
-                fontFamily = poppinsFamily,
+                text = "Selos",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
+                fontFamily = poppinsFamily,
                 modifier = Modifier.padding(start = 16.dp)
             )
 
@@ -206,7 +222,7 @@ fun OngProfileContent(navController: NavController) {
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.selo),
-                    contentDescription = stringResource(R.string.selo_nutrir),
+                    contentDescription = "Selo ONG",
                     modifier = Modifier.size(80.dp)
                 )
             }
@@ -214,18 +230,18 @@ fun OngProfileContent(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = stringResource(R.string.campanhas_ativas),
+                text = "Campanhas Ativas",
                 fontSize = 20.sp,
-                fontFamily = poppinsFamily,
                 fontWeight = FontWeight.Bold,
+                fontFamily = poppinsFamily,
                 modifier = Modifier.padding(start = 16.dp)
             )
-//
+
             Spacer(modifier = Modifier.height(8.dp))
 
-            CampaignListItem(stringResource(R.string.campanha_tutor))
-            CampaignListItem(stringResource(R.string.campanha_assistente))
-            CampaignListItem(stringResource(R.string.campanha_cuidados))
+            CampaignListItem("Tutor Voluntário para Reforço Escolar")
+            CampaignListItem("Assistente de Eventos Voluntário")
+            CampaignListItem("Voluntário para Cuidados de Animais Abandonados")
 
             Spacer(modifier = Modifier.padding(40.dp))
         }
@@ -243,19 +259,21 @@ fun OngProfileContent(navController: NavController) {
 @Composable
 fun VolunteerProfileContent(navController: NavController) {
     Box(modifier = Modifier.fillMaxSize()) {
+        // Conteúdo rolável
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color(255, 255, 255))
                 .verticalScroll(rememberScrollState())
         ) {
+            // Seta para voltar
             IconButton(
                 onClick = { /* Ação de voltar */ },
                 modifier = Modifier.padding(5.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_back),
-                    contentDescription = stringResource(R.string.voltar),
+                    contentDescription = "Voltar",
                     tint = Color.Black,
                     modifier = Modifier.size(30.dp)
                 )
@@ -268,7 +286,7 @@ fun VolunteerProfileContent(navController: NavController) {
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.capa_profile),
-                    contentDescription = stringResource(R.string.imagem_capa),
+                    contentDescription = "Imagem de Capa",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .height(150.dp)
@@ -287,7 +305,7 @@ fun VolunteerProfileContent(navController: NavController) {
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.profile_maria_eduarda),
-                        contentDescription = stringResource(R.string.foto_perfil),
+                        contentDescription = "Foto de Perfil",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .matchParentSize()
@@ -299,9 +317,9 @@ fun VolunteerProfileContent(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = stringResource(R.string.voluntario_nome),
+                text = "Maria Eduarda",
+                fontSize = 24.sp,
                 fontFamily = poppinsFamily,
-                fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(start = 16.dp)
             )
@@ -309,9 +327,9 @@ fun VolunteerProfileContent(navController: NavController) {
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = stringResource(R.string.voluntario_descricao),
-                fontFamily = poppinsFamily,
+                text = "Sou voluntária há 5 anos, desde então tenho dedicado meu tempo e energia para causas sociais que acredito. Sou apaixonada por tudo  isso!",
                 fontSize = 16.sp,
+                fontFamily = poppinsFamily,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp)
             )
 
@@ -322,6 +340,7 @@ fun VolunteerProfileContent(navController: NavController) {
                     .fillMaxWidth()
                     .padding(start = 16.dp),
             ) {
+
                 Row {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
@@ -331,7 +350,7 @@ fun VolunteerProfileContent(navController: NavController) {
                             modifier = Modifier.size(24.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = stringResource(R.string.contato_telefone), fontFamily = poppinsFamily,)
+                        Text(text = "11 91234-5678",fontFamily = poppinsFamily)
                     }
 
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 30.dp)) {
@@ -342,17 +361,19 @@ fun VolunteerProfileContent(navController: NavController) {
                             modifier = Modifier.size(24.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = stringResource(R.string.voluntario_instagram), fontFamily = poppinsFamily,)
+                        Text(text = "@maria_eduarda",fontFamily = poppinsFamily)
                     }
                 }
+
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = stringResource(R.string.selos),
+                text = "Selos",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
+                fontFamily = poppinsFamily,
                 modifier = Modifier.padding(start = 16.dp)
             )
 
@@ -366,13 +387,13 @@ fun VolunteerProfileContent(navController: NavController) {
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.selo_aconchego),
-                    contentDescription = stringResource(R.string.selo_aconchego),
+                    contentDescription = "Selo ONG",
                     modifier = Modifier.size(80.dp)
                 )
 
                 Image(
                     painter = painterResource(id = R.drawable.selo_nutrir),
-                    contentDescription = stringResource(R.string.selo_nutrir),
+                    contentDescription = "Selo ONG",
                     modifier = Modifier.size(80.dp)
                 )
             }
@@ -380,7 +401,7 @@ fun VolunteerProfileContent(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = stringResource(R.string.competencias_usuario),
+                text = "Competências",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = poppinsFamily,
@@ -395,21 +416,28 @@ fun VolunteerProfileContent(navController: NavController) {
                     .padding(horizontal = 16.dp, vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    CampaignListItem(stringResource(R.string.habilidade_comunicacao))
-                    CampaignListItem(stringResource(R.string.habilidade_cozinhar))
+                // Primeiro item de habilidades
+                Column(
+                    modifier = Modifier.weight(1f) // Permite que a coluna utilize o espaço disponível
+                ) {
+                    CampaignListItem("Comunicação escrita")
+                    CampaignListItem("Habilidade em cozinhar")
                 }
 
-                Column(modifier = Modifier.weight(0.8f)) {
-                    CampaignListItem(stringResource(R.string.habilidade_lideranca))
-                    CampaignListItem(stringResource(R.string.habilidade_ingles))
+                // Segundo item de habilidades
+                Column(
+                    modifier = Modifier.weight(0.8f) // Permite que a coluna utilize o espaço disponível
+                ) {
+                    CampaignListItem("Liderança")
+                    CampaignListItem("Inglês básico")
                 }
             }
+
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = stringResource(R.string.novas_ongs),
+                text = "Novas ONG's",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = poppinsFamily,
@@ -417,9 +445,12 @@ fun VolunteerProfileContent(navController: NavController) {
             )
 
             Spacer(modifier = Modifier.padding(8.dp))
-            Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-                OngItem(stringResource(R.string.ong_bem_da_madrugada), R.drawable.profile_image)
-                OngItem(stringResource(R.string.ong_nos_do_bem), R.drawable.profile_image)
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp),
+            ) {
+                OngItem("Bem da Madrugada", R.drawable.profile_image)
+                OngItem("Nós do Bem", R.drawable.profile_image)
             }
 
             Spacer(modifier = Modifier.padding(40.dp))
@@ -443,7 +474,8 @@ fun OngItem(name: String, imageRes: Int) {
             .padding(vertical = 4.dp)
             .background(Color(0xFFF1F3F4), shape = RoundedCornerShape(12.dp))
             .padding(8.dp),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically, // Centraliza verticalmente os itens na Row
+
     ) {
         Image(
             painter = painterResource(id = imageRes),
@@ -462,7 +494,7 @@ fun CampaignListItem(title: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 15.dp, vertical = 8.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         Box(
             modifier = Modifier
@@ -478,5 +510,5 @@ fun CampaignListItem(title: String) {
 @Composable
 fun PreviewProfileScreen() {
     val navController = rememberNavController()
-    ProfileScreen(profileType = ProfileType.Ong, navController = navController)
+    ProfileScreen(profileType = ProfileType.Volunteer, navController = navController)
 }

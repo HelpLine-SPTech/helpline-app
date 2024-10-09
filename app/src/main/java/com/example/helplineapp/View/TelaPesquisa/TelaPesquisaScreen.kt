@@ -4,13 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
@@ -22,11 +20,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.helplineapp.R
+
+val poppinsFamily = FontFamily(
+    Font(R.font.poppins_regular, FontWeight.Normal),
+    Font(R.font.poppins_bold, FontWeight.Bold),
+    Font(R.font.poppins_medium, FontWeight.Medium),
+    Font(R.font.poppins_semibold, FontWeight.SemiBold),
+    Font(R.font.poppins_extrabold, FontWeight.ExtraBold)
+)
 
 @Composable
 fun ConversasScreen() {
@@ -89,7 +98,8 @@ fun Header() {
         Text(
             text = "Busca",  // Alterado para "Busca"
             fontSize = 24.sp,
-            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+            fontFamily = poppinsFamily,
+            fontWeight = FontWeight.Bold,
             color = Color.Black
         )
 
@@ -150,6 +160,7 @@ fun SearchBar() {
                         Text(
                             text = "Pesquisar...",
                             fontSize = 16.sp,
+                            fontFamily = poppinsFamily,
                             color = Color.Gray
                         )
                     }
@@ -184,6 +195,7 @@ fun ConversationItem(profilePic: Int, name: String, message: String) {
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = name,
+                fontFamily = poppinsFamily,
                 fontSize = 16.sp,
                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
                 color = Color.Black
@@ -194,6 +206,7 @@ fun ConversationItem(profilePic: Int, name: String, message: String) {
             // Alterando o texto, removendo a hora e exibindo uma mensagem diferente
             Text(
                 text = message,
+                fontFamily = poppinsFamily,
                 fontSize = 14.sp,
                 color = Color.Gray
             )
