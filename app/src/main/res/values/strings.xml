@@ -30,6 +30,56 @@
     <string name="texto_publicacao">Escreva sua publicação...</string>
     <string name="publicar">Publicar</string>
 
+    <!-- Perfil da ONG -->
+    <string name="voltar">Voltar</string>
+    <string name="imagem_capa">Imagem de Capa</string>
+    <string name="foto_perfil">Foto de Perfil</string>
+    <string name="ong_nome">Bem da Madrugada</string>
+    <string name="ong_descricao">O grupo Bem da Madrugada é uma ONG com foco na ajuda de necessitados no momento em que encontram-se menos amparados.</string>
+    <string name="contato_telefone">11 91234-5678</string>
+    <string name="contato_instagram">bem_da_madrugada</string>
+    <string name="contato_endereco">Rua Vigário Albernaz, 738</string>
+    <string name="doacao">Doe aqui!</string>
+    <string name="selos">Selos</string>
+    <string name="campanhas_ativas">Campanhas Ativas</string>
+    <string name="campanha_tutor">Tutor Voluntário para Reforço Escolar</string>
+    <string name="campanha_assistente">Assistente de Eventos Voluntário</string>
+    <string name="campanha_cuidados">Voluntário para Cuidados de Animais Abandonados</string>
+    <string name="voluntario_nome">Maria Eduarda</string>
+    <string name="voluntario_descricao">Sou voluntária há 5 anos, desde então tenho dedicado meu tempo e energia para causas sociais que acredito. Sou apaixonada por tudo isso!</string>
+    <string name="voluntario_instagram">maria_eduarda</string>
+    <string name="selo_aconchego">Selo Aconchego</string>
+    <string name="selo_nutrir">Selo Nutrir</string>
+    <string name="competencias_usuario">Competências</string>
+    <string name="habilidade_comunicacao">Comunicação escrita</string>
+    <string name="habilidade_cozinhar">Habilidade em cozinhar</string>
+    <string name="habilidade_lideranca">Liderança</string>
+    <string name="habilidade_ingles">Inglês básico</string>
+    <string name="novas_ongs">Novas ONGs</string>
+    <string name="ong_bem_da_madrugada">Bem da Madrugada</string>
+    <string name="ong_nos_do_bem">Nós do Bem</string>
+
+    <!-- Edição de Perfil -->
+    <string name="editar_perfil">Editar Perfil</string>
+    <string name="imagem_capa_editar">Imagem de Capa</string>
+    <string name="foto_perfil_editar">Foto de Perfil</string>
+    <string name="nome">Nome:</string>
+    <string name="como_devemos_te_chamar">Como devemos te chamar?</string>
+    <string name="biografia">Biografia:</string>
+    <string name="fale_um_pouco_sobre_voce">Fale um pouco sobre você</string>
+    <string name="celular">Celular:</string>
+    <string name="informe_seu_numero_de_contato">Informe seu número de contato</string>
+    <string name="instagram">Instagram:</string>
+    <string name="adicione_seu_perfil_do_instagram">Adicione seu perfil do Instagram</string>
+    <string name="competencias_usuario_editar">Competências</string>
+    <string name="adicionar_competencia">Adicionar Competência</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="salvar">Salvar</string>
+
+    <!-- Mensagens de Sucesso ou Erro -->
+    <string name="perfil_atualizado">Perfil atualizado com sucesso!</string>
+    <string name="erro_atualizar_perfil">Erro ao atualizar perfil. Tente novamente.</string>
+
     <!-- Chat2 -->
     <string name="mensagem_1">Boa Noite!</string>
     <string name="mensagem_2">Não, pode falar.</string>

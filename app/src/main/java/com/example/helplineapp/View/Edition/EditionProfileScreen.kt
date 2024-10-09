@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -40,6 +41,8 @@ val poppinsFamily = FontFamily(
 fun EditionProfileContent() {
     var celular by remember { mutableStateOf(TextFieldValue("")) }
     var instagram by remember { mutableStateOf(TextFieldValue("")) }
+    var name by remember { mutableStateOf("") }
+    var biography by remember { mutableStateOf("") }
     var competencias by remember { mutableStateOf(mutableStateListOf(TextFieldValue(""))) }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -52,8 +55,8 @@ fun EditionProfileContent() {
             Header()
             BackgroundPhoto()
             ProfilePhoto()
-            NameField()
-            BiographyField()
+            NameField(name) { name = it }
+            BiographyField(biography) { biography = it }
             ContactField("Celular", "Informe seu número de contato", celular) { celular = it }
             ContactField("Instagram", "Adicione seu perfil do Instagram", instagram) { instagram = it }
             CompetenciesField(competencias) {
@@ -75,7 +78,7 @@ fun Header() {
         IconButton(onClick = { /* Ação de voltar */ }, modifier = Modifier.size(30.dp)) {
             Icon(painter = painterResource(id = R.drawable.ic_back), contentDescription = "Voltar", tint = Color.Black)
         }
-        Text(text = "Editar Perfil", fontSize = 22.sp, fontWeight = FontWeight.ExtraBold, fontFamily = poppinsFamily, modifier = Modifier.padding(start = 16.dp))
+        Text(text = stringResource(id = R.string.editar_perfil), fontSize = 22.sp, fontWeight = FontWeight.ExtraBold, fontFamily = poppinsFamily, modifier = Modifier.padding(start = 16.dp))
     }
 }
 
@@ -88,7 +91,7 @@ fun BackgroundPhoto() {
             tint = Color(0xFFDD7631),
             modifier = Modifier.size(20.dp) // Define o tamanho do ícone
         )
-        Text(text = "Foto Fundo", fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = poppinsFamily,  color = Color(0xFF585C60), modifier = Modifier.padding(start = 8.dp))
+        Text(text = stringResource(id = R.string.imagem_capa_editar), fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = poppinsFamily,  color = Color(0xFF585C60), modifier = Modifier.padding(start = 8.dp))
     }
     Box(modifier = Modifier.fillMaxWidth().height(150.dp).background(Color.Gray)) {
         Image(painter = painterResource(id = R.drawable.capa_profile), contentDescription = "Imagem de Capa", contentScale = ContentScale.Crop, modifier = Modifier.height(150.dp).fillMaxWidth())
@@ -104,7 +107,7 @@ fun ProfilePhoto() {
             tint = Color(0xFFDD7631),
             modifier = Modifier.size(20.dp) // Define o tamanho do ícone
         )
-        Text(text = "Foto Perfil", fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = poppinsFamily, color = Color(0xFF585C60), modifier = Modifier.padding(start = 8.dp))
+        Text(text = stringResource(id = R.string.foto_perfil_editar), fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = poppinsFamily, color = Color(0xFF585C60), modifier = Modifier.padding(start = 8.dp))
     }
     Box(modifier = Modifier.size(120.dp).clip(CircleShape).padding(start = 16.dp)) {
         Image(painter = painterResource(id = R.drawable.profile_image), contentDescription = "Foto de Perfil", modifier = Modifier.size(120.dp))
@@ -113,9 +116,7 @@ fun ProfilePhoto() {
 }
 
 @Composable
-fun NameField() {
-    var name by remember { mutableStateOf("") } // Cria um estado para o nome
-
+fun NameField(name: String, onNameChange: (String) -> Unit) {
     Row(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
         Icon(
             painter = painterResource(id = R.drawable.pencil),
@@ -123,29 +124,25 @@ fun NameField() {
             tint = Color(0xFFDD7631),
             modifier = Modifier.size(20.dp) // Define o tamanho do ícone
         )
-
-        Text(text = "Nome", fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = poppinsFamily, color = Color(0xFF585C60), modifier = Modifier.padding(start = 8.dp))
+        Text(text = stringResource(id = R.string.nome), fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = poppinsFamily, color = Color(0xFF585C60), modifier = Modifier.padding(start = 8.dp))
     }
 
     TextField(
-        value = name, // Usa o estado como valor
-        onValueChange = { newName -> name = newName }, // Atualiza o estado com o novo valor digitado
-        placeholder = { Text(text = "Como devemos te chamar?") },
+        value = name,
+        onValueChange = onNameChange,
+        placeholder = { Text(text = stringResource(id = R.string.como_devemos_te_chamar)) },
         shape = RoundedCornerShape(16.dp),
         colors = TextFieldDefaults.textFieldColors(
-            focusedIndicatorColor = Color.Transparent, // Remove a linha quando focado
-            unfocusedIndicatorColor = Color.Transparent // Remove a linha quando não focado
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
         ),
         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
     )
     Spacer(modifier = Modifier.height(8.dp))
 }
 
-
 @Composable
-fun BiographyField() {
-    var biography by remember { mutableStateOf("") } // Cria um estado para a biografia
-
+fun BiographyField(biography: String, onBiographyChange: (String) -> Unit) {
     Row(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
         Icon(
             painter = painterResource(id = R.drawable.pencil),
@@ -153,18 +150,17 @@ fun BiographyField() {
             tint = Color(0xFFDD7631),
             modifier = Modifier.size(20.dp) // Define o tamanho do ícone
         )
-
-        Text(text = "Biografia", fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = poppinsFamily, color = Color(0xFF585C60), modifier = Modifier.padding(start = 8.dp))
+        Text(text = stringResource(id = R.string.biografia), fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = poppinsFamily, color = Color(0xFF585C60), modifier = Modifier.padding(start = 8.dp))
     }
 
     TextField(
-        value = biography, // Usa o estado como valor
-        onValueChange = { newBiography -> biography = newBiography }, // Atualiza o estado com o novo valor digitado
-        placeholder = { Text(text = "Fale um pouco sobre você") },
+        value = biography,
+        onValueChange = onBiographyChange,
+        placeholder = { Text(text = stringResource(id = R.string.fale_um_pouco_sobre_voce)) },
         shape = RoundedCornerShape(16.dp),
         colors = TextFieldDefaults.textFieldColors(
-            focusedIndicatorColor = Color.Transparent, // Remove a linha quando focado
-            unfocusedIndicatorColor = Color.Transparent // Remove a linha quando não focado
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
         ),
         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
     )
@@ -180,7 +176,6 @@ fun ContactField(label: String, placeholder: String, value: TextFieldValue, onVa
             tint = Color(0xFFDD7631),
             modifier = Modifier.size(20.dp) // Define o tamanho do ícone
         )
-
         Text(text = label, fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = poppinsFamily,  color = Color(0xFF585C60), modifier = Modifier.padding(start = 8.dp))
     }
 
@@ -190,8 +185,8 @@ fun ContactField(label: String, placeholder: String, value: TextFieldValue, onVa
         placeholder = { Text(text = placeholder) },
         shape = RoundedCornerShape(16.dp),
         colors = TextFieldDefaults.textFieldColors(
-            focusedIndicatorColor = Color.Transparent, // Remove a linha quando focado
-            unfocusedIndicatorColor = Color.Transparent // Remove a linha quando não focado
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
         ),
         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)
     )
@@ -207,23 +202,20 @@ fun CompetenciesField(competencias: SnapshotStateList<TextFieldValue>, onAddComp
             tint = Color(0xFFDD7631),
             modifier = Modifier.size(20.dp) // Define o tamanho do ícone
         )
-
-        Text(text = "Competências", fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = poppinsFamily,  color = Color(0xFF585C60), modifier = Modifier.padding(start = 8.dp))
+        Text(text = stringResource(id = R.string.competencias_usuario_editar), fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = poppinsFamily,  color = Color(0xFF585C60), modifier = Modifier.padding(start = 8.dp))
     }
 
     for (index in competencias.indices) {
-        val competencia = competencias[index] // Obter a competência atual
+        val competencia = competencias[index]
         TextField(
             value = competencia,
-            onValueChange = { newValue ->
-                competencias[index] = newValue // Atualiza a competência específica
-            },
+            onValueChange = { newValue -> competencias[index] = newValue },
             shape = RoundedCornerShape(16.dp),
-            placeholder = { Text(text = "Nova competência") },
+            placeholder = { Text(text = stringResource(id = R.string.adicionar_competencia)) },
             trailingIcon = {
                 IconButton(
                     onClick = {
-                        competencias.removeAt(index) // Remove a competência correspondente
+                        competencias.removeAt(index)
                     }
                 ) {
                     Image(
@@ -242,7 +234,6 @@ fun CompetenciesField(competencias: SnapshotStateList<TextFieldValue>, onAddComp
         Spacer(modifier = Modifier.height(8.dp))
     }
 
-    // Botão para adicionar nova competência
     Row(modifier = Modifier.padding(horizontal = 16.dp)) {
         Button(
             onClick = onAddCompetency,
@@ -254,8 +245,6 @@ fun CompetenciesField(competencias: SnapshotStateList<TextFieldValue>, onAddComp
         }
     }
 }
-
-
 
 @Composable
 fun ActionButtons() {
@@ -269,7 +258,7 @@ fun ActionButtons() {
             colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF285430)),
             border = BorderStroke(2.dp, Color(0xFF285430)),
         ) {
-            Text(text = "Cancelar", fontFamily = poppinsFamily, fontWeight = FontWeight.SemiBold)
+            Text(text = stringResource(id = R.string.cancelar), fontFamily = poppinsFamily, fontWeight = FontWeight.SemiBold)
         }
 
         Button(
@@ -277,7 +266,7 @@ fun ActionButtons() {
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF285430), contentColor = Color.White)
         ) {
-            Text(text = "Salvar", fontFamily = poppinsFamily, fontWeight = FontWeight.SemiBold)
+            Text(text = stringResource(id = R.string.salvar), fontFamily = poppinsFamily, fontWeight = FontWeight.SemiBold)
         }
     }
 }
