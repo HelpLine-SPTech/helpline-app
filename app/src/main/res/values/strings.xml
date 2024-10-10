@@ -105,4 +105,44 @@
     <string name="mensagem_3">Boa noite Noemi, tudo bem?</string>
     <string name="mensagem_4">Está ocupada?</string>
 
+    <!-- Título da Tela de Cadastro -->
+    <string name="titulo_cadastro">Cadastro</string>
+
+    <!-- Etapa 1: Informações Pessoais -->
+    <string name="etapa_um_titulo">Informações de login</string>
+    <string name="email">E-mail:</string>
+    <string name="confirmar_email">Confirmar E-mail:</string>
+    <string name="senha">Senha:</string>
+    <string name="confirme_senha">Confirmar senha:</string>
+
+    <!-- Etapa 2: Contato -->
+    <string name="etapa_dois_titulo">Informações Pessoais</string>
+    <string name="nome_completo">Nome Completo:</string>
+    <string name="informe_seu_nome">Informe seu nome completo</string>
+    <string name="data_nascimento">Data de Nascimento:</string>
+    <string name="competencias_cadastro">Competências:</string>
+
+    <!-- Etapa 3: Endereço -->
+    <string name="etapa_tres_titulo">Informações de endereço</string>
+    <string name="cep_cadastro">CEP:</string>
+    <string name="informe_seu_endereco">Endereço:</string>
+    <string name="numero">Número:</string>
+    <string name="informe_complemento">Complemento</string>
+
+
+    <!-- Botões de Controle -->
+    <string name="botao_proximo">Próximo</string>
+    <string name="botao_anterior">Anterior</string>
+    <string name="botao_finalizar">Finalizar</string>
+
+    <!-- Mensagens de Erro -->
+    <string name="erro_nome_vazio">Por favor, insira seu nome.</string>
+    <string name="erro_email_invalido">Por favor, insira um e-mail válido.</string>
+    <string name="erro_telefone_invalido">Por favor, insira um telefone válido.</string>
+    <string name="erro_endereco_vazio">Por favor, insira seu endereço.</string>
+    <string name="erro_cep_invalido">Por favor, insira um CEP válido.</string>
+
+    <!-- Mensagem de Sucesso -->
+    <string name="cadastro_sucesso">Cadastro concluído com sucesso!</string>
+
 </resources>

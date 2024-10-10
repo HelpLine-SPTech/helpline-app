@@ -510,5 +510,5 @@ fun CampaignListItem(title: String) {
 @Composable
 fun PreviewProfileScreen() {
     val navController = rememberNavController()
-    ProfileScreen(profileType = ProfileType.Volunteer, navController = navController)
+    ProfileScreen(profileType = ProfileType.Ong, navController = navController)
 }
