@@ -1,8 +1,8 @@
 # Helpline-App
 
-![Helpline Logo](./assets/helpline-logo.png) <!-- Coloque o link da sua logo aqui -->
+  <p>Bem-vindo ao repositório oficial do <strong>Helpline-App</strong>! Este projeto é um aplicativo mobile que tem como objetivo conectar ONGs, voluntários e doadores em uma plataforma de comunicação prática e acessível. Através de um fórum interativo, facilitamos o engajamento e a colaboração em campanhas e ações sociais.</p>
 
-Bem-vindo ao repositório oficial do **Helpline-App**! Este projeto é um aplicativo mobile que tem como objetivo conectar ONGs, voluntários e doadores em uma plataforma de comunicação prática e acessível. Através de um fórum interativo, facilitamos o engajamento e a colaboração em campanhas e ações sociais.
+  <img src="app/src/main/res/drawable/logo.png" alt="Helpline Logo" width="200" />
 
 ## Funcionalidades
 - **Fórum de Discussões**: Permite que ONGs, voluntários e doadores se comuniquem e troquem informações em tempo real.
@@ -11,7 +11,7 @@ Bem-vindo ao repositório oficial do **Helpline-App**! Este projeto é um aplica
 - **Sistema de Notificações**: Mantenha-se atualizado sobre novas campanhas e interações no fórum.
 
 ## Tecnologias Utilizadas
-- **Kotlin** para desenvolvimento mobile
-- **Firebase** para autenticação e armazenamento de dados
-- **Rest APIs** para comunicação com o backend
-- **Material Design** para garantir uma interface amigável e intuitiva
+- **Kotlin:** para desenvolvimento mobile
+- **Firebase:** para autenticação e armazenamento de dados
+- **Rest APIs:** para comunicação com o backend
+- **Material Design:** para garantir uma interface amigável e intuitiva
