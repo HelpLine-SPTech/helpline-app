@@ -1,4 +1,4 @@
-package com.example.helpline.View.vaga
+package com.helpline.view.vaga
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -40,9 +40,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.helpline.R
-import com.example.helpline.View.NavDrawer
-import com.example.helpline.ui.app.Componente.Footer.BottomNavBar
+import com.helpline.R
+import com.helpline.ui.app.componente.forum.sidebar.NavDrawer
+import com.helpline.ui.app.componente.footer.BottomNavBar
 
 val poppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),

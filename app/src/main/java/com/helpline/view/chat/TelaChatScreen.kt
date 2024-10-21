@@ -1,4 +1,4 @@
-package com.example.helpline.View.Chat
+package com.helpline.view.chat
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -30,8 +30,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.helpline.R
-import com.example.helpline.ui.app.Componente.Chat.HeaderChat
+import com.helpline.R
+import com.helpline.ui.app.componente.chat.HeaderChat
 
 val poppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),

@@ -1,4 +1,4 @@
-package com.example.helpline.View.PerfilOng
+package com.helpline.view.perfilong
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -38,8 +38,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.helpline.R
-import com.example.helpline.ui.app.Componente.Footer.BottomNavBar
+import com.helpline.R
+import com.helpline.ui.app.componente.footer.BottomNavBar
 
 val poppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),

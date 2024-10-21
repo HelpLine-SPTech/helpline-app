@@ -1,4 +1,4 @@
-package com.example.helpline.View.ForumPost
+package com.helpline.view.forumpost
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -45,9 +45,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.helpline.R
-import com.example.helpline.View.NavDrawer
-import com.example.helpline.ui.app.Componente.Footer.BottomNavBar
+import com.helpline.R
+import com.helpline.ui.app.componente.forum.sidebar.NavDrawer
+import com.helpline.ui.app.componente.footer.BottomNavBar
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight

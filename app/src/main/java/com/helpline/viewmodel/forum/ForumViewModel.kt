@@ -1,4 +1,4 @@
-package com.example.helpline.ViewModel.Forum
+package com.helpline.viewmodel.forum
 
 class ForumViewModel {
 

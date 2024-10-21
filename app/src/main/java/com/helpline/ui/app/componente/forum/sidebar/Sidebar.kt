@@ -1,4 +1,4 @@
-package com.example.helpline.View
+package com.helpline.ui.app.componente.forum.sidebar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -40,8 +40,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.helpline.R
-import com.example.helpline.ui.app.Componente.Header.TopBar
+import com.helpline.R
+import com.helpline.ui.app.componente.header.TopBar
 import kotlinx.coroutines.launch
 
 

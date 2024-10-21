@@ -1,4 +1,4 @@
-package com.example.helpline.View.Campanha
+package com.helpline.view.campanha
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -33,9 +34,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.helpline.R
-import com.example.helpline.View.NavDrawer
-import com.example.helpline.ui.app.Componente.Footer.BottomNavBar
+import com.helpline.R
+import com.helpline.ui.app.componente.forum.sidebar.NavDrawer
+import com.helpline.ui.app.componente.footer.BottomNavBar
 
 
 @Composable
@@ -44,11 +45,11 @@ fun CampanhaScreen (navController: NavController) {
     NavDrawer {
         // Usando um Box para sobrepor o conteúdo e o footer
         Box(
-            modifier = androidx.compose.ui.Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
             // Conteúdo principal que rola
             Column(
-                modifier = androidx.compose.ui.Modifier
+                modifier = Modifier
                     .fillMaxSize()
                     .padding(
                         bottom = 60.dp,
@@ -58,7 +59,7 @@ fun CampanhaScreen (navController: NavController) {
             ){
                 // conteudo - primeiro post campanha
                 Card(
-                    modifier = androidx.compose.ui.Modifier
+                    modifier = Modifier
                         .padding(16.dp)
                         .fillMaxWidth(),
                     // define o sombreamento do elemento
@@ -71,11 +72,11 @@ fun CampanhaScreen (navController: NavController) {
                 ) {
 
                     Column(
-                        modifier = androidx.compose.ui.Modifier.padding(16.dp)
+                        modifier = Modifier.padding(16.dp)
                     ) {
 
                         Box(
-                            modifier = androidx.compose.ui.Modifier
+                            modifier = Modifier
                                 .fillMaxWidth()
 
                         ) {
@@ -83,7 +84,7 @@ fun CampanhaScreen (navController: NavController) {
                             Image(
                                 painter = painterResource(id = R.mipmap.doacao_leite),
                                 contentDescription = "imagem campanha leite",
-                                modifier = androidx.compose.ui.Modifier
+                                modifier = Modifier
                                     .fillMaxWidth()
                                     .height(150.dp)
                                     .clip(RoundedCornerShape(16.dp))// Aplica o arredondamento
@@ -92,11 +93,11 @@ fun CampanhaScreen (navController: NavController) {
                             )
                         }
                         // dar espaço entre elementos
-                        Spacer(modifier = androidx.compose.ui.Modifier.height(5.dp))
+                        Spacer(modifier = Modifier.height(5.dp))
 
                         // Nome da vaga e botão
                         Row(
-                            modifier = androidx.compose.ui.Modifier
+                            modifier = Modifier
                                 .fillMaxWidth()
                                 .height(25.dp), // Defina a altura desejada
                             horizontalArrangement = Arrangement.SpaceBetween
@@ -113,7 +114,7 @@ fun CampanhaScreen (navController: NavController) {
                         // Descrição da vaga
                         Column {
 
-                            Spacer(modifier = androidx.compose.ui.Modifier.height(1.dp))
+                            Spacer(modifier = Modifier.height(1.dp))
 
 
                             Text(text =  stringResource(id = R.string.objetivo_um),
@@ -124,18 +125,18 @@ fun CampanhaScreen (navController: NavController) {
                                 style = MaterialTheme.typography.bodyMedium)
 
 
-                            Spacer(modifier = androidx.compose.ui.Modifier.height(8.dp))
+                            Spacer(modifier = Modifier.height(8.dp))
 
                             Text(text = stringResource(id = R.string.subtitulo_um),
                                 style = MaterialTheme.typography.bodySmall,
                                 fontWeight = FontWeight.Bold
                             )
 
-                            Spacer(modifier = androidx.compose.ui.Modifier.height(8.dp))
+                            Spacer(modifier = Modifier.height(8.dp))
                             
                             Button(
                                 onClick = { /* Ação do botão */ },
-                                modifier = androidx.compose.ui.Modifier
+                                modifier = Modifier
                                     .width(100.dp)
                                     .height(20.dp),
                                 shape = RoundedCornerShape(50.dp),
@@ -147,7 +148,7 @@ fun CampanhaScreen (navController: NavController) {
                                     color = Color.White,
                                     style = MaterialTheme.typography.bodySmall,
                                     fontWeight = FontWeight.Bold,
-                                    modifier = androidx.compose.ui.Modifier.align(Alignment.CenterVertically) // Centraliza verticalmente
+                                    modifier = Modifier.align(Alignment.CenterVertically) // Centraliza verticalmente
                                 )
                             }
                         }
@@ -157,7 +158,7 @@ fun CampanhaScreen (navController: NavController) {
 
                 /* segunda campanha */
                 Card(
-                    modifier = androidx.compose.ui.Modifier
+                    modifier = Modifier
                         .padding(16.dp)
                         .fillMaxWidth(),
                     // define o sombreamento do elemento
@@ -170,11 +171,11 @@ fun CampanhaScreen (navController: NavController) {
                 ) {
 
                     Column(
-                        modifier = androidx.compose.ui.Modifier.padding(16.dp)
+                        modifier = Modifier.padding(16.dp)
                     ) {
 
                         Box(
-                            modifier = androidx.compose.ui.Modifier
+                            modifier = Modifier
                                 .fillMaxWidth()
 
                         ) {
@@ -182,7 +183,7 @@ fun CampanhaScreen (navController: NavController) {
                             Image(
                                 painter = painterResource(id = R.mipmap.campanha_ambiental),
                                 contentDescription = "imagem campanha ambiental",
-                                modifier = androidx.compose.ui.Modifier
+                                modifier = Modifier
                                     .fillMaxWidth()
                                     .height(150.dp)
                                     .clip(RoundedCornerShape(16.dp))// Aplica o arredondamento
@@ -191,11 +192,11 @@ fun CampanhaScreen (navController: NavController) {
                             )
                         }
                         // dar espaço entre elementos
-                        Spacer(modifier = androidx.compose.ui.Modifier.height(5.dp))
+                        Spacer(modifier = Modifier.height(5.dp))
 
                         // Nome da vaga e botão
                         Row(
-                            modifier = androidx.compose.ui.Modifier
+                            modifier = Modifier
                                 .fillMaxWidth()
                                 .height(25.dp), // Defina a altura desejada
                             horizontalArrangement = Arrangement.SpaceBetween
@@ -212,7 +213,7 @@ fun CampanhaScreen (navController: NavController) {
                         // Descrição da vaga
                         Column {
 
-                            Spacer(modifier = androidx.compose.ui.Modifier.height(1.dp))
+                            Spacer(modifier = Modifier.height(1.dp))
 
 
                             Text(text =  stringResource(id = R.string.objetivo_um),
@@ -223,18 +224,18 @@ fun CampanhaScreen (navController: NavController) {
                                 style = MaterialTheme.typography.bodyMedium)
 
 
-                            Spacer(modifier = androidx.compose.ui.Modifier.height(8.dp))
+                            Spacer(modifier = Modifier.height(8.dp))
 
                             Text(text = stringResource(id = R.string.subtitulo_um),
                                 style = MaterialTheme.typography.bodySmall,
                                 fontWeight = FontWeight.Bold
                             )
 
-                            Spacer(modifier = androidx.compose.ui.Modifier.height(8.dp))
+                            Spacer(modifier = Modifier.height(8.dp))
 
                             Button(
                                 onClick = { /* Ação do botão */ },
-                                modifier = androidx.compose.ui.Modifier
+                                modifier = Modifier
                                     .width(100.dp)
                                     .height(20.dp),
                                 shape = RoundedCornerShape(50.dp),
@@ -246,7 +247,7 @@ fun CampanhaScreen (navController: NavController) {
                                     color = Color.White,
                                     style = MaterialTheme.typography.bodySmall,
                                     fontWeight = FontWeight.Bold,
-                                    modifier = androidx.compose.ui.Modifier.align(Alignment.CenterVertically) // Centraliza verticalmente
+                                    modifier = Modifier.align(Alignment.CenterVertically) // Centraliza verticalmente
                                 )
                             }
                         }
@@ -257,7 +258,7 @@ fun CampanhaScreen (navController: NavController) {
             }
             // Footer fixo na parte inferior
             BottomNavBar(
-                modifier = androidx.compose.ui.Modifier
+                modifier = Modifier
                     .align(Alignment.BottomCenter) // Alinha o footer na parte inferior do Box
                     .fillMaxWidth()
                     .height(60.dp),

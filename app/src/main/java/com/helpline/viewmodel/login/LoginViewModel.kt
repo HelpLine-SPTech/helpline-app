@@ -1,9 +1,9 @@
-package com.example.helpline.ViewModel.Login
+package com.helpline.viewmodel.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.helpline.network.Login.LoginRequest
-import com.example.helpline.network.Login.LoginService
+import com.helpline.network.login.LoginRequest
+import com.helpline.network.login.LoginService
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 

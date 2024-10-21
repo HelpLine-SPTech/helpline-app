@@ -1,4 +1,4 @@
-package com.example.helpline.ui.theme
+package com.helpline.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

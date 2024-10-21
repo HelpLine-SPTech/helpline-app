@@ -1,6 +1,6 @@
-package com.example.helpline.config
+package com.helpline.config
 
-import com.example.helpline.network.Login.LoginService
+import com.helpline.network.login.LoginService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

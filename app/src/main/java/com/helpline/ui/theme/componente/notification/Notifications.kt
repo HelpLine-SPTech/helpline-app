@@ -1,4 +1,4 @@
-package com.example.helpline.ui.theme.Componente.Notification
+package com.helpline.ui.theme.componente.notification
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column

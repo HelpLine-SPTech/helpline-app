@@ -1,4 +1,4 @@
-package com.example.helpline
+package com.helpline
 
 import org.junit.Test
 

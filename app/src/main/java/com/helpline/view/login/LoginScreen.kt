@@ -1,4 +1,4 @@
-package com.example.helpline.View.Login
+package com.helpline.view.login
 
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
@@ -42,8 +42,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.helpline.R
-import com.example.helpline.ViewModel.Login.LoginViewModel
+import com.helpline.R
+import com.helpline.viewmodel.login.LoginViewModel
 
 val poppinsFamily = FontFamily(
   Font(R.font.poppins_regular, FontWeight.Normal),

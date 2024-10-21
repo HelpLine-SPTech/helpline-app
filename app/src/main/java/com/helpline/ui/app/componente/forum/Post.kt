@@ -1,4 +1,4 @@
-package com.example.helpline.ui.app.Componente.Forum
+package com.helpline.ui.app.componente.forum
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import com.example.helpline.R
+import com.helpline.R
 
 val poppinsFamily = FontFamily(
   Font(R.font.poppins_regular, FontWeight.Normal),
@@ -89,7 +89,7 @@ fun Post( nome: String, texto: String, profilePic: Int, postImage: Boolean){
 
       if (postImage){
         Image(
-          painter = painterResource(id = com.example.helpline.R.mipmap.imgdoacao),
+          painter = painterResource(id = com.helpline.R.mipmap.imgdoacao),
           contentDescription = "Cestas básicas",
           modifier = Modifier
             .fillMaxWidth()

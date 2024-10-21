@@ -1,4 +1,4 @@
-package com.example.helpline.ui.theme.Componente.Footer
+package com.helpline.ui.theme.componente.footer
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

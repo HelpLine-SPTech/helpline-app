@@ -1,4 +1,4 @@
-package com.example.helpline.ui.app.Componente.Notification.Header
+package com.helpline.ui.app.componente.notification.header
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -26,7 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.helpline.R
+import com.helpline.R
 
 @Composable
 fun HeaderNotification(navController: NavController) {

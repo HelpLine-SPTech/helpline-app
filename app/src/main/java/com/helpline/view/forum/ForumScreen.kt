@@ -1,4 +1,4 @@
-package com.example.helpline.View.Forum
+package com.helpline.view.forum
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -8,12 +8,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.helpline.View.NavDrawer
-import com.example.helpline.ui.app.Componente.Footer.BottomNavBar
-import com.example.helpline.ui.app.Componente.Forum.Post
+import com.helpline.ui.app.componente.forum.sidebar.NavDrawer
+import com.helpline.ui.app.componente.footer.BottomNavBar
+import com.helpline.ui.app.componente.forum.Post
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import com.helpline.R
 
 val poppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),

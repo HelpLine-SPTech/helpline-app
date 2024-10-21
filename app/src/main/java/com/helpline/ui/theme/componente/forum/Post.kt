@@ -1,4 +1,4 @@
-package com.example.helpline.ui.theme.Componente.Forum
+package com.helpline.ui.theme.componente.forum
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -29,7 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.helpline.R
+import com.helpline.R
 
 @Composable
 fun Post( nome: String, texto: String, profilePic: Int, postImage: Boolean){
@@ -77,7 +77,7 @@ fun Post( nome: String, texto: String, profilePic: Int, postImage: Boolean){
 
       if (postImage){
         Image(
-          painter = painterResource(id = com.example.helpline.R.mipmap.imgdoacao),
+          painter = painterResource(id = com.helpline.R.mipmap.imgdoacao),
           contentDescription = "Cestas básicas",
           modifier = Modifier
             .fillMaxWidth()

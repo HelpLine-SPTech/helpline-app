@@ -1,4 +1,4 @@
-package com.example.helpline.network.Login
+package com.helpline.network.login
 
 import retrofit2.http.Body
 import retrofit2.http.POST

@@ -1,4 +1,4 @@
-package com.example.helpline.View.SplashScreen
+package com.helpline.view.splash
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
@@ -19,7 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.helpline.R
+import com.helpline.R
 import kotlinx.coroutines.delay
 
 @Composable

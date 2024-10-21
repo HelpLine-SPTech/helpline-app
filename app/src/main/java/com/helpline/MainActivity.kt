@@ -1,7 +1,5 @@
-package com.example.helpline
+package com.helpline
 
-//import CadastroScreen
-//import CadastroViewModel
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
@@ -11,17 +9,17 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.core.view.WindowInsetsControllerCompat
-//import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-//import com.example.helplineapp.GetContext.Companion.context
-import com.example.helpline.View.Campanha.CampanhaScreen
-import com.example.helpline.View.Chat1.ConversasScreen
-import com.example.helpline.View.Forum.ForumScreen
-//import com.example.helplineapp.ui.app.Theme.HelplineAppTheme
-import com.example.helpline.View.SplashScreen.SplashScreen
-import com.example.helpline.ui.app.HelplineAppTheme
+import com.helpline.view.campanha.CampanhaScreen
+import com.helpline.view.chat1.ConversasScreen
+import com.helpline.view.forum.ForumScreen
+import com.helpline.view.splash.SplashScreen
+import com.helpline.ui.app.HelplineAppTheme
+import com.helpline.view.login.LoginScreen
+import com.helpline.viewmodel.login.LoginViewModel
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
   @SuppressLint("WrongConstant")
@@ -38,12 +36,12 @@ class MainActivity : ComponentActivity() {
       HelplineAppTheme {
         val navController = rememberNavController()
         // startDestination -> Tela que o aplicativo vai começar
-        NavHost(navController = navController, startDestination = "tela-campanha" /*"splashScreen"*/) {
+        NavHost(navController = navController, startDestination = "loginPage" /*"splashScreen"*/) {
 
           // Criando a rota para a tela de login
           composable(route = "loginPage") {
-         //   val loginViewModel: LoginViewModel = koinViewModel()
-          //  LoginScreen(navController, loginViewModel)
+            val loginViewModel: LoginViewModel = koinViewModel()
+            LoginScreen(navController, loginViewModel)
           }
 
           // Rota para tela do fórum

@@ -1,4 +1,4 @@
-package com.example.helpline.View.Notification
+package com.helpline.view.notification
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -20,9 +20,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.helpline.R
-import com.example.helpline.ui.app.Componente.Notification.Header.HeaderNotification
-import com.example.helpline.ui.app.Componente.Notification.NotificationItem
+import com.helpline.R
+import com.helpline.ui.app.componente.notification.header.HeaderNotification
+import com.helpline.ui.app.Componente.Notification.NotificationItem
 
 val poppinsFamily = FontFamily(
   Font(R.font.poppins_regular, FontWeight.Normal),

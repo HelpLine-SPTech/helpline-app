@@ -1,7 +1,7 @@
-package com.example.helpline.config
+package com.helpline.config
 
-import com.example.helpline.ViewModel.Login.LoginViewModel
-import com.example.helpline.network.Login.LoginService
+import com.helpline.viewmodel.login.LoginViewModel
+import com.helpline.network.login.LoginService
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
