@@ -34,6 +34,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -43,7 +45,13 @@ import androidx.navigation.NavController
 import com.example.helplineapp.R
 import com.example.helplineapp.ViewModel.Login.LoginViewModel
 
-
+val poppinsFamily = FontFamily(
+  Font(R.font.poppins_regular, FontWeight.Normal),
+  Font(R.font.poppins_bold, FontWeight.Bold),
+  Font(R.font.poppins_medium, FontWeight.Medium),
+  Font(R.font.poppins_semibold, FontWeight.SemiBold),
+  Font(R.font.poppins_extrabold, FontWeight.ExtraBold)
+)
 
 @Composable
 fun LoginScreen(navController: NavController, viewModel: LoginViewModel) {
@@ -79,6 +87,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel) {
       Text(
         text = "Por favor faça login em sua conta.",
         color = Color(0xFF1C4532),
+        fontFamily = poppinsFamily,
         textAlign = TextAlign.Center
       )
 
@@ -91,6 +100,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel) {
       Text(
         text = "Não possui conta? Cadastre-se",
         fontSize = 12.sp,
+        fontFamily = poppinsFamily,
         textAlign = TextAlign.Center,
         color = Color.Black,
         modifier = Modifier.clickable { navController.navigate("registryScreen") },
@@ -115,6 +125,7 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
   ) {
     Text(
       text = "Email",
+      fontFamily = poppinsFamily,
       color = Color(0xFF9CA3AF),
     )
 
@@ -139,6 +150,7 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
     Text(
       text = "Senha",
       color = Color(0xFF9CA3AF),
+      fontFamily = poppinsFamily
     )
 
     TextField(
@@ -161,6 +173,7 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
     Text(
       text = "Esqueceu sua senha?",
       fontSize = 12.sp,
+      fontFamily = poppinsFamily,
       color = Color(0xFF9CA3AF),
       modifier = Modifier.padding(start = 12.dp, top = 14.dp)
     )
@@ -185,6 +198,7 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
       Text(
         text = "Entrar",
         color = Color.White,
+        fontFamily = poppinsFamily,
         fontWeight = FontWeight.Bold
       )
     }

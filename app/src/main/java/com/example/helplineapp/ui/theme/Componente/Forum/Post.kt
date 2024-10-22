@@ -1,4 +1,4 @@
-package com.example.helplineapp.ui.app.Componente.Forum
+package com.example.helplineapp.ui.theme.Componente.Forum
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Comment
+import androidx.compose.material.icons.filled.Comment
 import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -29,17 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import com.example.helplineapp.R
-
-val poppinsFamily = FontFamily(
-  Font(R.font.poppins_regular, FontWeight.Normal),
-  Font(R.font.poppins_bold, FontWeight.Bold),
-  Font(R.font.poppins_medium, FontWeight.Medium),
-  Font(R.font.poppins_semibold, FontWeight.SemiBold),
-  Font(R.font.poppins_extrabold, FontWeight.ExtraBold)
-)
 
 @Composable
 fun Post( nome: String, texto: String, profilePic: Int, postImage: Boolean){
@@ -72,7 +63,6 @@ fun Post( nome: String, texto: String, profilePic: Int, postImage: Boolean){
         Text(
           text = nome,
           fontSize = 18.sp,
-          fontFamily = poppinsFamily,
           fontWeight = FontWeight.Bold,
           modifier = Modifier.padding(start = 10.dp) // Espaço entre a imagem e o texto
         )
@@ -82,7 +72,6 @@ fun Post( nome: String, texto: String, profilePic: Int, postImage: Boolean){
       Text(
         text = texto,
         fontSize = 14.sp,
-        fontFamily = poppinsFamily,
         modifier = Modifier.padding(bottom = 32.dp) // Espaçamento inferior
           .padding(top = 8.dp)
       )

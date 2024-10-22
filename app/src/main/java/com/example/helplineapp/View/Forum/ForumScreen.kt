@@ -12,6 +12,17 @@ import com.example.helplineapp.R
 import com.example.helplineapp.View.NavDrawer
 import com.example.helplineapp.ui.app.Componente.Footer.BottomNavBar
 import com.example.helplineapp.ui.app.Componente.Forum.Post
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+
+val poppinsFamily = FontFamily(
+    Font(R.font.poppins_regular, FontWeight.Normal),
+    Font(R.font.poppins_bold, FontWeight.Bold),
+    Font(R.font.poppins_medium, FontWeight.Medium),
+    Font(R.font.poppins_semibold, FontWeight.SemiBold),
+    Font(R.font.poppins_extrabold, FontWeight.ExtraBold)
+)
 
 
 @Composable

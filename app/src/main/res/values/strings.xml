@@ -26,10 +26,127 @@
     <string name="horario_dois">09h00 às 14h00</string>
     <string name="dia_semana_dois">Segunda-feira, Quarta-feira e Sexta-feira</string>
 
+    <!-- Primeira Campanha: Doe Amor, Doe Apoio -->
+    <string name="campanha_um">Doe Amor, Doe Apoio</string>
+    <string name="doe_aqui">Doe Aqui!</string>
+    <string name="objetivo_um">Objetivo:</string>
+    <string name="text_objetivo_um">Arrecadar fundos para apoiar instituições que coletam e distribuem
+        leite materno para bebês em necessidade. O foco é sensibilizar e mobilizar a comunidade
+        para contribuir financeiramente.</string>
+    <string name="subtitulo_um">🚼✨ Junte-se a nós na campanha Doe Amor, Doe Apoio e ajude a garantir
+        que mais bebês tenham acesso ao leite materno!</string>
+
+    <!-- Segunda Camapanha: Ajude a Proteger Nossas Florestas -->
+    <string name="campanha_dois">Ajude a Proteger Nossas Florestas</string>
+    <string name="text_objetivo_dois">Angariar fundos para apoiar ONGs dedicadas à preservação de
+        florestas nativas e à proteção de espécies ameaçadas. A meta é conscientizar a sociedade
+        sobre a importância da conservação ambiental e mobilizar recursos para projetos de
+        reflorestamento e combate ao desmatamento ilegal.</string>
+    <string name="subtitulo_dois">🌳💚 Junte-se à nossa campanha e ajude a garantir que as futuras
+        gerações possam desfrutar de um planeta verde e saudável!</string>
+
     <!-- Post -->
     <string name="texto_publicacao">Escreva sua publicação...</string>
     <string name="publicar">Publicar</string>
 
+
     <!-- Componente Comentario -->
     <string name="mensagem_componente">Escreva seu comentário...</string>
+
+    <!-- Perfil da ONG -->
+    <string name="voltar">Voltar</string>
+    <string name="imagem_capa">Imagem de Capa</string>
+    <string name="foto_perfil">Foto de Perfil</string>
+    <string name="ong_nome">Bem da Madrugada</string>
+    <string name="ong_descricao">O grupo Bem da Madrugada é uma ONG com foco na ajuda de necessitados no momento em que encontram-se menos amparados.</string>
+    <string name="contato_telefone">11 91234-5678</string>
+    <string name="contato_instagram">bem_da_madrugada</string>
+    <string name="contato_endereco">Rua Vigário Albernaz, 738</string>
+    <string name="doacao">Doe aqui!</string>
+    <string name="selos">Selos</string>
+    <string name="campanhas_ativas">Campanhas Ativas</string>
+    <string name="campanha_tutor">Tutor Voluntário para Reforço Escolar</string>
+    <string name="campanha_assistente">Assistente de Eventos Voluntário</string>
+    <string name="campanha_cuidados">Voluntário para Cuidados de Animais Abandonados</string>
+    <string name="voluntario_nome">Maria Eduarda</string>
+    <string name="voluntario_descricao">Sou voluntária há 5 anos, desde então tenho dedicado meu tempo e energia para causas sociais que acredito. Sou apaixonada por tudo isso!</string>
+    <string name="voluntario_instagram">maria_eduarda</string>
+    <string name="selo_aconchego">Selo Aconchego</string>
+    <string name="selo_nutrir">Selo Nutrir</string>
+    <string name="competencias_usuario">Competências</string>
+    <string name="habilidade_comunicacao">Comunicação escrita</string>
+    <string name="habilidade_cozinhar">Habilidade em cozinhar</string>
+    <string name="habilidade_lideranca">Liderança</string>
+    <string name="habilidade_ingles">Inglês básico</string>
+    <string name="novas_ongs">Novas ONGs</string>
+    <string name="ong_bem_da_madrugada">Bem da Madrugada</string>
+    <string name="ong_nos_do_bem">Nós do Bem</string>
+
+    <!-- Edição de Perfil -->
+    <string name="editar_perfil">Editar Perfil</string>
+    <string name="imagem_capa_editar">Imagem de Capa</string>
+    <string name="foto_perfil_editar">Foto de Perfil</string>
+    <string name="nome">Nome:</string>
+    <string name="como_devemos_te_chamar">Como devemos te chamar?</string>
+    <string name="biografia">Biografia:</string>
+    <string name="fale_um_pouco_sobre_voce">Fale um pouco sobre você</string>
+    <string name="celular">Celular:</string>
+    <string name="informe_seu_numero_de_contato">Informe seu número de contato</string>
+    <string name="instagram">Instagram:</string>
+    <string name="adicione_seu_perfil_do_instagram">Adicione seu perfil do Instagram</string>
+    <string name="competencias_usuario_editar">Competências</string>
+    <string name="adicionar_competencia">Adicionar Competência</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="salvar">Salvar</string>
+
+    <!-- Mensagens de Sucesso ou Erro -->
+    <string name="perfil_atualizado">Perfil atualizado com sucesso!</string>
+    <string name="erro_atualizar_perfil">Erro ao atualizar perfil. Tente novamente.</string>
+
+    <!-- Chat2 -->
+    <string name="mensagem_1">Boa Noite!</string>
+    <string name="mensagem_2">Não, pode falar.</string>
+    <string name="mensagem_3">Boa noite Noemi, tudo bem?</string>
+    <string name="mensagem_4">Está ocupada?</string>
+
+    <!-- Título da Tela de Cadastro -->
+    <string name="titulo_cadastro">Cadastro</string>
+
+    <!-- Etapa 1: Informações Pessoais -->
+    <string name="etapa_um_titulo">Informações de login</string>
+    <string name="email">E-mail:</string>
+    <string name="confirmar_email">Confirmar E-mail:</string>
+    <string name="senha">Senha:</string>
+    <string name="confirme_senha">Confirmar senha:</string>
+
+    <!-- Etapa 2: Contato -->
+    <string name="etapa_dois_titulo">Informações Pessoais</string>
+    <string name="nome_completo">Nome Completo:</string>
+    <string name="informe_seu_nome">Informe seu nome completo</string>
+    <string name="data_nascimento">Data de Nascimento:</string>
+    <string name="competencias_cadastro">Competências:</string>
+
+    <!-- Etapa 3: Endereço -->
+    <string name="etapa_tres_titulo">Informações de endereço</string>
+    <string name="cep_cadastro">CEP:</string>
+    <string name="informe_seu_endereco">Endereço:</string>
+    <string name="numero">Número:</string>
+    <string name="informe_complemento">Complemento</string>
+
+
+    <!-- Botões de Controle -->
+    <string name="botao_proximo">Próximo</string>
+    <string name="botao_anterior">Anterior</string>
+    <string name="botao_finalizar">Finalizar</string>
+
+    <!-- Mensagens de Erro -->
+    <string name="erro_nome_vazio">Por favor, insira seu nome.</string>
+    <string name="erro_email_invalido">Por favor, insira um e-mail válido.</string>
+    <string name="erro_telefone_invalido">Por favor, insira um telefone válido.</string>
+    <string name="erro_endereco_vazio">Por favor, insira seu endereço.</string>
+    <string name="erro_cep_invalido">Por favor, insira um CEP válido.</string>
+
+    <!-- Mensagem de Sucesso -->
+    <string name="cadastro_sucesso">Cadastro concluído com sucesso!</string>
+
 </resources>

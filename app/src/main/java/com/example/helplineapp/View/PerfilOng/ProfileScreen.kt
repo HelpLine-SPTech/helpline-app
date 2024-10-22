@@ -2,12 +2,27 @@ package com.example.helplineapp.View.PerfilOng
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,14 +30,24 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.helplineapp.R
 import com.example.helplineapp.ui.app.Componente.Footer.BottomNavBar
+
+val poppinsFamily = FontFamily(
+    Font(R.font.poppins_regular, FontWeight.Normal),
+    Font(R.font.poppins_bold, FontWeight.Bold),
+    Font(R.font.poppins_medium, FontWeight.Medium),
+    Font(R.font.poppins_semibold, FontWeight.SemiBold),
+    Font(R.font.poppins_extrabold, FontWeight.ExtraBold)
+)
 
 sealed class ProfileType {
     object Ong : ProfileType()
@@ -99,6 +124,7 @@ fun OngProfileContent(navController: NavController) {
 
             Text(
                 text = "Bem da Madrugada",
+                fontFamily = poppinsFamily,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(start = 16.dp)
@@ -109,6 +135,7 @@ fun OngProfileContent(navController: NavController) {
             Text(
                 text = "O grupo Bem da Madrugada é uma ONG com foco na ajuda de necessitados no momento em que encontram-se menos amparados.",
                 fontSize = 16.sp,
+                fontFamily = poppinsFamily,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp)
             )
 
@@ -127,7 +154,7 @@ fun OngProfileContent(navController: NavController) {
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = "11 91234-5678")
+                    Text(text = "11 91234-5678",fontFamily = poppinsFamily)
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -153,7 +180,7 @@ fun OngProfileContent(navController: NavController) {
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = "Rua Vigário Albernaz, 738")
+                    Text(text = "Rua Vigário Albernaz, 738", fontFamily = poppinsFamily)
                 }
             }
 
@@ -170,6 +197,7 @@ fun OngProfileContent(navController: NavController) {
             ) {
                 Text(text = "Doe aqui!",
                     color = Color.White,
+                    fontFamily = poppinsFamily,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -180,6 +208,7 @@ fun OngProfileContent(navController: NavController) {
                 text = "Selos",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
+                fontFamily = poppinsFamily,
                 modifier = Modifier.padding(start = 16.dp)
             )
 
@@ -204,6 +233,7 @@ fun OngProfileContent(navController: NavController) {
                 text = "Campanhas Ativas",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
+                fontFamily = poppinsFamily,
                 modifier = Modifier.padding(start = 16.dp)
             )
 
@@ -289,6 +319,7 @@ fun VolunteerProfileContent(navController: NavController) {
             Text(
                 text = "Maria Eduarda",
                 fontSize = 24.sp,
+                fontFamily = poppinsFamily,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(start = 16.dp)
             )
@@ -298,6 +329,7 @@ fun VolunteerProfileContent(navController: NavController) {
             Text(
                 text = "Sou voluntária há 5 anos, desde então tenho dedicado meu tempo e energia para causas sociais que acredito. Sou apaixonada por tudo  isso!",
                 fontSize = 16.sp,
+                fontFamily = poppinsFamily,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp)
             )
 
@@ -318,7 +350,7 @@ fun VolunteerProfileContent(navController: NavController) {
                             modifier = Modifier.size(24.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = "11 91234-5678")
+                        Text(text = "11 91234-5678",fontFamily = poppinsFamily)
                     }
 
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(start = 30.dp)) {
@@ -329,7 +361,7 @@ fun VolunteerProfileContent(navController: NavController) {
                             modifier = Modifier.size(24.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = "@maria_eduarda")
+                        Text(text = "@maria_eduarda",fontFamily = poppinsFamily)
                     }
                 }
 
@@ -341,6 +373,7 @@ fun VolunteerProfileContent(navController: NavController) {
                 text = "Selos",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
+                fontFamily = poppinsFamily,
                 modifier = Modifier.padding(start = 16.dp)
             )
 
@@ -371,6 +404,7 @@ fun VolunteerProfileContent(navController: NavController) {
                 text = "Competências",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
+                fontFamily = poppinsFamily,
                 modifier = Modifier.padding(start = 16.dp)
             )
 
@@ -406,6 +440,7 @@ fun VolunteerProfileContent(navController: NavController) {
                 text = "Novas ONG's",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
+                fontFamily = poppinsFamily,
                 modifier = Modifier.padding(start = 16.dp)
             )
 
@@ -450,7 +485,7 @@ fun OngItem(name: String, imageRes: Int) {
                 .clip(CircleShape)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = name, fontSize = 16.sp)
+        Text(text = name, fontSize = 16.sp, fontFamily = poppinsFamily)
     }
 }
 
@@ -467,7 +502,7 @@ fun CampaignListItem(title: String) {
                 .background(Color(0xFFFF9800), CircleShape)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = title)
+        Text(text = title, fontFamily = poppinsFamily)
     }
 }
 
@@ -475,5 +510,5 @@ fun CampaignListItem(title: String) {
 @Composable
 fun PreviewProfileScreen() {
     val navController = rememberNavController()
-    ProfileScreen(profileType = ProfileType.Volunteer, navController = navController)
+    ProfileScreen(profileType = ProfileType.Ong, navController = navController)
 }

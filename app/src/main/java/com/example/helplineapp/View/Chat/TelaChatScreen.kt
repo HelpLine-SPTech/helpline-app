@@ -21,15 +21,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.helplineapp.View.PerfilOng.ProfileScreen
+import com.example.helplineapp.R
 import com.example.helplineapp.ui.app.Componente.Chat.HeaderChat
-import com.example.helplineapp.ui.app.Componente.Notification.Header.HeaderNotification
+
+val poppinsFamily = FontFamily(
+    Font(R.font.poppins_regular, FontWeight.Normal),
+    Font(R.font.poppins_bold, FontWeight.Bold),
+    Font(R.font.poppins_medium, FontWeight.Medium),
+    Font(R.font.poppins_semibold, FontWeight.SemiBold),
+    Font(R.font.poppins_extrabold, FontWeight.ExtraBold)
+)
+
 
 @Composable
 fun TelaChatScreen(navController: NavController) {
@@ -60,14 +71,14 @@ fun TelaChatScreen(navController: NavController) {
                 ) {
                     item {
                         // Mensagens esquerda
-                        ReceivedMessage("Boa noite!")
-                        ReceivedMessage("Não, pode falar.")
+                        ReceivedMessage(stringResource(id = R.string.mensagem_1))
+                        ReceivedMessage(stringResource(id = R.string.mensagem_2))
 
                         Spacer(modifier = Modifier.height(16.dp))
 
                         // Mensagens direita
-                        SentMessage("Boa noite Noemi, tudo bem?")
-                        SentMessage("Está ocupada?")
+                        SentMessage(stringResource(id = R.string.mensagem_3))
+                        SentMessage(stringResource(id = R.string.mensagem_4))
                     }
                 }
             }
@@ -95,6 +106,7 @@ fun ReceivedMessage(message: String) {
         ) {
             Text(
                 text = message,
+                fontFamily = poppinsFamily,
                 fontSize = 16.sp,
                 color = Color.Black
             )
@@ -114,6 +126,7 @@ fun SentMessage(message: String) {
         ) {
             Text(
                 text = message,
+                fontFamily = poppinsFamily,
                 fontSize = 16.sp,
                 color = Color.Black
             )
@@ -133,6 +146,7 @@ fun InputField(placeholder: String) {
     ) {
         Text(
             text = placeholder,
+            fontFamily = poppinsFamily,
             fontSize = 16.sp,
             color = Color.Gray,
             fontWeight = FontWeight.Normal
