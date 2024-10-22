@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-  namespace = "com.example.helplineapp"
+  namespace = "com.helpline"
   compileSdk = 34
 
   defaultConfig {
-    applicationId = "com.example.helplineapp"
+    applicationId = "com.helpline"
     minSdk = 24
     targetSdk = 34
     versionCode = 1
