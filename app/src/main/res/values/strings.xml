@@ -29,4 +29,7 @@
     <!-- Post -->
     <string name="texto_publicacao">Escreva sua publicação...</string>
     <string name="publicar">Publicar</string>
+
+    <!-- Componente Comentario -->
+    <string name="mensagem_componente">Escreva seu comentário...</string>
 </resources>
