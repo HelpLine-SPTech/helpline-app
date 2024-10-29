@@ -49,6 +49,10 @@
     <string name="texto_publicacao">Escreva sua publicação...</string>
     <string name="publicar">Publicar</string>
 
+
+    <!-- Componente Comentario -->
+    <string name="mensagem_componente">Escreva seu comentário...</string>
+
     <!-- Perfil da ONG -->
     <string name="voltar">Voltar</string>
     <string name="imagem_capa">Imagem de Capa</string>
