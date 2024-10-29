@@ -111,5 +111,7 @@ dependencies {
   implementation "androidx.compose.ui:ui-text:1.2.0" // ou a versão que você está usando
   implementation "com.google.android.gms:play-services-auth:19.0.0" // Isso pode variar
 
+  implementation 'com.squareup.picasso:picasso:2.8'
+
 }
 

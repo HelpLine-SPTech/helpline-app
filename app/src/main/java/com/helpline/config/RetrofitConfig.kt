@@ -1,12 +1,19 @@
 package com.helpline.config
 
+import android.content.Context
+import android.util.Log
+import com.helpline.network.cadastro.CadastroService
+import com.helpline.network.forum.ForumService
 import com.helpline.network.login.LoginService
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 // Configuração do Retrofit
 object RetrofitClient {
-  private const val BASE_URL = "https://helpline-api-dev.azurewebsites.net/"
+  private const val BASE_URL = "http://localhost:8080"
 
 //  private fun provideOkHttpClient(context: Context): OkHttpClient {
 //    return OkHttpClient.Builder()
@@ -65,5 +72,17 @@ object RetrofitClient {
 object Login {
   val apiService: LoginService by lazy {
     RetrofitClient.retrofit.create(LoginService::class.java)
+  }
+}
+
+object Cadastro {
+  val apiService: CadastroService by lazy {
+    RetrofitClient.retrofit.create(CadastroService::class.java)
+  }
+}
+
+object Forum {
+  val apiService: ForumService by lazy {
+    RetrofitClient.retrofit.create(ForumService::class.java)
   }
 }

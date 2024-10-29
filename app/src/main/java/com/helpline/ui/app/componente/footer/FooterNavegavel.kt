@@ -15,8 +15,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun BottomNavBar(
@@ -32,6 +34,7 @@ fun BottomNavBar(
         NavigationBar(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(60.dp)
                 .clip(RoundedCornerShape(16.dp)), // Aplica o formato arredondado primeiro
             containerColor = Color(0xFF285430)
         ) {
@@ -93,12 +96,14 @@ fun BottomNavBar(
     }
 }
 
-//@Preview
-//@Composable
-//fun PreviewBottomNavBar() {
-//    BottomNavBar(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .height(60.dp)// Altura do footer
-//    )
-//}
+@Preview
+@Composable
+fun PreviewBottomNavBar() {
+    val navController = rememberNavController()
+    BottomNavBar(
+        navController = navController,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp)// Altura do footer
+    )
+}

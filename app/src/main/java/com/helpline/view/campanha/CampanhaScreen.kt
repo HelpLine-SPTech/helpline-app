@@ -42,7 +42,7 @@ import com.helpline.ui.app.componente.footer.BottomNavBar
 @Composable
 fun CampanhaScreen (navController: NavController) {
     // menu lateral
-    NavDrawer {
+    NavDrawer(navController = navController) {
         // Usando um Box para sobrepor o conteúdo e o footer
         Box(
             modifier = Modifier.fillMaxSize()

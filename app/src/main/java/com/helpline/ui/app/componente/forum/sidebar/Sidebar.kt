@@ -48,7 +48,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun NavDrawer(
   drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
-//  navController: NavController,
+  navController: NavController,
   content: @Composable () -> Unit,
 ) {
 
@@ -65,7 +65,7 @@ fun NavDrawer(
             .background(Color.White),
           verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-          SidebarContent()
+          SidebarContent(navController)
         }
       }
     },
@@ -79,7 +79,7 @@ fun NavDrawer(
 }
 
 @Composable
-fun SidebarContent() {
+fun SidebarContent(navController: NavController) {
   Column(
     modifier = Modifier
       .fillMaxSize()
@@ -122,33 +122,26 @@ fun SidebarContent() {
     )
 
     // Itens do menu
-    DrawerItem(icon = Icons.Default.Home, label = "Início")
-    DrawerItem(icon = Icons.AutoMirrored.Filled.Chat, label = "Chat")
-    DrawerItem(icon = Icons.Default.Work, label = "Vagas")
+    DrawerItem(icon = Icons.Default.Home, label = "Início", route = "forumScreen", navController = navController)
+    DrawerItem(icon = Icons.AutoMirrored.Filled.Chat, label = "Chat", route = "chat-list", navController = navController)
+    DrawerItem(icon = Icons.Default.Work, label = "Vagas", route = "jobs", navController = navController)
 
     Spacer(modifier = Modifier.weight(1f))
 
     // Botão de sair
-    DrawerItem(icon = Icons.AutoMirrored.Filled.Logout, label = "Sair", isLogout = true)
+    DrawerItem(icon = Icons.AutoMirrored.Filled.Logout, label = "Sair", isLogout = true, route = "loginPage", navController = navController)
   }
 }
 
 @Composable
-fun DrawerItem(icon: ImageVector, label: String, isLogout: Boolean = false) {
-  val context = LocalContext.current
-  val navController = NavController(context = context)
-
+fun DrawerItem(icon: ImageVector, route: String, label: String, isLogout: Boolean = false, navController: NavController) {
   Row(
     verticalAlignment = Alignment.CenterVertically,
     modifier = Modifier
       .fillMaxWidth()
       .padding(vertical = 10.dp)
       .clickable {
-        if (isLogout) {
-          navController.navigate("loginPage")
-        } else {
-          navController.navigate("forumScreen")
-        }
+        navController.navigate(route)
       }
   ) {
     Icon(
@@ -162,7 +155,7 @@ fun DrawerItem(icon: ImageVector, label: String, isLogout: Boolean = false) {
       text = label,
       fontWeight = if (isLogout) FontWeight.SemiBold else FontWeight.Normal,
       color = if (isLogout) Color.Black else Color.Gray,
-      fontSize = if (isLogout) 18.sp else 16.sp
+      fontSize = if (isLogout) 18.sp else 16.sp,
     )
   }
 }

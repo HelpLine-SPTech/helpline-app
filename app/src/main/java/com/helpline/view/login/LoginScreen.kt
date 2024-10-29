@@ -1,5 +1,6 @@
 package com.helpline.view.login
 
+import android.content.SharedPreferences
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
@@ -184,6 +185,7 @@ fun LoginForm(navController: NavController, viewModel: LoginViewModel) {
       onClick = {
         viewModel.loginUser(email, password, onLoginSuccess = {
           navController.navigate("forumScreen")
+
           Toast.makeText(context, "Login realizado!", Toast.LENGTH_LONG).show()
         }, onLoginError = {
           Toast.makeText(context, "Usuário ou senha incorretos!", Toast.LENGTH_SHORT).show()

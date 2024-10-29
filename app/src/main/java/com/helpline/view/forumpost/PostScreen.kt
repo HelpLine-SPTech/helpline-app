@@ -51,6 +51,7 @@ import com.helpline.ui.app.componente.footer.BottomNavBar
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import com.helpline.viewmodel.forum.ForumViewModel
 
 val poppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),
@@ -63,7 +64,7 @@ val poppinsFamily = FontFamily(
 @Composable
 fun PostScreen(navController: NavController) {
     var textState by remember { mutableStateOf(TextFieldValue()) }
-    NavDrawer {
+    NavDrawer(navController = navController) {
         Box(
             modifier = Modifier
                 .fillMaxSize()

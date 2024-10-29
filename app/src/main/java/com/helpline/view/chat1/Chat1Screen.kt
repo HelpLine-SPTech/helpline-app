@@ -44,6 +44,9 @@ import com.helpline.R
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
 
 
 val poppinsFamily = FontFamily(
@@ -55,7 +58,7 @@ val poppinsFamily = FontFamily(
 )
 
 @Composable
-fun ConversasScreen() {
+fun ConversasScreen(navController: NavController) {
 
     Box(
         modifier = Modifier
@@ -66,7 +69,7 @@ fun ConversasScreen() {
         Column {
 
             // Cabeçalho com seta de voltar e título
-            Header()
+            Header(navController = navController)
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -120,7 +123,7 @@ fun ConversasScreen() {
 }
 
 @Composable
-fun Header() {
+fun Header(navController: NavController) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -135,7 +138,7 @@ fun Header() {
             tint = Color.Black,
             modifier = Modifier
                 .size(24.dp)
-                .clickable { /* Ação de voltar */ }
+                .clickable { navController.navigateUp() }
         )
 
         Spacer(modifier = Modifier.width(8.dp))
@@ -256,5 +259,6 @@ fun ConversationItem(profilePic: Int, name: String, message: String, time: Strin
 @Preview(showBackground = true)
 @Composable
 fun PreviewConversasScreen() {
-    ConversasScreen()
+    val navController = rememberNavController()
+    ConversasScreen(navController)
 }

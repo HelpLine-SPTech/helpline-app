@@ -55,7 +55,7 @@ val poppinsFamily = FontFamily(
 @Composable
 fun VagaScreen (navController: NavController){
     // menu lateral
-    NavDrawer {
+    NavDrawer(navController = navController) {
         // Usando um Box para sobrepor o conteúdo e o footer
         Box(
             modifier = Modifier.fillMaxSize()

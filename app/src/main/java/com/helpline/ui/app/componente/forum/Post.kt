@@ -1,5 +1,6 @@
 package com.helpline.ui.app.componente.forum
 
+import android.widget.ImageView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import com.helpline.R
+import com.helpline.network.forum.Post
+import com.helpline.ui.app.componente.PicassoImage
 
 val poppinsFamily = FontFamily(
   Font(R.font.poppins_regular, FontWeight.Normal),
@@ -42,7 +45,7 @@ val poppinsFamily = FontFamily(
 )
 
 @Composable
-fun Post( nome: String, texto: String, profilePic: Int, postImage: Boolean){
+fun Post( postInfo: Post){
   Card(
     modifier = Modifier
       .fillMaxWidth()
@@ -61,8 +64,8 @@ fun Post( nome: String, texto: String, profilePic: Int, postImage: Boolean){
           .padding(bottom = 8.dp),
         verticalAlignment = Alignment.CenterVertically // Alinha verticalmente
       ) {
-        Image(
-          painter = painterResource(id = profilePic),
+        PicassoImage(
+          imageUrl = "https://plus.unsplash.com/premium_photo-1690303193898-f9c721d0770b?q=80&w=2066&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           contentDescription = "profilePic",
           modifier = Modifier
             .size(50.dp)
@@ -70,7 +73,7 @@ fun Post( nome: String, texto: String, profilePic: Int, postImage: Boolean){
         )
         // Nome do usuário
         Text(
-          text = nome,
+          text = postInfo.user.name,
           fontSize = 18.sp,
           fontFamily = poppinsFamily,
           fontWeight = FontWeight.Bold,
@@ -80,17 +83,17 @@ fun Post( nome: String, texto: String, profilePic: Int, postImage: Boolean){
 
       // Texto da mensagem
       Text(
-        text = texto,
+        text = postInfo.content,
         fontSize = 14.sp,
         fontFamily = poppinsFamily,
         modifier = Modifier.padding(bottom = 32.dp) // Espaçamento inferior
           .padding(top = 8.dp)
       )
 
-      if (postImage){
-        Image(
-          painter = painterResource(id = com.helpline.R.mipmap.imgdoacao),
-          contentDescription = "Cestas básicas",
+      if (!postInfo.images.isEmpty()){
+        PicassoImage(
+          imageUrl = postInfo.images[0].url,
+          contentDescription = "",
           modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(8.dp)) // Arredondando a imagem

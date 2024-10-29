@@ -4,6 +4,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -15,6 +18,8 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.helpline.R
+import com.helpline.network.forum.Post
+import com.helpline.viewmodel.forum.ForumViewModel
 
 val poppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),
@@ -26,8 +31,21 @@ val poppinsFamily = FontFamily(
 
 
 @Composable
-fun ForumScreen(navController: NavController) {
-    NavDrawer {
+fun ForumScreen(navController: NavController, postsViewModel: ForumViewModel) {
+
+    var posts = remember { mutableStateListOf<Post>() }
+
+    LaunchedEffect(Unit) {
+        postsViewModel.getPosts(
+            onSuccess = { response ->
+                posts.addAll(response.posts)
+            },
+            onFailure = { error ->
+
+            })
+    }
+
+    NavDrawer(navController = navController) {
         // Usando um Box para sobrepor o conteúdo e o footer
         Box(
             modifier = Modifier.fillMaxSize()
@@ -39,34 +57,9 @@ fun ForumScreen(navController: NavController) {
                     .padding(bottom = 60.dp, top = 120.dp) // Espaçamento para evitar sobreposição com o footer
                     .verticalScroll(rememberScrollState()) // Permite que o conteúdo role
             ) {
-                // O TopBar já está sendo chamado dentro do NavDrawer
-                // Conteúdo da tela
-                Post(
-                    nome = "Maria Eduarda",
-                    texto = "Oi pessoal, estou com algumas cestas básicas e gostaria de saber se alguma ONG poderia entrar em contato comigo para que eu possa fazer a doação.",
-                    profilePic = R.drawable.profile_maria_eduarda,
-                    postImage = true
-                )
-
-                // Post 2
-                Post(
-                    "Julia Almeida",
-                    "Gostaria de saber se alguma ONG poderia entrar em contato comigo para eu possa fazer a doação.",
-                    R.mipmap.img_julia_almeida,
-                    false
-                )
-
-                // Post 3
-                Post(
-                    "Adriano Leite Ribeiro",
-                    "Estou tão feliz por ter sido voluntária e ter contribuído com a ONG que me vinculei! " +
-                        "Foi uma experiência incrível e gratificante, saber que pude ajudar de alguma" +
-                        " forma faz tudo valer a pena. Mal posso esperar para continuar colaborando" +
-                        " e fazendo a diferença na comunidade.\n" +
-                        "#BemDaMadrugada.",
-                    R.mipmap.profile_adriano,
-                    false
-                )
+                posts.forEach {
+                    Post(postInfo = it)
+                }
             }
 
             // Footer fixo na parte inferior
@@ -79,4 +72,9 @@ fun ForumScreen(navController: NavController) {
             )
         }
     }
+}
+
+@Composable
+fun PostCard() {
+
 }

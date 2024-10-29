@@ -1,28 +1,52 @@
-package com.example.helpline.View.Cadastro
+package com.helpline.view.cadastro
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.helpline.R // Certifique-se de usar o R do seu pacote
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import com.helpline.R
+import com.helpline.viewmodel.cadastro.CadastroViewModel
 
 val poppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),
@@ -34,19 +58,69 @@ val poppinsFamily = FontFamily(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CadastroFlow() {
+fun CadastroFlow(viewModel: CadastroViewModel, navController: NavController) {
+    var context = LocalContext.current
+
     var currentStep by remember { mutableStateOf(0) }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+    var name by remember { mutableStateOf("") }
+    var birthDate by remember { mutableStateOf("") }
+    var abilities by remember { mutableStateOf("") }
+
+    var zipCode by remember { mutableStateOf("") }
+    var state by remember { mutableStateOf("") }
+    var city by remember { mutableStateOf("") }
+    var street by remember { mutableStateOf("") }
+    var number by remember { mutableStateOf("") }
+    var complement by remember { mutableStateOf("") }
 
     when (currentStep) {
-        0 -> CadastroScreen(onNext = { currentStep++ })
-        1 -> CadastroScreenT2(onNext = { currentStep++ }, onBack = { currentStep-- })
-        2 -> CadastroScreenT3(onBack = { currentStep-- })
+        0 -> CadastroScreen(
+            onNext = {email1, senha ->
+                email = email1
+                password = senha
+                currentStep++
+            })
+        1 -> CadastroScreenT2(
+            onNext = { nome, data, competencias ->
+                name = nome
+                birthDate = data
+                abilities = competencias
+                currentStep++
+            },
+            onBack = { currentStep-- })
+        2 -> CadastroScreenT3(
+            onNext = {cep, estado, cidade, rua, numero, complemento ->
+                zipCode = cep
+                state = estado
+                city = cidade
+                street = rua
+                number = numero
+                complement = complemento
+
+                viewModel.registerUser(
+                    email,
+                    password,
+                    name,
+                    "",
+                    "COMMON",
+                    "ADMIN",
+                    onSuccess = {
+                        Toast.makeText(context, "Cadastro realizado!", Toast.LENGTH_LONG).show()
+                        Log.d("NAVEGAÇÃO CADASTRO", "alooo")
+                        navController.navigate("forumScreen")
+                    },
+                    onFailure = {exception -> Toast.makeText(context, "Erro ao cadastrar ${exception.message()}", Toast.LENGTH_LONG).show() })
+            },
+            onBack = { currentStep-- })
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CadastroScreen(onNext: () -> Unit) {
+fun CadastroScreen(onNext: (String, String) -> Unit) {
     var email by remember { mutableStateOf("") }
     var confirmEmail by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
@@ -178,7 +252,7 @@ fun CadastroScreen(onNext: () -> Unit) {
                 Spacer(modifier = Modifier.height(32.dp))
 
                 Button(
-                    onClick = onNext,
+                    onClick = { onNext(email, senha) },
                     modifier = Modifier
                         .width(200.dp)
                         .height(50.dp)
@@ -195,7 +269,7 @@ fun CadastroScreen(onNext: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CadastroScreenT2(onNext: () -> Unit, onBack: () -> Unit) {
+fun CadastroScreenT2(onNext: (String, String, String) -> Unit, onBack: () -> Unit) {
     var nomeCompleto by remember { mutableStateOf("") }
     var dataNascimento by remember { mutableStateOf("") }
     var competencias by remember { mutableStateOf("") }
@@ -318,7 +392,7 @@ fun CadastroScreenT2(onNext: () -> Unit, onBack: () -> Unit) {
                     }
 
                     Button(
-                        onClick = onNext,
+                        onClick = { onNext(nomeCompleto, dataNascimento, competencias) },
                         modifier = Modifier.width(110.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(28, 54, 30)),
                         shape = RoundedCornerShape(15.dp)
@@ -333,9 +407,11 @@ fun CadastroScreenT2(onNext: () -> Unit, onBack: () -> Unit) {
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun CadastroScreenT3(onBack: () -> Unit) {
+fun CadastroScreenT3(onNext: (String, String, String, String, String, String) -> Unit, onBack: () -> Unit) {
     var cep by remember { mutableStateOf("") }
-    var endereco by remember { mutableStateOf("") }
+    var estado by remember { mutableStateOf("") }
+    var cidade by remember { mutableStateOf("") }
+    var rua by remember { mutableStateOf("") }
     var numero by remember { mutableStateOf("") }
     var complemento by remember { mutableStateOf("") }
 
@@ -354,7 +430,7 @@ fun CadastroScreenT3(onBack: () -> Unit) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 30.dp, vertical = 100.dp),
+                .padding(horizontal = 30.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
@@ -408,9 +484,9 @@ fun CadastroScreenT3(onBack: () -> Unit) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 TextField(
-                    value = endereco,
-                    onValueChange = { endereco = it },
-                    label = { Text(stringResource(id = R.string.informe_seu_endereco)) },
+                    value = estado,
+                    onValueChange = { estado = it },
+                    label = { Text(stringResource(id = R.string.estado)) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(4.dp)
@@ -423,6 +499,45 @@ fun CadastroScreenT3(onBack: () -> Unit) {
                         unfocusedIndicatorColor = Color.Transparent
                     )
                 )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                TextField(
+                    value = cidade,
+                    onValueChange = { cidade = it },
+                    label = { Text(stringResource(id = R.string.cidade)) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp)
+                        .shadow(8.dp, shape = RoundedCornerShape(20.dp)),
+                    shape = RoundedCornerShape(20.dp),
+                    singleLine = true,
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = Color.White,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                TextField(
+                    value = rua,
+                    onValueChange = { rua = it },
+                    label = { Text(stringResource(id = R.string.rua)) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp)
+                        .shadow(8.dp, shape = RoundedCornerShape(20.dp)),
+                    shape = RoundedCornerShape(20.dp),
+                    singleLine = true,
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = Color.White,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent
+                    )
+                )
+
                 Spacer(modifier = Modifier.height(16.dp))
 
                 TextField(
@@ -475,7 +590,7 @@ fun CadastroScreenT3(onBack: () -> Unit) {
                     }
 
                     Button(
-                        onClick = { /* lógica de validação e finalização aqui */ },
+                        onClick = { onNext(cep, estado, cidade, rua, numero, complemento) },
                         modifier = Modifier.width(125.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(28, 54, 30)),
                         shape = RoundedCornerShape(15.dp)
@@ -486,10 +601,4 @@ fun CadastroScreenT3(onBack: () -> Unit) {
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun CadastroFlowPreview() {
-    CadastroFlow()
 }

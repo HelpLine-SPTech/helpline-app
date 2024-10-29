@@ -1,4 +1,4 @@
-package com.example.helpline.network.Cadastro
+package com.helpline.network.cadastro
 
 import retrofit2.http.Body
 import retrofit2.http.POST

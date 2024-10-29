@@ -17,7 +17,13 @@ import com.helpline.view.chat1.ConversasScreen
 import com.helpline.view.forum.ForumScreen
 import com.helpline.view.splash.SplashScreen
 import com.helpline.ui.app.HelplineAppTheme
+import com.helpline.view.cadastro.CadastroFlow
 import com.helpline.view.login.LoginScreen
+import com.helpline.view.perfilong.ProfileScreen
+import com.helpline.view.perfilong.ProfileType
+import com.helpline.view.vaga.VagaScreen
+import com.helpline.viewmodel.cadastro.CadastroViewModel
+import com.helpline.viewmodel.forum.ForumViewModel
 import com.helpline.viewmodel.login.LoginViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -46,7 +52,8 @@ class MainActivity : ComponentActivity() {
 
           // Rota para tela do fórum
           composable(route = "forumScreen") {
-            ForumScreen(navController)
+            val forumViewModel: ForumViewModel = koinViewModel()
+            ForumScreen(navController, forumViewModel)
           }
 
           // Rota para tela de splash screen
@@ -54,18 +61,25 @@ class MainActivity : ComponentActivity() {
             SplashScreen(navController)
           }
 
-          composable(route = "signinStep1") {
-
-     //       CadastroScreen(CadastroViewModel(), navController)
-
+          composable(route = "registryScreen") {
+            val cadastroViewModel: CadastroViewModel = koinViewModel()
+            CadastroFlow(cadastroViewModel, navController)
           }
 
           composable(route = "chat-list") {
-            ConversasScreen()
+            ConversasScreen(navController)
           }
 
           composable(route = "tela-campanha"){
             CampanhaScreen(navController)
+          }
+
+          composable(route = "jobs") {
+            VagaScreen(navController)
+          }
+
+          composable(route = "profile") {
+            ProfileScreen(profileType = ProfileType.Ong, navController)
           }
         }
       }
