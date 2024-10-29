@@ -1,5 +1,6 @@
 package com.helpline.config
 
+import android.content.Context
 import com.helpline.network.cadastro.CadastroService
 import com.helpline.network.forum.ForumService
 import com.helpline.viewmodel.login.LoginViewModel
@@ -14,14 +15,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val appModule = module {
   // Definição de Retrofit
-  single { androidContext() }
   single { provideRetrofit() }
   single { provideApiService(get()) }
   single { provideCadastroService(get())}
   single { provideForumService(get())}
 
   // Definição do ViewModel
-  viewModel { LoginViewModel(get()) }
+  viewModel { LoginViewModel(get(), androidContext()) }
   viewModel { CadastroViewModel(get()) }
   viewModel { ForumViewModel(get()) }
 }

@@ -3,6 +3,7 @@ package com.helpline.view.forum
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
@@ -45,33 +46,47 @@ fun ForumScreen(navController: NavController, postsViewModel: ForumViewModel) {
             })
     }
 
-    NavDrawer(navController = navController) {
-        // Usando um Box para sobrepor o conteúdo e o footer
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            // Conteúdo principal que rola
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 60.dp, top = 120.dp) // Espaçamento para evitar sobreposição com o footer
-                    .verticalScroll(rememberScrollState()) // Permite que o conteúdo role
+    Scaffold(
+        content = { innerPadding ->
+            NavDrawer(
+                navController = navController,
+                modifier = Modifier.padding(innerPadding)
             ) {
-                posts.forEach {
-                    Post(postInfo = it)
+                // Usando um Box para sobrepor o conteúdo e o footer
+                Box(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    // Conteúdo principal que rola
+                    // Usar LazyColumn
+                    Column(
+                        modifier = Modifier
+//                    .fillMaxSize()
+                            .padding(
+                                bottom = 60.dp,
+                                top = 120.dp
+                            ) // Espaçamento para evitar sobreposição com o footer
+                            .verticalScroll(rememberScrollState()) // Permite que o conteúdo role
+                    ) {
+                        posts.forEach {
+                            Post(postInfo = it)
+                        }
+                    }
+
+                    // Footer fixo na parte inferior
+
                 }
             }
-
-            // Footer fixo na parte inferior
+        },
+        bottomBar = {
             BottomNavBar(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter) // Alinha o footer na parte inferior do Box
+                modifier = Modifier // Alinha o footer na parte inferior do Box
                     .fillMaxWidth()
                     .height(60.dp),
                 navController = navController
             )
         }
-    }
+    )
+
 }
 
 @Composable

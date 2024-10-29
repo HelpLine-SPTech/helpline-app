@@ -49,6 +49,7 @@ import kotlinx.coroutines.launch
 fun NavDrawer(
   drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
   navController: NavController,
+  modifier: Modifier = Modifier,
   content: @Composable () -> Unit,
 ) {
 

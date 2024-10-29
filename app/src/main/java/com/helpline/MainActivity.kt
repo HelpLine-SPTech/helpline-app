@@ -1,4 +1,4 @@
-package com.example.helplineapp
+package com.helpline
 
 import android.annotation.SuppressLint
 import android.os.Build

@@ -11,16 +11,16 @@ import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
-class LoginViewModel (private val loginService: LoginService) : ViewModel() {
+class LoginViewModel (private val loginService: LoginService, private val context: Context) : ViewModel() {
   fun loginUser(email: String, password: String, onLoginSuccess: () -> Unit,
             onLoginError: () -> Unit ) {
     viewModelScope.launch {
       try {
-//        val tokenHandler = TokenManager(context)
+        val tokenHandler = TokenManager(context)
 
         val response = loginService.login(LoginRequest(email, password))
         if (response != null) {
-//          tokenHandler.saveToken(response.token)
+          tokenHandler.saveToken(response.token)
           onLoginSuccess()
         } else {
           onLoginError()

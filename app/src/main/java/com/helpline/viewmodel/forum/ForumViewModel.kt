@@ -12,7 +12,7 @@ class ForumViewModel(private val forumService: ForumService) : ViewModel() {
     fun getPosts(onSuccess: (GetPostsResponse) -> Unit, onFailure: (Exception) -> Unit) {
         viewModelScope.launch {
             try {
-                val response = forumService.getPosts("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZWxwbGluZS1hcGkiLCJzdWIiOiJkMTU3NmNjMy0wMGVhLTRkZGUtOGRlZC1lNGUzYzY1NTQ4NDIiLCJleHAiOjE3MzAxNzMzMzl9.wE-xr1WxUWYk8yY6VVyTNXkg3BkWPeaqeEN0il-EcOs")
+                val response = forumService.getPosts("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZWxwbGluZS1hcGkiLCJzdWIiOiJkMTU3NmNjMy0wMGVhLTRkZGUtOGRlZC1lNGUzYzY1NTQ4NDIiLCJleHAiOjE3MzAyNTk3Nzl9.0Z2OmvKrpNyxMNb6xDjco2JtTnm8UMgtSK7N-3aG9jc")
                 onSuccess(response)
             } catch (e: Exception) {
                 onFailure(e)
