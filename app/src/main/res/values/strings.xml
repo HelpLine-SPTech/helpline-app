@@ -130,6 +130,9 @@
     <string name="etapa_tres_titulo">Informações de endereço</string>
     <string name="cep_cadastro">CEP:</string>
     <string name="informe_seu_endereco">Endereço:</string>
+    <string name="estado">Estado:</string>
+    <string name="cidade">Cidade:</string>
+    <string name="rua">Rua:</string>
     <string name="numero">Número:</string>
     <string name="informe_complemento">Complemento</string>
 
