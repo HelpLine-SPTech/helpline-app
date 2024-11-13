@@ -1,9 +1,13 @@
 package com.helpline.network.forum
 
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.Part
 import java.util.UUID
 
 data class Post(
@@ -48,7 +52,22 @@ data class GetPostsResponse(
     val success: Boolean
 )
 
+data class CreatePostsResponse(
+    val post: Post,
+    val success: Boolean
+)
+
 interface ForumService {
     @GET("/posts")
     suspend fun getPosts(@Header("Authorization") auth: String): GetPostsResponse
+
+    @Multipart
+    @POST("/posts")
+    suspend fun createPost(
+        @Part images: List<MultipartBody.Part>,
+        @Part ("content") content: String,
+        @Header("Authorization") auth: String
+    ) : CreatePostsResponse
+
 }
+

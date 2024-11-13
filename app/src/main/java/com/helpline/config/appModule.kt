@@ -7,6 +7,7 @@ import com.helpline.viewmodel.login.LoginViewModel
 import com.helpline.network.login.LoginService
 import com.helpline.viewmodel.cadastro.CadastroViewModel
 import com.helpline.viewmodel.forum.ForumViewModel
+import com.helpline.viewmodel.post.PostViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -24,6 +25,7 @@ val appModule = module {
   viewModel { LoginViewModel(get(), androidContext()) }
   viewModel { CadastroViewModel(get()) }
   viewModel { ForumViewModel(get()) }
+  viewModel { PostViewModel(get()) }
 }
 
 fun provideRetrofit(): Retrofit {
@@ -44,4 +46,6 @@ fun provideCadastroService(retrofit: Retrofit): CadastroService {
 fun provideForumService(retrofit: Retrofit): ForumService {
   return retrofit.create(ForumService::class.java)
 }
+
+
 

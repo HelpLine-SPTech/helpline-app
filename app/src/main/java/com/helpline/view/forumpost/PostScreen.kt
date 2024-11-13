@@ -1,5 +1,7 @@
 package com.helpline.view.forumpost
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -36,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -52,6 +55,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.helpline.viewmodel.forum.ForumViewModel
+import com.helpline.viewmodel.post.PostViewModel
 
 val poppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),
@@ -62,8 +66,29 @@ val poppinsFamily = FontFamily(
 )
 
 @Composable
-fun PostScreen(navController: NavController) {
+fun PostScreen(navController: NavController, postViewModel: PostViewModel) {
+    var context = LocalContext.current
     var textState by remember { mutableStateOf(TextFieldValue()) }
+
+    fun submit() {
+        postViewModel.createPost(
+            content = textState.text,
+            images = emptyList(),
+            onSuccess = { response ->
+                if (response.success) {
+                    Toast.makeText(context, "Post criado com sucesso!", Toast.LENGTH_LONG).show()
+                    Log.d("NAVEGAÇÃO POST", "funcionou")
+                    navController.navigate("forumScreen")
+                } else {
+                    Toast.makeText(context, "Erro ao fazer o post", Toast.LENGTH_LONG).show()
+                }
+
+            },
+            onFailure = { error ->
+                    Toast.makeText(context, "Erro ao fazer o post ${error.message()}", Toast.LENGTH_LONG).show()
+            })
+    }
+
     NavDrawer(navController = navController) {
         Box(
             modifier = Modifier
@@ -142,7 +167,7 @@ fun PostScreen(navController: NavController) {
                         ) {
                             // Primeiro vem o botão de imagem
                             Button(
-                                onClick = { /* Ação do botão de imagem */ },
+                                onClick = { submit() },
                                 modifier = Modifier
                                     .padding(start = 16.dp)
                                     .width(40.dp)
@@ -188,9 +213,9 @@ fun PostScreen(navController: NavController) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun Post() {
-    val navController = rememberNavController()
-    PostScreen(navController = navController)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun Post() {
+//    val navController = rememberNavController()
+//    PostScreen(navController = navController)
+//}
