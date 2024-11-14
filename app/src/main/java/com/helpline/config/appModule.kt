@@ -5,8 +5,10 @@ import com.helpline.network.cadastro.CadastroService
 import com.helpline.network.forum.ForumService
 import com.helpline.viewmodel.login.LoginViewModel
 import com.helpline.network.login.LoginService
+import com.helpline.network.vaga.VagaService
 import com.helpline.viewmodel.cadastro.CadastroViewModel
 import com.helpline.viewmodel.forum.ForumViewModel
+import com.helpline.viewmodel.vaga.VagaViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -19,11 +21,13 @@ val appModule = module {
   single { provideApiService(get()) }
   single { provideCadastroService(get())}
   single { provideForumService(get())}
+  single { provideVagaService(get())}
 
   // Definição do ViewModel
   viewModel { LoginViewModel(get(), androidContext()) }
   viewModel { CadastroViewModel(get()) }
   viewModel { ForumViewModel(get()) }
+  viewModel { VagaViewModel(get()) }
 }
 
 fun provideRetrofit(): Retrofit {
@@ -43,5 +47,9 @@ fun provideCadastroService(retrofit: Retrofit): CadastroService {
 
 fun provideForumService(retrofit: Retrofit): ForumService {
   return retrofit.create(ForumService::class.java)
+}
+
+fun provideVagaService(retrofit: Retrofit): VagaService {
+  return retrofit.create(VagaService::class.java)
 }
 

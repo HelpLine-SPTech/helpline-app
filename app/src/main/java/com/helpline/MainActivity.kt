@@ -25,6 +25,7 @@ import com.helpline.view.vaga.VagaScreen
 import com.helpline.viewmodel.cadastro.CadastroViewModel
 import com.helpline.viewmodel.forum.ForumViewModel
 import com.helpline.viewmodel.login.LoginViewModel
+import com.helpline.viewmodel.vaga.VagaViewModel
 import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
@@ -75,12 +76,14 @@ class MainActivity : ComponentActivity() {
           }
 
           composable(route = "jobs") {
-            VagaScreen(navController)
+            val vagaViewModel: VagaViewModel = koinViewModel()
+            VagaScreen(navController, vagaViewModel)
           }
 
           composable(route = "profile") {
             ProfileScreen(profileType = ProfileType.Ong, navController)
           }
+
         }
       }
     }
