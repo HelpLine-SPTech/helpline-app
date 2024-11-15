@@ -5,7 +5,6 @@ import android.util.Log
 import com.helpline.network.cadastro.CadastroService
 import com.helpline.network.forum.ForumService
 import com.helpline.network.login.LoginService
-import com.helpline.network.perfil.PerfilService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -85,11 +84,5 @@ object Cadastro {
 object Forum {
   val apiService: ForumService by lazy {
     RetrofitClient.retrofit.create(ForumService::class.java)
-  }
-}
-
-object Perfil {
-  val apiService: PerfilService by lazy {
-    RetrofitClient.retrofit.create(PerfilService::class.java)
   }
 }

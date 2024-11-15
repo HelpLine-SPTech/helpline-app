@@ -111,7 +111,7 @@ fun SidebarContent(navController: NavController) {
           text = "Ver perfil",
           color = Color.Gray,
           fontSize = 14.sp,
-//          modifier = Modifier.clickable { navController.navigate("profileScreenVolunteer") },
+          modifier = Modifier.clickable { navController.navigate("profile/bd88f341-455a-48a5-aa70-7ae69902b5eb") },
         )
       }
     }
