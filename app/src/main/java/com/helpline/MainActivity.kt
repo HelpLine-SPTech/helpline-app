@@ -66,6 +66,10 @@
               CadastroFlow(cadastroViewModel, navController)
             }
 
+            composable(route = "telaPesquisa"){
+              ConversasScreen(navController)
+            }
+
             composable(route = "chat-list") {
               ConversasScreen(navController)
             }
@@ -80,7 +84,6 @@
 
             composable(route = "profile/{UserID}") {
               val PerfilViewModel: PerfilViewModel = koinViewModel()
-              ProfileScreen(navController, "d1576cc3-00ea-4dde-8ded-e4e3c6554842", PerfilViewModel)
               it.arguments?.getString("UserID")
                 ?.let { userid -> ProfileScreen(navController, userid, PerfilViewModel) }
             }
