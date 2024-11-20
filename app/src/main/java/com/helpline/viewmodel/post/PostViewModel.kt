@@ -1,5 +1,6 @@
 package com.helpline.viewmodel.post
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.helpline.network.forum.CreatePostsResponse
@@ -15,10 +16,13 @@ class PostViewModel(private val forumService: ForumService) : ViewModel() {
                     onFailure: (HttpException) -> Unit){
         viewModelScope.launch {
             try {
+                Log.d("PostCreate", "Content: $content, Images: $images")
                 val response = forumService.createPost(images = images, content = content , auth = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZWxwbGluZS1hcGkiLCJzdWIiOiJhMjA1Njg4OS1jODY3LTQ4YzQtYjAwYS0zMDMxYTBlYThjNDAiLCJleHAiOjE3MzE0NzY4MDN9.WXi8L_S3MmYQBfRz2NTGuAPmdr1ixmMF2QcrgD5M3gg")
                 onSuccess(response)
             } catch (e: HttpException) {
                 onFailure(e)
+            } catch (e: Exception) {
+                Log.e("PostCreate", "Erro: $e")
             }
         }
     }
