@@ -21,8 +21,10 @@ import com.helpline.view.cadastro.CadastroFlow
 import com.helpline.view.login.LoginScreen
 import com.helpline.view.perfilong.ProfileScreen
 import com.helpline.view.perfilong.ProfileType
+import com.helpline.view.telapesquisa.SearchScreen
 import com.helpline.view.vaga.VagaScreen
 import com.helpline.viewmodel.cadastro.CadastroViewModel
+import com.helpline.viewmodel.campanha.CampaignViewModel
 import com.helpline.viewmodel.forum.ForumViewModel
 import com.helpline.viewmodel.login.LoginViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -56,6 +58,10 @@ class MainActivity : ComponentActivity() {
             ForumScreen(navController, forumViewModel)
           }
 
+          composable(route = "search") {
+            SearchScreen();
+          }
+
           // Rota para tela de splash screen
           composable(route = "splashScreen") {
             SplashScreen(navController)
@@ -71,7 +77,8 @@ class MainActivity : ComponentActivity() {
           }
 
           composable(route = "tela-campanha"){
-            CampanhaScreen(navController)
+            val campaignViewModel: CampaignViewModel = koinViewModel()
+            CampanhaScreen(navController, campaignViewModel)
           }
 
           composable(route = "jobs") {

@@ -38,7 +38,7 @@ val poppinsFamily = FontFamily(
 )
 
 @Composable
-fun ConversasScreen() {
+fun SearchScreen() {
 
     Box(
         modifier = Modifier
@@ -217,5 +217,5 @@ fun ConversationItem(profilePic: Int, name: String, message: String) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewConversasScreen() {
-    ConversasScreen()
+    SearchScreen()
 }

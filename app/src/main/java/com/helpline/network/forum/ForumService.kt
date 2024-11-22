@@ -49,6 +49,6 @@ data class GetPostsResponse(
 )
 
 interface ForumService {
-    @GET("/posts")
-    suspend fun getPosts(@Header("Authorization") auth: String): GetPostsResponse
+    @GET("/api/posts")
+    suspend fun getPosts(): GetPostsResponse
 }

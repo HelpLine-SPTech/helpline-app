@@ -51,6 +51,7 @@ import com.helpline.ui.app.componente.footer.BottomNavBar
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import com.helpline.ui.app.componente.PicassoImage
 import com.helpline.viewmodel.forum.ForumViewModel
 
 val poppinsFamily = FontFamily(

@@ -90,7 +90,7 @@ fun Post( postInfo: Post){
           .padding(top = 8.dp)
       )
 
-      if (!postInfo.images.isEmpty()){
+      if (postInfo.images.isNotEmpty()){
         PicassoImage(
           imageUrl = postInfo.images[0].url,
           contentDescription = "",

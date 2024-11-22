@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Chat
+import androidx.compose.material.icons.filled.Handshake
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
@@ -48,7 +49,7 @@ fun BottomNavBar(
                         modifier = Modifier.size(32.dp))
                 },
                 selected = false,
-                onClick = { /* Ação para Home */ }
+                onClick = { navController.navigate("forumScreen") }
             )
 
             NavigationBarItem(
@@ -59,17 +60,17 @@ fun BottomNavBar(
                         modifier = Modifier.size(32.dp))
                 },
                 selected = false,
-                onClick = { /* Ação para Search */ }
+                onClick = { navController.navigate("search") }
             )
             NavigationBarItem(
                 icon = {
-                    Icon(imageVector = Icons.Default.Notifications,
-                        contentDescription = "Notification Button",
+                    Icon(imageVector = Icons.Default.Handshake,
+                        contentDescription = "Campanhas",
                         tint = Color.White,
                         modifier = Modifier.size(32.dp))
                 },
                 selected = false,
-                onClick = { /*navController.navigate("notificationScreen")*/ }
+                onClick = { navController.navigate("tela-campanha") }
             )
 
             NavigationBarItem(
