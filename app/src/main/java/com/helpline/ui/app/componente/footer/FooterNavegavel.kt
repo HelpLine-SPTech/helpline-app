@@ -48,7 +48,7 @@ fun BottomNavBar(
                         modifier = Modifier.size(32.dp))
                 },
                 selected = false,
-                onClick = { /* Ação para Home */ }
+                onClick = { navController.navigate("forumScreen") }
             )
 
             NavigationBarItem(
@@ -59,7 +59,7 @@ fun BottomNavBar(
                         modifier = Modifier.size(32.dp))
                 },
                 selected = false,
-                onClick = { /* Ação para Search */ }
+                onClick = { navController.navigate("") }
             )
             NavigationBarItem(
                 icon = {
@@ -90,7 +90,7 @@ fun BottomNavBar(
                         modifier = Modifier.size(32.dp))
                 },
                 selected = false,
-                onClick = { /* Ação para Briefcase */ }
+                onClick = { navController.navigate("jobs") }
             )
         }
     }
