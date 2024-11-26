@@ -216,7 +216,7 @@ fun VagaScreen (navController: NavController){
                                     style = MaterialTheme.typography.bodyMedium )
                             }
                             Row {
-                                Text(text = stringResource(id = R.string.dia_semana),
+                                Text(text = stringResource(id = R.string.data_hora),
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = poppinsFamily,
                                     style = MaterialTheme.typography.bodyMedium
@@ -370,7 +370,7 @@ fun VagaScreen (navController: NavController){
                                     style = MaterialTheme.typography.bodyMedium )
                             }
                             Row {
-                                Text(text = stringResource(id = R.string.dia_semana),
+                                Text(text = stringResource(id = R.string.data_hora),
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = poppinsFamily,
                                     style = MaterialTheme.typography.bodyMedium

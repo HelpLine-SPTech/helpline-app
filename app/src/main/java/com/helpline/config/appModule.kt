@@ -9,6 +9,7 @@ import com.helpline.network.perfil.PerfilService
 import com.helpline.viewmodel.cadastro.CadastroViewModel
 import com.helpline.viewmodel.forum.ForumViewModel
 import com.helpline.viewmodel.perfil.PerfilViewModel
+import com.helpline.viewmodel.post.PostViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -27,6 +28,7 @@ val appModule = module {
   viewModel { LoginViewModel(get(), androidContext()) }
   viewModel { CadastroViewModel(get()) }
   viewModel { ForumViewModel(get()) }
+  viewModel { PostViewModel(get()) }
   viewModel { PerfilViewModel(get()) }
 }
 

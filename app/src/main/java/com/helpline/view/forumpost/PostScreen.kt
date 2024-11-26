@@ -1,7 +1,14 @@
 package com.helpline.view.forumpost
 
+import android.content.Context
+import android.net.Uri
+import android.util.Log
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +22,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,6 +38,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -36,6 +47,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -51,7 +63,13 @@ import com.helpline.ui.app.componente.footer.BottomNavBar
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import com.helpline.ui.app.componente.PicassoImage
 import com.helpline.viewmodel.forum.ForumViewModel
+import com.helpline.viewmodel.post.PostViewModel
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 
 val poppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),
@@ -62,13 +80,68 @@ val poppinsFamily = FontFamily(
 )
 
 @Composable
-fun PostScreen(navController: NavController) {
+fun PostScreen(navController: NavController, postViewModel: PostViewModel) {
+    var context = LocalContext.current
     var textState by remember { mutableStateOf(TextFieldValue()) }
+    var selectedImages = remember { mutableStateListOf<Uri>() }
+
+    val multipleImagePickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetMultipleContents()
+    ) { uris: List<Uri>? ->
+        // Handle the selected images here
+        if (uris != null) {
+            selectedImages.clear()
+            selectedImages.addAll(uris)
+            Log.d("Uploud de img", "funcionou $uris")
+        }
+    }
+
+    fun uriToFile(context: Context, uri: Uri): File {
+        val contentResolver = context.contentResolver
+        val inputStream = contentResolver.openInputStream(uri)
+        val tempFile = File.createTempFile("image", ".jpg", context.cacheDir)
+        inputStream?.use { input ->
+            tempFile.outputStream().use { output ->
+                input.copyTo(output)
+            }
+        }
+        return tempFile
+    }
+
+    fun prepareFilePart(context: Context, uri: Uri, partName: String): MultipartBody.Part {
+        val file = uriToFile(context, uri)
+        val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData(partName, file.name, requestFile)
+    }
+
+    fun submit() {
+
+        val images = selectedImages.map { uri ->
+            prepareFilePart(context, uri, "images[]")
+        }
+
+        postViewModel.createPost(
+            images = images,
+            content = textState.text,
+            onSuccess = { response ->
+                if (response.success) {
+                    Toast.makeText(context, "Post criado com sucesso!", Toast.LENGTH_LONG).show()
+                    Log.d("NAVEGAÇÃO POST", "funcionou")
+                    navController.navigate("forumScreen")
+                } else {
+                    Toast.makeText(context, "Erro ao fazer o post", Toast.LENGTH_LONG).show()
+                }
+
+            },
+            onFailure = { error ->
+                    Toast.makeText(context, "Erro ao fazer o post ${error.message()}", Toast.LENGTH_LONG).show()
+            })
+    }
+
     NavDrawer(navController = navController) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
         ) {
             // Conteúdo principal que rola
             Column(
@@ -92,8 +165,10 @@ fun PostScreen(navController: NavController) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(start = 16.dp, top = 16.dp)
+                        verticalAlignment = Alignment.Top,
+                        modifier = Modifier
+                            .padding(start = 16.dp, top = 16.dp)
+                            .fillMaxHeight(0.7f)
                     )
                     {
                         Image(
@@ -131,18 +206,44 @@ fun PostScreen(navController: NavController) {
                             }
                         )
                     }
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(), // Faz a Row ocupar toda a largura disponível
+                        verticalAlignment = Alignment.Bottom,
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        LazyRow(
+                            modifier = Modifier.fillMaxWidth(), // Garante que o LazyRow respeite o alinhamento à esquerda
+                            horizontalArrangement = Arrangement.Start // Adiciona alinhamento interno no LazyRow
+                        ) {
+                            items(selectedImages) { uri ->
+                                Box(
+                                    modifier = Modifier
+                                        .padding(horizontal = 10.dp)
+                                        .clip(RoundedCornerShape(10.dp))
+                                ) {
+                                    PicassoImage(
+                                        imageUrl = uri.toString(),
+                                        modifier = Modifier
+                                            .height(50.dp)
+                                            .width(50.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
+
                     Column(
                         modifier = Modifier.fillMaxHeight(),
-                        verticalArrangement = Arrangement.SpaceBetween
+                        verticalArrangement = Arrangement.Bottom
                     ) {
-                        Spacer(modifier = Modifier.weight(1f))
                         Row(
                             horizontalArrangement = Arrangement.SpaceBetween,
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             // Primeiro vem o botão de imagem
                             Button(
-                                onClick = { /* Ação do botão de imagem */ },
+                                onClick = { multipleImagePickerLauncher.launch("image/*") },
                                 modifier = Modifier
                                     .padding(start = 16.dp)
                                     .width(40.dp)
@@ -162,7 +263,7 @@ fun PostScreen(navController: NavController) {
 
                             // Depois o botão de publicação
                             Button(
-                                onClick = { /* Lógica de publicação */ },
+                                onClick = { submit()},
                                 modifier = Modifier
                                     .height(60.dp)
                                     .padding(end = 20.dp, bottom = 20.dp), // Ajuste padding no fim
@@ -188,9 +289,9 @@ fun PostScreen(navController: NavController) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun Post() {
-    val navController = rememberNavController()
-    PostScreen(navController = navController)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun Post() {
+//    val navController = rememberNavController()
+//    PostScreen(navController = navController)
+//}

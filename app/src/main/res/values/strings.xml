@@ -14,7 +14,7 @@
     <string name="qtd_dois">2</string>
     <string name="horario">Horário:</string>
     <string name="horario_um">10h00 às 14h00</string>
-    <string name="dia_semana">Dias da semana:</string>
+    <string name="data_hora">Data e Hora:</string>
     <string name="dia_semana_um">Terça-feira e Quinta-feira</string>
 
     <!-- Segunda vaga: Bem da Madrugada -->
