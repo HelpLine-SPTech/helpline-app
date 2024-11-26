@@ -5,10 +5,12 @@ import com.helpline.network.cadastro.CadastroService
 import com.helpline.network.campanha.CampaignService
 import com.helpline.network.forum.ForumService
 import com.helpline.network.login.LoginService
+import com.helpline.network.search.SearchService
 import com.helpline.viewmodel.cadastro.CadastroViewModel
 import com.helpline.viewmodel.campanha.CampaignViewModel
 import com.helpline.viewmodel.forum.ForumViewModel
 import com.helpline.viewmodel.login.LoginViewModel
+import com.helpline.viewmodel.search.SearchViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -17,6 +19,8 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 
 val appModule = module {
@@ -28,25 +32,33 @@ val appModule = module {
   single { provideCadastroService(get(), get())}
   single { provideForumService(get(), get())}
   single { provideCampaignService(get(), get())}
+  single { provideSearchService(get(), get())}
 
   // Definição do ViewModel
   viewModel { LoginViewModel(get(), get()) }
   viewModel { CadastroViewModel(get()) }
   viewModel { ForumViewModel(get()) }
   viewModel { CampaignViewModel(get()) }
+  viewModel { SearchViewModel(get())}
 }
 
 fun provideRetrofit(): Retrofit {
 
   return Retrofit.Builder()
-    .baseUrl("http://192.168.0.105:8080")
+    .baseUrl("https://helpline-api-gzb4d6ahg7hpcygx.brazilsouth-01.azurewebsites.net")
     .addConverterFactory(GsonConverterFactory.create())
     .build()
 }
 
+
 fun getClient(token: String): OkHttpClient {
   return OkHttpClient
     .Builder()
+    .connectTimeout(10, TimeUnit.MINUTES)
+    .writeTimeout(10, TimeUnit.MINUTES)
+    .readTimeout(10, TimeUnit.MINUTES)
+    .callTimeout(10, TimeUnit.MINUTES)
+    .addInterceptor(LoggingInterceptor())
     .addInterceptor(InterceptorTokenJWT(token)).build()
 }
 
@@ -82,6 +94,14 @@ fun provideCampaignService(retrofit: Retrofit, client: OkHttpClient): CampaignSe
     .create(CampaignService::class.java)
 }
 
+fun provideSearchService(retrofit: Retrofit, client: OkHttpClient): SearchService {
+  return retrofit
+    .newBuilder()
+    .client(client)
+    .build()
+    .create(SearchService::class.java)
+}
+
 /*
 Classe que implementa um Interceptor para adicionar um token JWT a TODAS as requisições
  */
@@ -96,5 +116,22 @@ class InterceptorTokenJWT(val token:String): Interceptor {
 
     val newRequest = currentRequest.build()
     return chain.proceed(newRequest)
+  }
+}
+
+internal class LoggingInterceptor : Interceptor {
+  @Throws(IOException::class)
+  override fun intercept(chain: Interceptor.Chain): Response {
+    val request: Request = chain.request()
+
+    val t1 = System.nanoTime()
+    Log.i("Logging interceptor", "Sending request ${request.url} on ${chain.connection()}\n${request.headers}")
+
+    val response: Response = chain.proceed(request)
+
+    val t2 = System.nanoTime()
+    Log.i("Logging interceptor", "Received response for ${response.request.url} in ${String.format("%.1f", (t2 - t1) / 1e6)}ms\n${response.headers}")
+
+    return response
   }
 }

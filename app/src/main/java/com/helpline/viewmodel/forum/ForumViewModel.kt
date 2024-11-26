@@ -1,9 +1,11 @@
 package com.helpline.viewmodel.forum
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.helpline.network.forum.ForumService
 import com.helpline.network.forum.GetPostsResponse
+import com.helpline.network.forum.Post
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.lang.Exception
@@ -16,6 +18,18 @@ class ForumViewModel(private val forumService: ForumService) : ViewModel() {
                 onSuccess(response)
             } catch (e: Exception) {
                 onFailure(e)
+            }
+        }
+    }
+
+    fun likePost(post: Post, onSuccess: () -> Unit, onFailure: () -> Unit) {
+        viewModelScope.launch {
+            try {
+                forumService.likePost(post.id.toString())
+                onSuccess();
+            } catch (e: Exception) {
+                Log.d("Forum", "Error: $e")
+                onFailure()
             }
         }
     }

@@ -27,6 +27,7 @@ import com.helpline.viewmodel.cadastro.CadastroViewModel
 import com.helpline.viewmodel.campanha.CampaignViewModel
 import com.helpline.viewmodel.forum.ForumViewModel
 import com.helpline.viewmodel.login.LoginViewModel
+import com.helpline.viewmodel.search.SearchViewModel
 import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
@@ -59,7 +60,8 @@ class MainActivity : ComponentActivity() {
           }
 
           composable(route = "search") {
-            SearchScreen();
+            val viewModel: SearchViewModel = koinViewModel()
+            SearchScreen(navController, viewModel);
           }
 
           // Rota para tela de splash screen

@@ -4,6 +4,8 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
+import retrofit2.http.POST
+import retrofit2.http.Path
 import java.util.UUID
 
 data class Post(
@@ -35,10 +37,10 @@ data class Comment(
 data class User(
     val id: UUID,
     val name: String,
-    val bio: String,
+    val bio: String?,
     val email: String,
     val document: String,
-    val profilePicUrl: String,
+    val profilePicUrl: String?,
     val type: String,
     val abilities: List<String>
 )
@@ -51,4 +53,7 @@ data class GetPostsResponse(
 interface ForumService {
     @GET("/api/posts")
     suspend fun getPosts(): GetPostsResponse
+
+    @POST("/api/posts/{id}/like")
+    suspend fun likePost(@Path("id") id: String)
 }

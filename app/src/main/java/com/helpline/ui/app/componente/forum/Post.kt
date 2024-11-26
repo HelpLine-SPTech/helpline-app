@@ -1,7 +1,5 @@
 package com.helpline.ui.app.componente.forum
 
-import android.widget.ImageView
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,10 +9,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Comment
 import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -22,11 +22,14 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -45,7 +48,9 @@ val poppinsFamily = FontFamily(
 )
 
 @Composable
-fun Post( postInfo: Post){
+fun Post( postInfo: Post, onLike: (Post) -> Unit){
+  var liked by remember { mutableStateOf(postInfo.liked) }
+
   Card(
     modifier = Modifier
       .fillMaxWidth()
@@ -57,7 +62,6 @@ fun Post( postInfo: Post){
       modifier = Modifier.padding(16.dp),
       horizontalAlignment = Alignment.Start,
     ) {
-      // Linha para a foto e nome do usuário
       Row(
         modifier = Modifier
           .fillMaxWidth()
@@ -65,59 +69,61 @@ fun Post( postInfo: Post){
         verticalAlignment = Alignment.CenterVertically // Alinha verticalmente
       ) {
         PicassoImage(
-          imageUrl = "https://plus.unsplash.com/premium_photo-1690303193898-f9c721d0770b?q=80&w=2066&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          imageUrl = postInfo.user.profilePicUrl ?: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
           contentDescription = "profilePic",
           modifier = Modifier
             .size(50.dp)
-            .clip(RoundedCornerShape(20.dp)), // Arredondando a imagem
+            .clip(CircleShape),
         )
-        // Nome do usuário
         Text(
           text = postInfo.user.name,
           fontSize = 18.sp,
           fontFamily = poppinsFamily,
           fontWeight = FontWeight.Bold,
-          modifier = Modifier.padding(start = 10.dp) // Espaço entre a imagem e o texto
+          modifier = Modifier.padding(start = 10.dp)
         )
       }
 
-      // Texto da mensagem
       Text(
         text = postInfo.content,
         fontSize = 14.sp,
         fontFamily = poppinsFamily,
-        modifier = Modifier.padding(bottom = 32.dp) // Espaçamento inferior
+        modifier = Modifier.padding(bottom = 32.dp)
           .padding(top = 8.dp)
       )
 
       if (postInfo.images.isNotEmpty()){
-        PicassoImage(
-          imageUrl = postInfo.images[0].url,
-          contentDescription = "",
-          modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(8.dp)) // Arredondando a imagem
-            .height(180.dp),
-        )
+        postInfo.images.forEach {
+          PicassoImage(
+            imageUrl = it.url,
+            contentDescription = "Post Image",
+            modifier = Modifier
+              .fillMaxWidth()
+              .clip(RoundedCornerShape(8.dp)) // Arredondando a imagem
+              .height(180.dp),
+          )
+        }
       }
 
-      // Área de interações (curtir, comentar)
       Row(
         modifier = Modifier
           .fillMaxWidth()
-          .padding(top = 32.dp), // Espaçamento do topo entre a imagem e os botões
-        horizontalArrangement = Arrangement.Start // Alinha à esquerda
+          .padding(top = 32.dp),
+        horizontalArrangement = Arrangement.Start
       ) {
         Button(
-          onClick = { /* Ação para curtir */ },
+          onClick = {
+            liked = true
+            onLike(postInfo)
+          },
           modifier = Modifier.padding(end = 8.dp),
           colors = ButtonDefaults.buttonColors(containerColor = Color.White)
             .copy(contentColor = Color.Black)
         ) {
-          Icon(imageVector = Icons.Default.ThumbUp, contentDescription = "Like")
+          Icon(imageVector = if (!liked) Icons.Outlined.ThumbUp else Icons.Filled.ThumbUp, contentDescription = "Like")
         }
 
-        Spacer(modifier = Modifier.width(8.dp)) // Espaço entre os botões
+        Spacer(modifier = Modifier.width(8.dp))
 
         Button(
           onClick = { /* Ação para curtir */ },
