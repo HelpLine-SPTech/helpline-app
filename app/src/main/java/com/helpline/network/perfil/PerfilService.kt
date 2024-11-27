@@ -28,14 +28,14 @@ data class UpdatePerfilResponse(
 interface PerfilService {
 
     // Função para obter o perfil de um usuário
-    @GET("/auth/{userId}")
+    @GET("/api/auth/{userId}")
     suspend fun getPerfil(
         @Header("Authorization") auth: String,
         @Path("userId") userId: UUID
     ): GetPerfilResponse
 
     // Função para atualizar o perfil de um usuário
-    @PUT("/auth/{userId}")
+    @PUT("/api/auth/{userId}")
     suspend fun updatePerfil(
         @Header("Authorization") auth: String,
         @Path("userId") userId: UUID,

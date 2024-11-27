@@ -35,6 +35,6 @@ data class SavedUser(
 
 
 interface CadastroService {
-    @POST("/auth/register")
+    @POST("/api/auth/register")
     suspend fun register(@Body body: CadastroRequest) : CadastroResponse
 }

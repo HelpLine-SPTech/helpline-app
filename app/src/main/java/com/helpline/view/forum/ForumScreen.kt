@@ -1,15 +1,24 @@
 package com.helpline.view.forum
 
+import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.helpline.ui.app.componente.forum.sidebar.NavDrawer
@@ -20,6 +29,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.helpline.R
 import com.helpline.network.forum.Post
+import com.helpline.ui.app.componente.Loader
 import com.helpline.viewmodel.forum.ForumViewModel
 
 val poppinsFamily = FontFamily(
@@ -35,18 +45,47 @@ val poppinsFamily = FontFamily(
 fun ForumScreen(navController: NavController, postsViewModel: ForumViewModel) {
 
     var posts = remember { mutableStateListOf<Post>() }
+    var isLoading by remember { mutableStateOf<Boolean>(true) }
 
-    LaunchedEffect(Unit) {
+    fun fetchPosts() {
+
         postsViewModel.getPosts(
             onSuccess = { response ->
+                posts.clear()
                 posts.addAll(response.posts)
+                isLoading = false
             },
             onFailure = { error ->
-
+                isLoading = false
             })
     }
 
+    fun likePost(post: Post) {
+        postsViewModel.likePost(
+            post = post,
+            onSuccess = {
+                fetchPosts()
+            },
+            onFailure = {
+
+            })
+
+    }
+
+    LaunchedEffect(Unit) {
+        fetchPosts()
+    }
+
     Scaffold(
+        floatingActionButton = {
+            Box(
+                modifier = Modifier
+                    .height(50.dp)
+                    .width(50.dp)
+                    .background(Color.Red)
+            )
+        },
+        floatingActionButtonPosition = FabPosition.End,
         content = { innerPadding ->
             NavDrawer(
                 navController = navController,
@@ -56,24 +95,24 @@ fun ForumScreen(navController: NavController, postsViewModel: ForumViewModel) {
                 Box(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    // Conteúdo principal que rola
-                    // Usar LazyColumn
-                    Column(
-                        modifier = Modifier
-//                    .fillMaxSize()
-                            .padding(
-                                bottom = 60.dp,
-                                top = 120.dp
-                            ) // Espaçamento para evitar sobreposição com o footer
-                            .verticalScroll(rememberScrollState()) // Permite que o conteúdo role
-                    ) {
-                        posts.forEach {
-                            Post(postInfo = it)
+                    if(isLoading) {
+                        Loader()
+                    } else {
+                        LazyColumn (
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .padding(
+                                    bottom = 60.dp,
+                                    top = 120.dp
+                                )
+                        ) {
+                            items(posts) { post ->
+                                Post(
+                                    postInfo = post,
+                                    onLike = { p -> likePost(p) })
+                            }
                         }
                     }
-
-                    // Footer fixo na parte inferior
-
                 }
             }
         },

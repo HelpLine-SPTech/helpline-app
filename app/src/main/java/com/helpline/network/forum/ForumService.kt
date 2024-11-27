@@ -9,6 +9,7 @@ import java.time.LocalDateTime
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 import java.util.UUID
 
 data class Post(
@@ -43,7 +44,7 @@ data class User(
     val bio: String?,
     val email: String,
     val document: String,
-    val profilePicUrl: String,
+    val profilePicUrl: String?,
     val type: String,
     val abilities: List<String>,
     val address: Address?,
@@ -94,15 +95,17 @@ data class CreatePostsResponse(
 )
 
 interface ForumService {
-    @GET("/posts")
-    suspend fun getPosts(@Header("Authorization") auth: String): GetPostsResponse
-
     @Multipart
-    @POST("/posts")
+    @POST("/api/posts")
     suspend fun createPost(
         @Part images: List<MultipartBody.Part>,
         @Part ("content") content: String,
         @Header("Authorization") auth: String
     ) : CreatePostsResponse
 
+    @GET("/api/posts")
+    suspend fun getPosts(): GetPostsResponse
+
+    @POST("/api/posts/{id}/like")
+    suspend fun likePost(@Path("id") id: String)
 }

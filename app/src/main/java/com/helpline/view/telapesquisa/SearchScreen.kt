@@ -3,16 +3,18 @@ package com.helpline.view.telapesquisa
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
-import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -27,7 +29,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.helpline.R
+import com.helpline.network.forum.User
+import com.helpline.ui.app.componente.Loader
+import com.helpline.ui.app.componente.PicassoImage
+import com.helpline.viewmodel.search.SearchViewModel
+import org.koin.androidx.compose.koinViewModel
 
 val poppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),
@@ -38,45 +47,57 @@ val poppinsFamily = FontFamily(
 )
 
 @Composable
-fun ConversasScreen() {
+fun SearchScreen(navController: NavController, viewModel: SearchViewModel) {
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState())
-    ) {
-        Column {
+    val searchResult by viewModel.searchResult.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
 
-            // Cabeçalho com seta de voltar, título e ícone de notificação
-            Header()
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Barra de pesquisa com fundo arredondado e lupa
-            SearchBar()
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Exemplo de conversa
-            ConversationItem(
-                profilePic = R.mipmap.ong1,
-                name = "Bem da Madrugada",
-                message = "Rua das Flores, 123\nJardim das Esperanças, SP, 01234–567"
-            )
-
-            ConversationItem(
-                profilePic = R.mipmap.ong2,
-                name = "Amigos de Belém",
-                message = "Avenida da Liberdade, 456\nCentro, RJ, 98765–432"
-            )
-
-        }
+    fun search(term: String) {
+        viewModel.search(term)
     }
+
+    Scaffold(
+        content = { innerPadding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+            ) {
+                Column {
+
+                    // Cabeçalho com seta de voltar, título e ícone de notificação
+                    Header(goBack = { navController.popBackStack() })
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Barra de pesquisa com fundo arredondado e lupa
+                    SearchBar(onSearch = { search(it) })
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    if (isLoading) {
+                        Loader()
+                    } else if(searchResult.isNotEmpty()) {
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxHeight()
+                        ) {
+                            items(searchResult) {
+                                ConversationItem(
+                                    user = it,
+                                    onClick = { navController.navigate("/profile/${it.id}")}
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    )
 }
 
 @Composable
-fun Header() {
+fun Header(goBack: () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -90,7 +111,7 @@ fun Header() {
             tint = Color.Black,
             modifier = Modifier
                 .size(24.dp)
-                .clickable { /* Ação de voltar */ }
+                .clickable { goBack() }
         )
 
         Spacer(modifier = Modifier.width(8.dp))
@@ -102,23 +123,11 @@ fun Header() {
             fontWeight = FontWeight.Bold,
             color = Color.Black
         )
-
-        Spacer(modifier = Modifier.weight(1f))  // Empurra o ícone de notificação para a direita
-
-        // Ícone de notificação adicionado no topo direito
-        Icon(
-            imageVector = Icons.Default.Notifications,
-            contentDescription = "Notificações",
-            tint = Color.Black,
-            modifier = Modifier
-                .size(24.dp)
-                .clickable { /* Ação para notificações */ }
-        )
     }
 }
 
 @Composable
-fun SearchBar() {
+fun SearchBar(onSearch: (String) -> Unit) {
     var searchText by remember { mutableStateOf("") }
 
     Box(
@@ -150,9 +159,7 @@ fun SearchBar() {
                     imeAction = ImeAction.Search
                 ),
                 keyboardActions = KeyboardActions(
-                    onSearch = {
-                        // Ação quando o usuário pressiona "Search"
-                    }
+                    onSearch = { onSearch(searchText) }
                 ),
                 textStyle = TextStyle(fontSize = 16.sp, color = Color.Black),
                 decorationBox = { innerTextField ->
@@ -173,18 +180,18 @@ fun SearchBar() {
 }
 
 @Composable
-fun ConversationItem(profilePic: Int, name: String, message: String) {
+fun ConversationItem(user: User, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
-            .clickable { /* Ação para abrir conversa */ },
+            .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Imagem de perfil
-        androidx.compose.foundation.Image(
-            painter = androidx.compose.ui.res.painterResource(id = profilePic),
-            contentDescription = null,
+        PicassoImage(
+            imageUrl = user.profilePicUrl ?: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+            contentDescription = "Profile Image",
             modifier = Modifier
                 .size(48.dp)
                 .clip(androidx.compose.foundation.shape.CircleShape)
@@ -194,21 +201,11 @@ fun ConversationItem(profilePic: Int, name: String, message: String) {
 
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = name,
+                text = user.name,
                 fontFamily = poppinsFamily,
                 fontSize = 16.sp,
                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
                 color = Color.Black
-            )
-
-            Spacer(modifier = Modifier.height(4.dp))
-
-            // Alterando o texto, removendo a hora e exibindo uma mensagem diferente
-            Text(
-                text = message,
-                fontFamily = poppinsFamily,
-                fontSize = 14.sp,
-                color = Color.Gray
             )
         }
     }
@@ -217,5 +214,7 @@ fun ConversationItem(profilePic: Int, name: String, message: String) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewConversasScreen() {
-    ConversasScreen()
+    val navController = rememberNavController()
+    val viewModel = koinViewModel<SearchViewModel>()
+    SearchScreen(navController, viewModel)
 }

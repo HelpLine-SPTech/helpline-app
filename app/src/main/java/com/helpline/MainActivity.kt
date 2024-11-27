@@ -1,33 +1,36 @@
   package com.helpline
 
-  import android.annotation.SuppressLint
-  import android.os.Build
-  import android.os.Bundle
-  import android.view.WindowInsets
-  import androidx.activity.ComponentActivity
-  import androidx.activity.compose.setContent
-  import androidx.activity.enableEdgeToEdge
-  import androidx.annotation.RequiresApi
-  import androidx.core.view.WindowInsetsControllerCompat
-  import androidx.navigation.compose.NavHost
-  import androidx.navigation.compose.composable
-  import androidx.navigation.compose.rememberNavController
-  import com.helpline.view.campanha.CampanhaScreen
-  import com.helpline.view.chat1.ConversasScreen
-  import com.helpline.view.forum.ForumScreen
-  import com.helpline.view.splash.SplashScreen
-  import com.helpline.ui.app.HelplineAppTheme
-  import com.helpline.view.cadastro.CadastroFlow
-  import com.helpline.view.forumpost.PostScreen
-  import com.helpline.view.login.LoginScreen
-  import com.helpline.view.perfilong.ProfileScreen
-  import com.helpline.view.vaga.VagaScreen
-  import com.helpline.viewmodel.cadastro.CadastroViewModel
-  import com.helpline.viewmodel.forum.ForumViewModel
-  import com.helpline.viewmodel.login.LoginViewModel
-  import com.helpline.viewmodel.perfil.PerfilViewModel
-  import com.helpline.viewmodel.post.PostViewModel
-  import org.koin.androidx.compose.koinViewModel
+import android.annotation.SuppressLint
+import android.os.Build
+import android.os.Bundle
+import android.view.WindowInsets
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
+import androidx.core.view.WindowInsetsControllerCompat
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.helpline.view.campanha.CampanhaScreen
+import com.helpline.view.chat1.ConversasScreen
+import com.helpline.view.forum.ForumScreen
+import com.helpline.view.splash.SplashScreen
+import com.helpline.ui.app.HelplineAppTheme
+import com.helpline.view.cadastro.CadastroFlow
+import com.helpline.view.forumpost.PostScreen
+import com.helpline.view.login.LoginScreen
+import com.helpline.view.perfilong.ProfileScreen
+import com.helpline.view.telapesquisa.SearchScreen
+import com.helpline.view.vaga.VagaScreen
+import com.helpline.viewmodel.cadastro.CadastroViewModel
+import com.helpline.viewmodel.campanha.CampaignViewModel
+import com.helpline.viewmodel.forum.ForumViewModel
+import com.helpline.viewmodel.login.LoginViewModel
+import com.helpline.viewmodel.perfil.PerfilViewModel
+import com.helpline.viewmodel.post.PostViewModel
+import com.helpline.viewmodel.search.SearchViewModel
+import org.koin.androidx.compose.koinViewModel
 
   class MainActivity : ComponentActivity() {
     @SuppressLint("WrongConstant")
@@ -58,10 +61,15 @@
               ForumScreen(navController, forumViewModel)
             }
 
-            // Rota para tela de splash screen
-            composable(route = "splashScreen") {
-              SplashScreen(navController)
-            }
+          composable(route = "search") {
+            val viewModel: SearchViewModel = koinViewModel()
+            SearchScreen(navController, viewModel);
+          }
+
+          // Rota para tela de splash screen
+          composable(route = "splashScreen") {
+            SplashScreen(navController)
+          }
 
             composable(route = "registryScreen") {
               val cadastroViewModel: CadastroViewModel = koinViewModel()
@@ -76,9 +84,10 @@
               ConversasScreen(navController)
             }
 
-            composable(route = "tela-campanha"){
-              CampanhaScreen(navController)
-            }
+          composable(route = "tela-campanha"){
+            val campaignViewModel: CampaignViewModel = koinViewModel()
+            CampanhaScreen(navController, campaignViewModel)
+          }
 
             composable(route = "jobs") {
               VagaScreen(navController)
