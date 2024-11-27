@@ -4,17 +4,21 @@ import android.util.Log
 import com.helpline.network.cadastro.CadastroService
 import com.helpline.network.campanha.CampaignService
 import com.helpline.network.forum.ForumService
+import com.helpline.viewmodel.login.LoginViewModel
 import com.helpline.network.login.LoginService
 import com.helpline.network.search.SearchService
+import com.helpline.network.perfil.PerfilService
 import com.helpline.viewmodel.cadastro.CadastroViewModel
 import com.helpline.viewmodel.campanha.CampaignViewModel
 import com.helpline.viewmodel.forum.ForumViewModel
-import com.helpline.viewmodel.login.LoginViewModel
 import com.helpline.viewmodel.search.SearchViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
+import com.helpline.viewmodel.perfil.PerfilViewModel
+import com.helpline.viewmodel.post.PostViewModel
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -33,6 +37,7 @@ val appModule = module {
   single { provideForumService(get(), get())}
   single { provideCampaignService(get(), get())}
   single { provideSearchService(get(), get())}
+  single { providePerfilService(get(), get())}
 
   // Definição do ViewModel
   viewModel { LoginViewModel(get(), get()) }
@@ -40,6 +45,8 @@ val appModule = module {
   viewModel { ForumViewModel(get()) }
   viewModel { CampaignViewModel(get()) }
   viewModel { SearchViewModel(get())}
+  viewModel { PostViewModel(get()) }
+  viewModel { PerfilViewModel(get()) }
 }
 
 fun provideRetrofit(): Retrofit {
@@ -100,6 +107,14 @@ fun provideSearchService(retrofit: Retrofit, client: OkHttpClient): SearchServic
     .client(client)
     .build()
     .create(SearchService::class.java)
+}
+
+fun providePerfilService(retrofit: Retrofit, client: OkHttpClient): PerfilService {
+    return retrofit
+        .newBuilder()
+        .client(client)
+        .build()
+        .create(PerfilService::class.java)
 }
 
 /*

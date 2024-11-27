@@ -1,4 +1,4 @@
-package com.helpline
+  package com.helpline
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -18,46 +18,48 @@ import com.helpline.view.forum.ForumScreen
 import com.helpline.view.splash.SplashScreen
 import com.helpline.ui.app.HelplineAppTheme
 import com.helpline.view.cadastro.CadastroFlow
+import com.helpline.view.forumpost.PostScreen
 import com.helpline.view.login.LoginScreen
 import com.helpline.view.perfilong.ProfileScreen
-import com.helpline.view.perfilong.ProfileType
 import com.helpline.view.telapesquisa.SearchScreen
 import com.helpline.view.vaga.VagaScreen
 import com.helpline.viewmodel.cadastro.CadastroViewModel
 import com.helpline.viewmodel.campanha.CampaignViewModel
 import com.helpline.viewmodel.forum.ForumViewModel
 import com.helpline.viewmodel.login.LoginViewModel
+import com.helpline.viewmodel.perfil.PerfilViewModel
+import com.helpline.viewmodel.post.PostViewModel
 import com.helpline.viewmodel.search.SearchViewModel
 import org.koin.androidx.compose.koinViewModel
 
-class MainActivity : ComponentActivity() {
-  @SuppressLint("WrongConstant")
-  @RequiresApi(Build.VERSION_CODES.R)
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    enableEdgeToEdge()
-    WindowInsetsControllerCompat(window, window.decorView).let { controller ->
-      controller.hide(WindowInsets.Type.systemBars())
-      controller.systemBarsBehavior =
-        WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-    }
-    setContent {
-      HelplineAppTheme {
-        val navController = rememberNavController()
-        // startDestination -> Tela que o aplicativo vai começar
-        NavHost(navController = navController, startDestination = "loginPage" /*"splashScreen"*/) {
+  class MainActivity : ComponentActivity() {
+    @SuppressLint("WrongConstant")
+    @RequiresApi(Build.VERSION_CODES.R)
+    override fun onCreate(savedInstanceState: Bundle?) {
+      super.onCreate(savedInstanceState)
+      enableEdgeToEdge()
+      WindowInsetsControllerCompat(window, window.decorView).let { controller ->
+        controller.hide(WindowInsets.Type.systemBars())
+        controller.systemBarsBehavior =
+          WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+      }
+      setContent {
+        HelplineAppTheme {
+          val navController = rememberNavController()
+          // startDestination -> Tela que o aplicativo vai começar
+          NavHost(navController = navController, startDestination = "loginPage" /*"splashScreen"*/) {
 
-          // Criando a rota para a tela de login
-          composable(route = "loginPage") {
-            val loginViewModel: LoginViewModel = koinViewModel()
-            LoginScreen(navController, loginViewModel)
-          }
+            // Criando a rota para a tela de login
+            composable(route = "loginPage") {
+              val loginViewModel: LoginViewModel = koinViewModel()
+              LoginScreen(navController, loginViewModel)
+            }
 
-          // Rota para tela do fórum
-          composable(route = "forumScreen") {
-            val forumViewModel: ForumViewModel = koinViewModel()
-            ForumScreen(navController, forumViewModel)
-          }
+            // Rota para tela do fórum
+            composable(route = "forumScreen") {
+              val forumViewModel: ForumViewModel = koinViewModel()
+              ForumScreen(navController, forumViewModel)
+            }
 
           composable(route = "search") {
             val viewModel: SearchViewModel = koinViewModel()
@@ -69,29 +71,40 @@ class MainActivity : ComponentActivity() {
             SplashScreen(navController)
           }
 
-          composable(route = "registryScreen") {
-            val cadastroViewModel: CadastroViewModel = koinViewModel()
-            CadastroFlow(cadastroViewModel, navController)
-          }
+            composable(route = "registryScreen") {
+              val cadastroViewModel: CadastroViewModel = koinViewModel()
+              CadastroFlow(cadastroViewModel, navController)
+            }
 
-          composable(route = "chat-list") {
-            ConversasScreen(navController)
-          }
+            composable(route = "telaPesquisa"){
+              ConversasScreen(navController)
+            }
+
+            composable(route = "chat-list") {
+              ConversasScreen(navController)
+            }
 
           composable(route = "tela-campanha"){
             val campaignViewModel: CampaignViewModel = koinViewModel()
             CampanhaScreen(navController, campaignViewModel)
           }
 
-          composable(route = "jobs") {
-            VagaScreen(navController)
-          }
+            composable(route = "jobs") {
+              VagaScreen(navController)
+            }
 
-          composable(route = "profile") {
-            ProfileScreen(profileType = ProfileType.Ong, navController)
+            composable(route = "profile/{UserID}") {
+              val perfilViewModel: PerfilViewModel = koinViewModel()
+              it.arguments?.getString("UserID")
+                ?.let { userid -> ProfileScreen(navController, userid, perfilViewModel) }
+            }
+
+            composable(route = "post") {
+                val postViewModel: PostViewModel = koinViewModel()
+                PostScreen(navController, postViewModel)
+            }
           }
         }
       }
     }
   }
-}

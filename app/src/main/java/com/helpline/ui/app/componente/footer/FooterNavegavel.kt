@@ -7,7 +7,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.Handshake
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Work
 import androidx.compose.material3.*
@@ -91,7 +90,7 @@ fun BottomNavBar(
                         modifier = Modifier.size(32.dp))
                 },
                 selected = false,
-                onClick = { /* Ação para Briefcase */ }
+                onClick = { navController.navigate("jobs") }
             )
         }
     }
