@@ -8,6 +8,7 @@ import com.helpline.viewmodel.login.LoginViewModel
 import com.helpline.network.login.LoginService
 import com.helpline.network.search.SearchService
 import com.helpline.network.perfil.PerfilService
+import com.helpline.network.vaga.VagaService
 import com.helpline.viewmodel.cadastro.CadastroViewModel
 import com.helpline.viewmodel.campanha.CampaignViewModel
 import com.helpline.viewmodel.forum.ForumViewModel
@@ -18,6 +19,7 @@ import okhttp3.Request
 import okhttp3.Response
 import com.helpline.viewmodel.perfil.PerfilViewModel
 import com.helpline.viewmodel.post.PostViewModel
+import com.helpline.viewmodel.vaga.VagaViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -38,6 +40,7 @@ val appModule = module {
   single { provideCampaignService(get(), get())}
   single { provideSearchService(get(), get())}
   single { providePerfilService(get(), get())}
+  single { provideVagaService(get(), get())}
 
   // Definição do ViewModel
   viewModel { LoginViewModel(get(), get()) }
@@ -47,10 +50,10 @@ val appModule = module {
   viewModel { SearchViewModel(get())}
   viewModel { PostViewModel(get()) }
   viewModel { PerfilViewModel(get()) }
+  viewModel { VagaViewModel(get()) }
 }
 
 fun provideRetrofit(): Retrofit {
-
   return Retrofit.Builder()
     .baseUrl("https://helpline-api-gzb4d6ahg7hpcygx.brazilsouth-01.azurewebsites.net")
     .addConverterFactory(GsonConverterFactory.create())
@@ -115,6 +118,14 @@ fun providePerfilService(retrofit: Retrofit, client: OkHttpClient): PerfilServic
         .client(client)
         .build()
         .create(PerfilService::class.java)
+}
+
+fun provideVagaService(retrofit: Retrofit, client: OkHttpClient): VagaService {
+    return retrofit
+        .newBuilder()
+        .client(client)
+        .build()
+        .create(VagaService::class.java)
 }
 
 /*

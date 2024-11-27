@@ -30,6 +30,7 @@ import com.helpline.viewmodel.login.LoginViewModel
 import com.helpline.viewmodel.perfil.PerfilViewModel
 import com.helpline.viewmodel.post.PostViewModel
 import com.helpline.viewmodel.search.SearchViewModel
+import com.helpline.viewmodel.vaga.VagaViewModel
 import org.koin.androidx.compose.koinViewModel
 
   class MainActivity : ComponentActivity() {
@@ -76,22 +77,19 @@ import org.koin.androidx.compose.koinViewModel
               CadastroFlow(cadastroViewModel, navController)
             }
 
-            composable(route = "telaPesquisa"){
-              ConversasScreen(navController)
-            }
-
-            composable(route = "chat-list") {
-              ConversasScreen(navController)
-            }
+          composable(route = "chat-list") {
+            ConversasScreen(navController)
+          }
 
           composable(route = "tela-campanha"){
             val campaignViewModel: CampaignViewModel = koinViewModel()
             CampanhaScreen(navController, campaignViewModel)
           }
 
-            composable(route = "jobs") {
-              VagaScreen(navController)
-            }
+          composable(route = "jobs") {
+            val vagaViewModel: VagaViewModel = koinViewModel()
+            VagaScreen(navController, vagaViewModel)
+          }
 
             composable(route = "profile/{UserID}") {
               val perfilViewModel: PerfilViewModel = koinViewModel()
