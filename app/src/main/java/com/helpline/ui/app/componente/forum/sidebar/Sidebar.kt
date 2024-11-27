@@ -1,6 +1,5 @@
 package com.helpline.ui.app.componente.forum.sidebar
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -34,15 +33,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.helpline.R
+import com.helpline.config.Session
+import com.helpline.ui.app.componente.PicassoImage
 import com.helpline.ui.app.componente.header.TopBar
 import kotlinx.coroutines.launch
+import org.koin.java.KoinJavaComponent.inject
 
 
 @Composable
@@ -81,6 +80,9 @@ fun NavDrawer(
 
 @Composable
 fun SidebarContent(navController: NavController) {
+
+  val session: Session by inject(Session::class.java)
+
   Column(
     modifier = Modifier
       .fillMaxSize()
@@ -91,8 +93,8 @@ fun SidebarContent(navController: NavController) {
       verticalAlignment = Alignment.CenterVertically,
       modifier = Modifier.padding(bottom = 24.dp, top = 32.dp)
     ) {
-      Image(
-        painter = painterResource(id = R.mipmap.imgperfil),
+      PicassoImage(
+        imageUrl = session.loggedUser?.profilePicUrl ?: "",
         contentDescription = "Profile Image",
         modifier = Modifier
           .size(84.dp)
@@ -100,18 +102,20 @@ fun SidebarContent(navController: NavController) {
       )
       Spacer(modifier = Modifier.width(16.dp))
       Column {
-        Text(
-          text = "Rafael Oliveira",
-          fontWeight = FontWeight.Bold,
-          fontSize = 20.sp,
-          color = Color.Black
-        )
+        session.loggedUser?.let {
+          Text(
+            text = it.name,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            color = Color.Black
+          )
+        }
         Spacer(modifier = Modifier.height(4.dp))
         Text(
           text = "Ver perfil",
           color = Color.Gray,
           fontSize = 14.sp,
-//          modifier = Modifier.clickable { navController.navigate("profileScreenVolunteer") },
+          modifier = Modifier.clickable { navController.navigate("profile/bd88f341-455a-48a5-aa70-7ae69902b5eb") },
         )
       }
     }

@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -81,17 +83,16 @@ fun VagaScreen (navController: NavController, vagaViewModel: VagaViewModel){
             modifier = Modifier.fillMaxSize()
         ) {
             // Conteúdo principal que rola
-            Column(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(
                         bottom = 60.dp,
                         top = 120.dp
                     ) // Espaçamento para evitar sobreposição com o footer
-                    .verticalScroll(rememberScrollState()) // Permite que o conteúdo role
             ) {
-                for (job in jobs) {
-                    CardVagas(job = job)
+                items(jobs) {
+                    CardVagas(job = it)
                 }
 
             }

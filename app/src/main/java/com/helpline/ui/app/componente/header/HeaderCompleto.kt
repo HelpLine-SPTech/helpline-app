@@ -16,9 +16,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.helpline.R
+import com.helpline.config.Session
+import com.helpline.ui.app.componente.PicassoImage
+import org.koin.java.KoinJavaComponent.inject
 
 @Composable
 fun TopBar(onMenuClick: () -> Unit) {
+    val session: Session by inject(Session::class.java)
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,7 +41,7 @@ fun TopBar(onMenuClick: () -> Unit) {
         Spacer(modifier = Modifier.weight(1f))
 
         // Imagem de perfil (direita)
-        ProfileImage()
+        ProfileImage(session.loggedUser?.profilePicUrl ?: "")
     }
 }
 
@@ -65,9 +70,9 @@ fun Logo() {
 }
 
 @Composable
-fun ProfileImage() {
-    Image(
-        painter = painterResource(id = R.mipmap.imgperfil),
+fun ProfileImage(url: String) {
+    PicassoImage(
+        imageUrl = url,
         contentDescription = "Profile Image",
         modifier = Modifier
             .size(50.dp)
