@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -63,7 +64,10 @@ fun SearchScreen(navController: NavController, viewModel: SearchViewModel) {
                     .fillMaxSize()
                     .padding(innerPadding)
             ) {
-                Column {
+                Column (
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
+                ){
 
                     // Cabeçalho com seta de voltar, título e ícone de notificação
                     Header(goBack = { navController.popBackStack() })
@@ -85,7 +89,7 @@ fun SearchScreen(navController: NavController, viewModel: SearchViewModel) {
                             items(searchResult) {
                                 ConversationItem(
                                     user = it,
-                                    onClick = { navController.navigate("/profile/${it.id}")}
+                                    onClick = { navController.navigate("profile/${it.id}")}
                                 )
                             }
                         }
@@ -130,6 +134,8 @@ fun Header(goBack: () -> Unit) {
 fun SearchBar(onSearch: (String) -> Unit) {
     var searchText by remember { mutableStateOf("") }
 
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -159,7 +165,11 @@ fun SearchBar(onSearch: (String) -> Unit) {
                     imeAction = ImeAction.Search
                 ),
                 keyboardActions = KeyboardActions(
-                    onSearch = { onSearch(searchText) }
+                    onSearch = {
+                        onSearch(searchText)
+                        keyboardController?.hide()
+                    },
+                    onDone = {  }
                 ),
                 textStyle = TextStyle(fontSize = 16.sp, color = Color.Black),
                 decorationBox = { innerTextField ->

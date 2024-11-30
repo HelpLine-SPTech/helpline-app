@@ -30,7 +30,6 @@ interface PerfilService {
     // Função para obter o perfil de um usuário
     @GET("/api/auth/{userId}")
     suspend fun getPerfil(
-        @Header("Authorization") auth: String,
         @Path("userId") userId: UUID
     ): GetPerfilResponse
 

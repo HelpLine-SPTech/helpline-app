@@ -27,6 +27,7 @@ springWeb = "5.3.22"
 springWebsocket = "5.3.22"
 uiToolingPreview = "1.7.2"
 uiToolingPreviewVersion = "1.4.0"
+uiTestAndroid = "1.7.2"
 
 [libraries]
 androidx-activity-compose-v131 = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
@@ -63,6 +64,7 @@ spring-messaging = { module = "org.springframework:spring-messaging", version.re
 spring-web = { module = "org.springframework:spring-web", version.ref = "springWeb" }
 spring-websocket = { module = "org.springframework:spring-websocket", version.ref = "springWebsocket" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "uiToolingPreview" }
+androidx-ui-test-android = { group = "androidx.compose.ui", name = "ui-test-android", version.ref = "uiTestAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

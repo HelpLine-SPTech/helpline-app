@@ -63,12 +63,14 @@ import com.helpline.ui.app.componente.footer.BottomNavBar
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import com.helpline.config.Session
 import com.helpline.ui.app.componente.PicassoImage
 import com.helpline.viewmodel.forum.ForumViewModel
 import com.helpline.viewmodel.post.PostViewModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import org.koin.compose.koinInject
 import java.io.File
 
 val poppinsFamily = FontFamily(
@@ -84,6 +86,8 @@ fun PostScreen(navController: NavController, postViewModel: PostViewModel) {
     var context = LocalContext.current
     var textState by remember { mutableStateOf(TextFieldValue()) }
     var selectedImages = remember { mutableStateListOf<Uri>() }
+
+    var session = koinInject<Session>()
 
     val multipleImagePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetMultipleContents()
@@ -117,7 +121,7 @@ fun PostScreen(navController: NavController, postViewModel: PostViewModel) {
     fun submit() {
 
         val images = selectedImages.map { uri ->
-            prepareFilePart(context, uri, "images[]")
+            prepareFilePart(context, uri, "images")
         }
 
         postViewModel.createPost(
@@ -171,8 +175,8 @@ fun PostScreen(navController: NavController, postViewModel: PostViewModel) {
                             .fillMaxHeight(0.7f)
                     )
                     {
-                        Image(
-                            painter = painterResource(id = R.mipmap.giovanna),
+                        PicassoImage(
+                            imageUrl = session.loggedUser?.profilePicUrl ?: "",
                             contentDescription = "Profile Picture",
                             modifier = Modifier
                                 .size(50.dp)
@@ -180,8 +184,7 @@ fun PostScreen(navController: NavController, postViewModel: PostViewModel) {
                                 .background(
                                     Color.Gray,
                                     shape = CircleShape
-                                ), // Cor de fundo e forma circular
-                            contentScale = ContentScale.Crop
+                                )
                         )
                         Spacer(modifier = Modifier.width(16.dp))
                         BasicTextField(

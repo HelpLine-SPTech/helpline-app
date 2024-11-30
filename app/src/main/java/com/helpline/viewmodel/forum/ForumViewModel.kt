@@ -3,6 +3,7 @@ package com.helpline.viewmodel.forum
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.helpline.network.forum.CommentPostResponse
 import com.helpline.network.forum.ForumService
 import com.helpline.network.forum.GetPostsResponse
 import com.helpline.network.forum.Post
@@ -30,6 +31,17 @@ class ForumViewModel(private val forumService: ForumService) : ViewModel() {
             } catch (e: Exception) {
                 Log.d("Forum", "Error: $e")
                 onFailure()
+            }
+        }
+    }
+
+    fun commentOnPost(postId: String, content: String, onSuccess: (CommentPostResponse) -> Unit, onFailure: (Exception) -> Unit) {
+        viewModelScope.launch {
+            try {
+                val response = forumService.commentPost(postId, content)
+                onSuccess(response)
+            } catch (e: Exception) {
+                onFailure(e)
             }
         }
     }

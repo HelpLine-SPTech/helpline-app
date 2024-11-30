@@ -12,7 +12,7 @@ class VagaViewModel (private val vagaService: VagaService) : ViewModel() {
     fun getVagaPorId(onSuccess: (GetVagaResponse) -> Unit, onFailure: (Exception) -> Unit){
         viewModelScope.launch{
             try {
-                val response = vagaService.getVagaPorId("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZWxwbGluZS1hcGkiLCJzdWIiOiJhMjA1Njg4OS1jODY3LTQ4YzQtYjAwYS0zMDMxYTBlYThjNDAiLCJleHAiOjE3MzE1NjAwNDh9.i2XmygTNaED5RvmS11jepnMmF62uTxGK9MIoW47L6A4")
+                val response = vagaService.getAll()
                 if (response.success){
                     onSuccess(response)
                 }
