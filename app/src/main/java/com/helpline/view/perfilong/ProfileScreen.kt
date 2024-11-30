@@ -60,7 +60,7 @@ val poppinsFamily = FontFamily(
 @Composable
 fun ProfileScreen(navController: NavController, userid : String, perfilViewModel : PerfilViewModel) {
     LaunchedEffect(Unit){
-        perfilViewModel.fetchPerfilData(UUID.fromString(userid), "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZWxwbGluZS1hcGkiLCJzdWIiOiJkMTU3NmNjMy0wMGVhLTRkZGUtOGRlZC1lNGUzYzY1NTQ4NDIiLCJleHAiOjE3MzE5ODc3MzJ9.rLlS-7wFFrK6YW2a1f99RIAXneegw_mFJDTOn3vNkxw")
+        perfilViewModel.fetchPerfilData(UUID.fromString(userid))
     }
     val user by perfilViewModel.perfilData.collectAsState()
     if (user == null) return
@@ -86,7 +86,7 @@ fun OngProfileContent(navController: NavController, userid: String, user: User?)
                 ) {
                     // Seta para voltar
                     IconButton(
-                        onClick = { /* Ação de voltar */ },
+                        onClick = { navController.popBackStack() },
                         modifier = Modifier.padding(5.dp)
                     ) {
                         Icon(
@@ -300,7 +300,7 @@ fun VolunteerProfileContent(
                 ) {
                     // Seta para voltar
                     IconButton(
-                        onClick = { /* Ação de voltar */ },
+                        onClick = { navController.popBackStack() },
                         modifier = Modifier.padding(5.dp)
                     ) {
                         Icon(

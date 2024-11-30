@@ -2,8 +2,6 @@ package com.helpline.network.vaga
 
 import com.helpline.network.forum.User
 import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
 
 data class Job(
     val id: String,
@@ -35,6 +33,6 @@ data class GetVagaResponse(
 )
 
 interface VagaService {
-    @GET("/jobs")
-    suspend fun getVagaPorId(@Header("Authorization") auth: String): GetVagaResponse
+    @GET("/api/jobs")
+    suspend fun getAll(): GetVagaResponse
 }

@@ -10,6 +10,7 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 import java.util.UUID
 
 data class Post(
@@ -17,7 +18,7 @@ data class Post(
     val content: String,
     val likes: List<Like>,
     val images: List<Image>,
-    val comments: List<Comment>,
+    var comments: MutableList<Comment>,
     val user: User,
     val addedAt: String,
     val liked: Boolean
@@ -94,13 +95,17 @@ data class CreatePostsResponse(
     val success: Boolean
 )
 
+data class CommentPostResponse(
+    val success: Boolean,
+    val comment: Comment
+)
+
 interface ForumService {
     @Multipart
     @POST("/api/posts")
     suspend fun createPost(
         @Part images: List<MultipartBody.Part>,
-        @Part ("content") content: String,
-        @Header("Authorization") auth: String
+        @Part ("content") content: String
     ) : CreatePostsResponse
 
     @GET("/api/posts")
@@ -108,4 +113,7 @@ interface ForumService {
 
     @POST("/api/posts/{id}/like")
     suspend fun likePost(@Path("id") id: String)
+
+    @POST("/api/posts/{id}/comment")
+    suspend fun commentPost(@Path("id") id: String, @Query("content") content: String): CommentPostResponse
 }

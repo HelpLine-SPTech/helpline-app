@@ -1,5 +1,6 @@
 package com.helpline.view.vaga
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +20,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChatBubble
 import androidx.compose.material3.Button
@@ -61,6 +63,7 @@ val poppinsFamily = FontFamily(
     Font(R.font.poppins_extrabold, FontWeight.ExtraBold)
 )
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun VagaScreen (navController: NavController, vagaViewModel: VagaViewModel){
     val jobs = remember { mutableStateListOf<Job>()}
@@ -78,41 +81,35 @@ fun VagaScreen (navController: NavController, vagaViewModel: VagaViewModel){
 
     // menu lateral
     NavDrawer(navController = navController) {
-        // Usando um Box para sobrepor o conteúdo e o footer
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            // Conteúdo principal que rola
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(
-                        bottom = 60.dp,
-                        top = 120.dp
-                    ) // Espaçamento para evitar sobreposição com o footer
-            ) {
-                items(jobs) {
-                    CardVagas(job = it)
+        Scaffold(
+            content = {
+                Box(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    // Conteúdo principal que rola
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(
+                                bottom = 60.dp,
+                                top = 120.dp
+                            ) // Espaçamento para evitar sobreposição com o footer
+                    ) {
+                        items(jobs) {
+                            CardVagas(job = it)
+                        }
+
+                    }
                 }
-
+            },
+            bottomBar = {
+                BottomNavBar(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    navController = navController
+                )
             }
-            // Footer fixo na parte inferior
-            BottomNavBar(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter) // Alinha o footer na parte inferior do Box
-                    .fillMaxWidth()
-                    .height(60.dp),
-                navController = navController
-            )
-        }
-     }
-
+        )
     }
-/*
-@Preview(showBackground = true)
-@Composable
-fun PreviewVagaScreen() {
-    val navController = rememberNavController()
-    VagaScreen(navController = navController)
 }
-*/

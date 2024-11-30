@@ -6,9 +6,16 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
 import androidx.compose.material.FabPosition
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -19,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.helpline.ui.app.componente.forum.sidebar.NavDrawer
@@ -27,10 +35,13 @@ import com.helpline.ui.app.componente.forum.Post
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.helpline.R
 import com.helpline.network.forum.Post
 import com.helpline.ui.app.componente.Loader
 import com.helpline.viewmodel.forum.ForumViewModel
+import org.koin.androidx.compose.koinViewModel
 
 val poppinsFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),
@@ -78,12 +89,16 @@ fun ForumScreen(navController: NavController, postsViewModel: ForumViewModel) {
 
     Scaffold(
         floatingActionButton = {
-            Box(
+            FloatingActionButton(
                 modifier = Modifier
                     .height(50.dp)
-                    .width(50.dp)
-                    .background(Color.Red)
-            )
+                    .width(50.dp),
+                shape = CircleShape,
+                backgroundColor = Color(0xFF285430),
+                onClick = { navController.navigate("post") }
+            ) {
+                Icon(imageVector = Icons.Filled.Edit, contentDescription = "Back", tint = Color.White, modifier = Modifier.size(16.dp))
+            }
         },
         floatingActionButtonPosition = FabPosition.End,
         content = { innerPadding ->
@@ -108,7 +123,8 @@ fun ForumScreen(navController: NavController, postsViewModel: ForumViewModel) {
                         ) {
                             items(posts) { post ->
                                 Post(
-                                    postInfo = post,
+                                    post = post,
+                                    navController = navController,
                                     onLike = { p -> likePost(p) })
                             }
                         }
@@ -128,7 +144,10 @@ fun ForumScreen(navController: NavController, postsViewModel: ForumViewModel) {
 
 }
 
+@Preview
 @Composable
-fun PostCard() {
-
+fun preview() {
+    var navController = rememberNavController()
+    var viewModel = koinViewModel<ForumViewModel>()
+    ForumScreen(navController, viewModel);
 }

@@ -21,11 +21,11 @@ class PerfilViewModel(private val perfilService: PerfilService) : ViewModel() {
     private val _errorMessage = MutableStateFlow<String?>(null)
     val errorMessage: StateFlow<String?> get() = _errorMessage
 
-    fun fetchPerfilData(userId: UUID, authToken: String) {
+    fun fetchPerfilData(userId: UUID) {
         viewModelScope.launch {
             _loading.value = true
             try {
-                val perfilResponse = perfilService.getPerfil(authToken, userId)
+                val perfilResponse = perfilService.getPerfil(userId)
                 Log.d("PerfilViewModel", "Perfil response: $perfilResponse")
                 if (perfilResponse.success) {
                     _perfilData.value = perfilResponse.user
