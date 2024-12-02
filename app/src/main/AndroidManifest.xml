@@ -8,7 +8,7 @@
 
     <application
         android:allowBackup="true"
-        android:name=".App"
+        android:name="com.helpline.App"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/icon_variation"
@@ -19,7 +19,7 @@
         tools:targetApi="31"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MainActivity"
+            android:name="com.helpline.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.HelplineApp"
             tools:ignore="DuplicateActivity">

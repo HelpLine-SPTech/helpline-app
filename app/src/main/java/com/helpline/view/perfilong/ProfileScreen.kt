@@ -46,6 +46,8 @@ import com.helpline.R
 import com.helpline.network.forum.User
 import com.helpline.ui.app.componente.PicassoImage
 import com.helpline.ui.app.componente.footer.BottomNavBar
+import com.helpline.ui.app.componente.perfil.AddressRow
+import com.helpline.ui.app.componente.perfil.WhatsAppRow
 import com.helpline.viewmodel.perfil.PerfilViewModel
 import java.util.UUID
 
@@ -164,14 +166,7 @@ fun OngProfileContent(navController: NavController, userid: String, user: User?)
                             .padding(start = 16.dp),
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.icon_zap),
-                                contentDescription = null,
-                                tint = Color.Black,
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(text = "11 91234-5678",fontFamily = poppinsFamily)
+                            WhatsAppRow(phoneNumber = "11987728651") //Adicionar telefone do cabra
                         }
 
                         Spacer(modifier = Modifier.height(8.dp))
@@ -189,18 +184,7 @@ fun OngProfileContent(navController: NavController, userid: String, user: User?)
 
                         Spacer(modifier = Modifier.height(8.dp))
 
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_loc),
-                                contentDescription = null,
-                                tint = Color.Black,
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            if (user != null) {
-                                Text(text = "${user.address?.street}, ${user.address?.number}, ${user.address?.city}", fontFamily = poppinsFamily)
-                            }
-                        }
+                        AddressRow(user = user)
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
